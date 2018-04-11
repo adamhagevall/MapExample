@@ -60,7 +60,7 @@ class LibraryList extends Component {
         case true:
             return (
             <View>
-            <Button onPress={this.onButtonPress}>First</Button>;
+            <Button onPress={this.onButtonPress}>First</Button>
             <View>
             {this.renderList()}
             </View>
@@ -69,7 +69,7 @@ class LibraryList extends Component {
         case false: 
         return (
             <View>
-            <Button onPress={this.onButtonPress}>Second</Button>;
+            <Button onPress={this.onButtonPress}>Second</Button>
             <View>
             {this.renderMap()}
             </View>
@@ -77,7 +77,11 @@ class LibraryList extends Component {
             );
 
         default: 
-            return <Button onPress={this.onButtonPress}>Third</Button>;
+            return (
+            <View>
+            <Button onPress={this.onButtonPress}>Third</Button>
+            </View>
+            );
     }
 }
 
