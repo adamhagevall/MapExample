@@ -35,17 +35,20 @@ import NewHeader from './components/NewHeader';
 import SearchBar from './components/SearchBar';
 import FooterEx from './components/FooterEx';
 // import FAB from './components/FAB';
+import Card from './components/common/Card';
+import CardSection from './components/common/CardSection';
 
 const App = () => {
     return (
         <Provider store={createStore(reducers)}>
+       
             <View style={{ flex: 1 }}>
                 <NewHeader />
                 <SearchBar />
-                <TabBar />
-                {/* <FooterEx /> */}
-                
-            </View>
+                {/* <TabBar /> */}
+         
+                <FooterEx />   
+                </View>
         </Provider>
     );
 };

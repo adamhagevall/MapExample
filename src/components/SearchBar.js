@@ -3,7 +3,6 @@ import { Container, Header, Item, Input, Icon, Button, Text } from 'native-base'
 export default class SearchBar extends Component {
     render() {
         return (
-            <Container>
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
@@ -14,7 +13,6 @@ export default class SearchBar extends Component {
                         <Text>Search</Text>
                     </Button>
                 </Header>
-            </Container>
         );
     }
 }

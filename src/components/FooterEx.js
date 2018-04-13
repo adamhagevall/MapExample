@@ -5,6 +5,9 @@ import { ListView, View, Image } from 'react-native';
   import Map from './Map';
   import LibraryList from './LibraryList';
 
+import Card from './common/Card';
+import CardSection from './common/CardSection';
+
 class FooterEx extends Component {
 
     state = { onFirstPage: null }; //NYTT
@@ -19,17 +22,21 @@ class FooterEx extends Component {
                }
                };
 
+               renderMap() {
+                return (
+                    console.log(this.state.onFirstPage),
+                 <Map/>
+                );
+            }
+
     renderContent() {
     switch (this.state.onFirstPage) {
         case true:
-
-            return (
-            console.log(this.state.onFirstPage),
-                <LibraryList />
+        return (
+            <LibraryList />
             );
         case false: 
         return (
-            console.log(this.state.onFirstPage),
                 <Map />
             );
 
@@ -43,30 +50,30 @@ class FooterEx extends Component {
 
       render() {
           return (
+            <View style={{ flex: 1 }}>
+                 <View>
+                <Card style = {{ width: 200, height: 400}}>
+              {this.renderContent()}
+              </Card>
+          </View>
               <Container>
                   <Content />
                   <Footer >
                       <FooterTab>
-                          <Button vertical onPress={this.onButtonPress}>
-                              <Icon name='apps' />
-                              <Text>Apps</Text>
-                          </Button>
-                         
-                          <Button vertical>
-                              <Icon name="camera" />
-                              <Text>Camera</Text>
-                          </Button>
-                          <Button active vertical>
+                          <Button active vertical onPress={this.onButtonPress}>
                               <Icon active name="navigate" />
                               <Text>Navigate</Text>
                           </Button>
-                          <Button vertical>
+                          <Button vertical onPress={this.onButtonPress}>
                               <Icon name="person" />
-                              <Text>Contact</Text>
+                              <Text>Information</Text>
                           </Button>
                       </FooterTab>
                   </Footer>
               </Container>
+             
+              
+      </View>
           );
       }
   }

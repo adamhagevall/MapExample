@@ -88,7 +88,6 @@ class LibraryList extends Component {
 render() {
     return (
          <View> 
-        
          <View>
              {this.renderList()}
          </View>
@@ -99,14 +98,14 @@ render() {
              source={require('./Assets/img2.png')}
              style={{height: 50}}
          />
-         <Image
+         {/* <Image
              source={require('./Assets/img3.png')}
              style={{width: 80, height: 80}}
          />
          <Image
              source={require('./Assets/img4.png')}
              style={{width:200, height: 80}}
-         />
+         /> */}
          </View>
 
     );

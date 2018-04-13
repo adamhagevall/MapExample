@@ -5,7 +5,6 @@ import { Container, Content, ListItem, Text, CheckBox, Header, Left, Right, Butt
 export default class NewHeader extends Component {
     render() {
         return (
-            <Container>
                 <Header>
                     <Left>
                         <Button transparent>
@@ -17,11 +16,10 @@ export default class NewHeader extends Component {
                     </Body>
                     <Right>
                         <Button transparent>
-                            <Icon name='menu' />
+                            <Icon name='settings' />
                         </Button>
                     </Right>
                 </Header>
-            </Container>
         );
     }
 }

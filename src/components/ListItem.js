@@ -6,8 +6,9 @@ import {
     LayoutAnimation 
 } from 'react-native';
 import { connect } from 'react-redux';
-import { CardSection } from './common';
 import * as actions from '../actions';
+import Card from './common/Card';
+import CardSection from './common/CardSection';
 
 
 class ListItem extends Component {

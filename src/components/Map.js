@@ -5,6 +5,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import axios from 'axios';
 import MapTiles from './MapTiles';
 
+
 //const GOOGLE_MAPS_APIKEY = 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ';
 
 var custom = require('./101.jpg');
@@ -28,6 +29,8 @@ class Map extends Component {
 
     render() {
         return (
+            console.log('hejhej'),
+            
             <MapView
                 provider={ PROVIDER_GOOGLE }
                 style={ styles.container }
@@ -65,13 +68,17 @@ class Map extends Component {
                 /> 
                 {this.renderTiles()}
             </MapView>
+          
+            
+                
+            
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
+        height: 450,
         width: '100%'
     }
 });
