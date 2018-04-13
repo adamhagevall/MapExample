@@ -13,7 +13,7 @@ class Map extends Component {
     state = { tiles: [] };
 
     componentWillMount() {
-        axios.get('https://api.myjson.com/bins/ycd3j')
+        axios.get('https://api.myjson.com/bins/iugzr')
             .then(response => this.setState({tiles: response.data }))
             .catch((error) => {
                 alert(error.message)})
