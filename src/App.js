@@ -6,13 +6,14 @@ import reducers from './reducers';
 import { Header } from './components/common';
 import LibraryList from './components/LibraryList';
 import Map from './components/Map';
+import TabBar from './components/TabBar';
 
 const App = () => {
     return (
         <Provider store={createStore(reducers)}>
             <View style={{ flex: 1 }}>
                 <Header headerText="Raukavagen" />
-                <LibraryList />
+                <TabBar />
             </View>
         </Provider>
     );

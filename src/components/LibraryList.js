@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View } from 'react-native';
+import { ListView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import ListItem from './ListItem';
 import Map from './Map';
@@ -18,16 +18,16 @@ class LibraryList extends Component {
    }
 
 
-   //NYTT
-   onButtonPress = () => {
-       if (this.state.onFirstPage) {
-           this.setState({ onFirstPage: false });
-           console.log(this.state.onFirstPage);
-       } else {
-           this.setState({ onFirstPage: true });
-           console.log(this.state.onFirstPage);
-       }
-       };
+//    //NYTT
+//    onButtonPress = () => {
+//        if (this.state.onFirstPage) {
+//            this.setState({ onFirstPage: false });
+//            console.log(this.state.onFirstPage);
+//        } else {
+//            this.setState({ onFirstPage: true });
+//            console.log(this.state.onFirstPage);
+//        }
+//        };
 
    //SLUT
 /*  renderContent() {
@@ -38,9 +38,9 @@ class LibraryList extends Component {
    renderRow(library) {
        return <ListItem library={library} />;
    }
-   renderMap() {
-       return <Map />
-   }
+//    renderMap() {
+//        return <Map />
+//    }
 
    renderList() {
        return (
@@ -52,46 +52,64 @@ class LibraryList extends Component {
    }
 
 
-   renderContent() {
-    console.log(this.state.onFirstPage);
-    switch (this.state.onFirstPage) {
+//    renderContent() {
+//     console.log(this.state.onFirstPage);
+//     switch (this.state.onFirstPage) {
         
 
-        case true:
-            return (
-            <View>
-            <Button onPress={this.onButtonPress}>First</Button>
-            <View>
-            {this.renderList()}
-            </View>
-            </View> 
-            );
-        case false: 
-        return (
-            <View>
-            <Button onPress={this.onButtonPress}>Second</Button>
-            <View>
-            {this.renderMap()}
-            </View>
-            </View> 
-            );
+//         case true:
+//             return (
+//             <View>
+//             <Button onPress={this.onButtonPress}>First</Button>
+//             <View>
+//             {this.renderList()}
+//             </View>
+//             </View> 
+//             );
+//         case false: 
+//         return (
+//             <View>
+//             <Button onPress={this.onButtonPress}>Second</Button>
+//             <View>
+//             {this.renderMap()}
+//             </View>
+//             </View> 
+//             );
 
-        default: 
-            return (
-            <View>
-            <Button onPress={this.onButtonPress}>Third</Button>
-            </View>
-            );
-    }
-}
+//         default: 
+//             return (
+//             <View>
+//             <Button onPress={this.onButtonPress}>Third</Button>
+//             </View>
+//             );
+//     }
+// }
 
-   render() {
-       return (
-            <View> 
-               {this.renderContent()}
-            </View>
+render() {
+    return (
+         <View> 
+        
+         <View>
+             {this.renderList()}
+         </View>
+         <Image
+             source={require('./Assets/img1.png')}
+         />
+         <Image
+             source={require('./Assets/img2.png')}
+             style={{height: 50}}
+         />
+         <Image
+             source={require('./Assets/img3.png')}
+             style={{width: 80, height: 80}}
+         />
+         <Image
+             source={require('./Assets/img4.png')}
+             style={{width:200, height: 80}}
+         />
+         </View>
 
-       );
+    );
    }
 
 }
