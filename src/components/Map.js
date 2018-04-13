@@ -1,60 +1,70 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-
 import MapViewDirections from 'react-native-maps-directions';
+import axios from 'axios';
+import MapTiles from './MapTiles';
 
-
-const coordinates = [
-  {
-    latitude: 18.2954925,
-    longitude: 57.6408186,
-  },
-  {
-    latitude: 18.2946771,
-    longitude: 57.6409392,
-  },
-];
-
-const GOOGLE_MAPS_APIKEY = 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ';
+//const GOOGLE_MAPS_APIKEY = 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ';
 
 var custom = require('./101.jpg');
-var mapStyle = require('./mapStyle.json');
 
 class Map extends Component {
+    state = { tiles: [] };
+
+    componentWillMount() {
+        axios.get('https://api.myjson.com/bins/ycd3j')
+            .then(response => this.setState({tiles: response.data }))
+            .catch((error) => {
+                alert(error.message)})
+    };
+
+    renderTiles() {
+        console.log(this.state);
+        return this.state.tiles.map(tile =>
+            <MapTiles key={tile.origin} tile={tile} />
+        );
+    }
+
     render() {
         return (
             <MapView
-
                 provider={ PROVIDER_GOOGLE }
                 style={ styles.container }
                 initialRegion={{
                     latitude: 57.639572,
                     longitude: 18.294661,
                     latitudeDelta: 0.00012,
-                    longitudeDelta: 0.010
+                    longitudeDelta: 0.020
                 }}
-                >
-            <MapView.Marker
-                style= {{height: 1}}
-                coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
-                title={'Tillgänglighetsarenan'}
-                //image={custom}
-                pinColor={'blue'}
-              />
-
-            <MapView.Marker coordinate={coordinates[0]} />
-            <MapView.Marker coordinate={{ longitude: 18.2946771, latitude: 57.6409392 }} />
-            <MapViewDirections
-              origin={{ longitude: 18.2925582, latitude: 57.6354749 }}
-              destination={{ longitude: 18.2982713, latitude: 57.6384871 }}
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={30}
-              strokeColor="blue"
-            />
+            >
+                <MapView.Marker
+                    style={{ height: 1 }}
+                    coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
+                    title={'Tillgänglighetsarenan'}
+                    //image={custom}
+                    pinColor={'blue'}
+                />
+                <MapView.Marker 
+                    style={{ height: 1 }}
+                    coordinate={{ longitude: 18.2800916, latitude: 57.6317496 }}
+                    title={'Scandic Visby'}
+                    pinColor={'blue'}
+                />
+                <MapView.Marker
+                    style={{ height: 1 }}
+                    coordinate={{ longitude: 18.2892483, latitude: 57.6402041 }}
+                    title={'Tillgängliga toaletter'}
+                    pinColor={'blue'}
+                />
+                <MapView.Marker
+                    style={{ height: 1 }}
+                    coordinate={{ longitude: 18.288044, latitude: 57.6376372 }}
+                    title={'Parkeringsplats'}
+                    pinColor={'blue'}
+                /> 
+                {this.renderTiles()}
             </MapView>
-            
-            
         );
     }
 }
@@ -66,8 +76,10 @@ const styles = StyleSheet.create({
     }
 });
 
-// AppRegistry.registerComponent('MapExample', () => MapExample);
+export default Map;
 
+// AppRegistry.registerComponent('MapExample', () => MapExample);
+//{this.renderTiles()}
 
 // import React, { Component } from 'react';
 // import { AppRegistry, StyleSheet, View, Dimensions } from 'react-native';
@@ -80,7 +92,28 @@ const styles = StyleSheet.create({
 // const LONGITUDE = 0;
 // const LATITUDE_DELTA = 0.0922;
 // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+/*
 
+const coordinates = [
+  {
+    latitude: 18.2954925,
+    longitude: 57.6408186
+  },
+  {
+    latitude: 18.2946771,
+    longitude: 57.6409392
+  }
+];
+
+<MapViewDirections
+              //origin={{ longitude: 18.2925582, latitude: 57.6354749 }}
+              //destination={{ longitude: 18.2982713, latitude: 57.6384871 }}
+              origin={coordinates[0]}
+              destination={coordinates[1]}
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="blue"
+            />
 // class Map extends Component {
     
 //     constructor() {
@@ -161,4 +194,4 @@ const styles = StyleSheet.create({
 //     }
 //   });
 
-  export default Map;
+*/
