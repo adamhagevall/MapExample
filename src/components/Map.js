@@ -3,6 +3,7 @@ import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body } from 'native-base';
+import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import SearchBar from './SearchBar';
 import MapTiles from './MapTiles';
@@ -13,11 +14,55 @@ import NewHeader from './NewHeader';
 //const GOOGLE_MAPS_APIKEY = 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ';
 
 var custom = require('./101.jpg');
+let { width, height } = Dimensions.get('window');
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 0;
+const LONGITUDE = 0;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class Map extends Component {
-  state = { tiles: [] };
+  constructor() {
+    super();
+    this.state = {
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      },
+      tiles: [],
+      mapStyle: {},
+
+    }
+  }
+
+  updateStyle() {
+    this.setState({
+      mapStyle: {
+        height: '100%',
+        width: '100%'
+      }
+    })
+  }
 
   componentWillMount() {
+    setTimeout( () => this.updateStyle(), 1000);
+    Geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          region: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+          }
+        });
+      },
+      (error) => console.log(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
     axios.get('https://api.myjson.com/bins/iugzr')
       .then(response => this.setState({ tiles: response.data }))
       .catch((error) => {

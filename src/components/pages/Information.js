@@ -32,7 +32,7 @@ class Information extends Component {
 
     render() {
         return (
-            <Content>
+            <Content style={{ marginTop: 75 }}>
                 <View>
                     {this.renderList()}
                 </View>
