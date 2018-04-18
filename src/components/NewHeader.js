@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import { Container, Content, ListItem, Text, CheckBox, Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
+import { Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 
 export default class NewHeader extends Component {
     render() {
         return (
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='arrow-back' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>Hejhej</Title>
-                    </Body>
-                    <Right>
-                        <Button transparent>
-                            <Icon name='settings' />
-                        </Button>
-                    </Right>
-                </Header>
+            <Header>
+                <Left>
+                </Left>
+                <Body>
+                    <Title>Visby Pistkarta</Title>
+                </Body>
+                <Right>
+                    <Button transparent onPress={Actions.settings}>
+                        <Icon name='settings' />
+                    </Button>
+                </Right>
+            </Header>
         );
     }
 }
+module.export = NewHeader;
