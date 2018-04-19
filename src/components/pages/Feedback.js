@@ -3,8 +3,15 @@ import { Text, View, StyleSheet, TextInput, TouchableHighlight } from 'react-nat
 import { Container, Header, Left, Body, Title, Right, Textarea, Form } from "native-base";
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
+import Communications from 'react-native-communications';
+
 
 export default class Feedback extends Component {
+    onTextPress() {
+        console.log('hall[')
+        Communications.email(['johanna.dagfalk@live.se'],null,null,'My Subject','My body text')
+    }
+
     render() {
         return (
             <Content style={{ marginTop: 75 }}>
@@ -23,7 +30,7 @@ export default class Feedback extends Component {
                         <Textarea rowSpan={5} bordered />
                     </Form>
                     <Text style={styles.text}></Text>
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableHighlight style={styles.button} onPress={this.onTextPress.bind(this)}>
                         <Text style={styles.buttonText}>Send Feedback</Text>
                     </TouchableHighlight>
                 </View>
