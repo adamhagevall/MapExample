@@ -20,8 +20,11 @@ const LATITUDE = 0;
 const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const searchDetails = {};
 
 export default class Map extends Component {
+
+
   constructor() {
     super();
     this.state = {
@@ -32,7 +35,10 @@ export default class Map extends Component {
         longitudeDelta: LONGITUDE_DELTA
       },
       tiles: [],
-      mapStyle: {}
+      mapStyle: {},
+      originDetails: {},
+      destinationDetails: {},
+      routeTile: []
       // loading: true
     }
   }
@@ -102,6 +108,18 @@ export default class Map extends Component {
   //     }
   // }
 
+  originCallback = (detailsFromSearch) => {
+    this.setState({ originDetails: detailsFromSearch })
+    console.log('originDetails: ', this.state.originDetails);
+  };
+
+  destinationCallback = (detailsFromSearch) => {
+    this.setState({ destinationDetails: detailsFromSearch })
+    console.log('destinationDetails: ', this.state.destinationDetails);
+  }
+
+
+
   renderTiles() {
     return this.state.tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
@@ -121,7 +139,8 @@ export default class Map extends Component {
         <NewHeader />
         {/* <LoadingView loading={this.state.loading}> */}
         <Content>
-          <SearchBar />
+          <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
+          <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
           <View style={{ width, height }}>
 
             <MapView
@@ -159,29 +178,44 @@ export default class Map extends Component {
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
               />
-
+              <MapView.Marker
+                style={{ height: 1 }}
+                coordinate={this.state.originDetails}
+                pinColor={'red'}
+              />
+              <MapView.Marker
+                style={{ height: 1 }}
+                coordinate={this.state.destinationDetails}
+                pinColor={'green'}
+              />
+              <MapViewDirections
+                origin={this.state.originDetails}
+                destination={this.state.destinationDetails}
+                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                strokeWidth={5}
+                strokeColor='yellow'
+              />
               {this.renderTiles()}
-              <FAB style={{ marginBottom: 75 }} />
-              </MapView>
-
-            </View>
-          </Content>
-          {/* </LoadingView> */}
+            </MapView>
+            <FAB style={{ marginBottom: 100 }} />
+          </View>
+        </Content>
+        {/* </LoadingView> */}
       </Container>
-        );
-      }
-    }
-    
+    );
+  }
+}
+
 const styles = StyleSheet.create({
-          container: {
-          height: '100%',
-        width: '100%'
-      }
-    });
-    
-    
-    
-    
+  container: {
+    height: '100%',
+    width: '100%'
+  }
+});
+
+
+
+
     // AppRegistry.registerComponent('MapExample', () => MapExample);
 //{this.renderTiles()}
 
