@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Footer, FooterTab, Button, Icon, Text } from 'native-base';
-import { ListView, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class FooterEx extends Component {
+
     constructor() {
         super();
         this.state = { activeTabName: 'map' };
     }
+
     tabAction(tab) {
         this.setState({ activeTabName: tab });
         if (tab === 'map') {
@@ -18,6 +19,23 @@ export default class FooterEx extends Component {
         }
     }
 
+    render() {
+        return (
+            <Footer >
+                <FooterTab>
+                    <Button vertical active={(this.state.activeTabName === 'map') ? true : ""} onPress={() => { this.tabAction('map') }}>
+                        <Icon active name="navigate" />
+                        <Text>Navigate</Text>
+                    </Button>
+                    <Button vertical active={(this.state.activeTabName === 'information') ? true : ""} onPress={() => { this.tabAction('information') }}>
+                        <Icon name="person" />
+                        <Text>Information</Text>
+                    </Button>
+                </FooterTab>
+            </Footer>
+        );
+    }
+}
     //     state = { onFirstPage: null }; //NYTT
 
     //     onButtonPress = () => {
@@ -56,22 +74,3 @@ export default class FooterEx extends Component {
     //     }
     // }
 
-    render() {
-        return (
-            <Footer >
-                <FooterTab>
-                    <Button vertical active={(this.state.activeTabName === 'map') ? true : ""} onPress={() => { this.tabAction('map') }}>
-                        <Icon active name="navigate" />
-                        <Text>Navigate</Text>
-                    </Button>
-                    <Button vertical active={(this.state.activeTabName === 'information') ? true : ""} onPress={() => { this.tabAction('information') }}>
-                        <Icon name="person" />
-                        <Text>Information</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
-        );
-    }
-}
-
-module.export = FooterEx;

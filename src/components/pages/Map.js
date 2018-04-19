@@ -5,15 +5,14 @@ import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body } from 'native-base';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
-import SearchBar from './SearchBar';
-import MapTiles from './MapTiles';
-import NewHeader from './NewHeader';
-// import Polyline from '@mapbox/polyline';
+import LoadingView from 'react-native-loading-view';
+import SearchBar from '../SearchBar';
+import MapTiles from '../MapTiles';
+import NewHeader from '../MapHeader';
+import FAB from '../FAB';
 
 
-//const GOOGLE_MAPS_APIKEY = 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ';
-
-var custom = require('./101.jpg');
+var custom = require('../101.jpg');
 let { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -33,8 +32,8 @@ export default class Map extends Component {
         longitudeDelta: LONGITUDE_DELTA
       },
       tiles: [],
-      mapStyle: {},
-
+      mapStyle: {}
+      // loading: true
     }
   }
 
@@ -48,27 +47,37 @@ export default class Map extends Component {
   }
 
   componentWillMount() {
-    setTimeout( () => this.updateStyle(), 1000);
+    setTimeout(() => this.updateStyle(), 1000);
     Geolocation.getCurrentPosition(
       position => {
         this.setState({
           region: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
           }
         });
       },
       (error) => console.log(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
     axios.get('https://api.myjson.com/bins/iugzr')
       .then(response => this.setState({ tiles: response.data }))
       .catch((error) => {
         alert(error.message)
-      })
+      });
   };
+
+  // componentDidMount = () => {
+  //   // This is just ment as an example of how you handle an asynchronus operation 
+  //   // In reality this might be a fetch or storage access 
+  //   setTimeout(() => {
+  //     this.setState({
+  //       loading: false
+  //     })
+  //   }, 8000)
+  // }
 
   // componentDidMount() {
   //     this.getDirections("18.299425, 57.636907", "18.301871, 57.635942")
@@ -97,6 +106,11 @@ export default class Map extends Component {
     return this.state.tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
     );
+    //   setTimeout(() => {
+    //         this.setState({
+    //           loading: false
+    //         })
+    //       }, 8000)
   }
 
   render() {
@@ -105,9 +119,11 @@ export default class Map extends Component {
     return (
       <Container>
         <NewHeader />
+        {/* <LoadingView loading={this.state.loading}> */}
         <Content>
           <SearchBar />
           <View style={{ width, height }}>
+
             <MapView
               provider={PROVIDER_GOOGLE}
               style={styles.container}
@@ -143,33 +159,30 @@ export default class Map extends Component {
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
               />
+
               {this.renderTiles()}
-            </MapView>
-          </View>
-        </Content>
+              <FAB style={{ marginBottom: 75 }} />
+              </MapView>
+
+            </View>
+          </Content>
+          {/* </LoadingView> */}
       </Container>
-    );
-  }
-}
-
+        );
+      }
+    }
+    
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%'
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-// AppRegistry.registerComponent('MapExample', () => MapExample);
+          container: {
+          height: '100%',
+        width: '100%'
+      }
+    });
+    
+    
+    
+    
+    // AppRegistry.registerComponent('MapExample', () => MapExample);
 //{this.renderTiles()}
 
 // import React, { Component } from 'react';

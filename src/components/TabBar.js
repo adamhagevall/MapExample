@@ -1,10 +1,8 @@
-
 import React, { Component } from 'react';
-
-import { AppRegistry, Text, View, TabBarIOS, StyleSheet, ListView } from 'react-native';
+import { Text, View, TabBarIOS, StyleSheet, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import ListItem from './ListItem';
-import Map from './Map';
+import Map from './pages/Map';
 import { Button } from './common';
 import Test from './Test';
 import LibraryList from './LibraryList';

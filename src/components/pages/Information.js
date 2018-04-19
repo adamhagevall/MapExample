@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ListView, View, Image } from 'react-native';
-import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { connect } from 'react-redux';
 import { Content } from 'native-base';
 import ListItem from '../ListItem';
 import { Button } from '../common/Button';

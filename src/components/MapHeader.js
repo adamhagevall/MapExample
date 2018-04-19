@@ -3,7 +3,7 @@ import { Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 
-export default class NewHeader extends Component {
+export default class MapHeader extends Component {
     render() {
         return (
             <Header>
@@ -13,6 +13,9 @@ export default class NewHeader extends Component {
                     <Title>Visby Pistkarta</Title>
                 </Body>
                 <Right>
+                <Button transparent onPress={Actions.feedback}>
+                        <Icon name='more' />
+                    </Button>
                     <Button transparent onPress={Actions.settings}>
                         <Icon name='settings' />
                     </Button>
@@ -21,4 +24,3 @@ export default class NewHeader extends Component {
         );
     }
 }
-module.export = NewHeader;
