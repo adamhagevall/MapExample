@@ -3,21 +3,18 @@ import { Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 
-export default class MapHeader extends Component {
+export default class InfoHeader extends Component {
     render() {
         return (
             <Header>
                 <Left>
                 </Left>
                 <Body>
-                    <Title>Visby Pistkarta</Title>
+                    <Title>Information</Title>
                 </Body>
                 <Right>
-                <Button transparent onPress={Actions.feedback}>
-                        <Icon name='at' />
-                    </Button>
-                    <Button transparent onPress={Actions.settings}>
-                        <Icon name='settings' />
+                <Button transparent onPress={Actions.calendar}>
+                        <Icon name='calendar' />
                     </Button>
                 </Right>
             </Header>

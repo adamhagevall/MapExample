@@ -7,9 +7,11 @@ import Communications from 'react-native-communications';
 
 
 export default class Feedback extends Component {
-    onTextPress() {
-        console.log('hall[')
-        Communications.email(['johanna.dagfalk@live.se'],null,null,'My Subject','My body text')
+    state = { mailSender: '', mailSubject: '', mailContent: '' };
+
+    onMailPress() {
+        Communications.email(['johanna.dagfalk@live.se'], null, null, this.state.mailSubject, this.state.mailContent)
+        console.log(this.state.mailSender);
     }
 
     render() {
@@ -19,18 +21,23 @@ export default class Feedback extends Component {
                     <Text style={styles.text}>Ditt namn</Text>
                     <TextInput
                         style={styles.textInput}
-                    ></TextInput>
+                        onChangeText={(mailSender) => this.setState({ mailSender })}
+                    >
+                    </TextInput>
                     <Text style={styles.text}>Angående plats/gata</Text>
                     <TextInput
                         keyboardType="numbers-and-punctuation"
                         style={styles.textInput}
+                        onChangeText={(mailSubject) => this.setState({ mailSubject })}
                     ></TextInput>
                     <Text style={styles.text}>Feedback</Text>
                     <Form>
-                        <Textarea rowSpan={5} bordered />
+                        <Textarea rowSpan={5} bordered 
+                        onChangeText={(mailContent) => this.setState({ mailContent })}/>
+                        
                     </Form>
                     <Text style={styles.text}></Text>
-                    <TouchableHighlight style={styles.button} onPress={this.onTextPress.bind(this)}>
+                    <TouchableHighlight style={styles.button} onPress={this.onMailPress.bind(this)}>
                         <Text style={styles.buttonText}>Send Feedback</Text>
                     </TouchableHighlight>
                 </View>

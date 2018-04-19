@@ -13,6 +13,7 @@ import FAB from './components/FAB';
 import Information from './components/pages/Information';
 import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
+import Calendar from './components/pages/Calendar';
 
 
 export default class App extends Component {
@@ -44,9 +45,10 @@ export default class App extends Component {
                     <Container>
                         <Router>
                             <Scene key='map' component={Map} title='Map' hideNavBar={true} hideTabBar={false} />
-                            <Scene key='information' component={Information} title='Information' hideNavBar={false} hideTabBar={false}/>
+                            <Scene key='information' component={Information} title='Information' hideNavBar={true} hideTabBar={false}/>
                             <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} hideTabBar={true}/>
                             <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
+                            <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />
                         </Router>
                         <Footer />
                     </Container>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { ListView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Content } from 'native-base';
+import { Content, Container } from 'native-base';
 import ListItem from '../ListItem';
 import { Button } from '../common/Button';
+import InfoHeader from '../InfoHeader';
 
 class Information extends Component {
 
@@ -31,6 +32,8 @@ class Information extends Component {
 
     render() {
         return (
+            <Container style={{ flex: 1 }}>
+                <InfoHeader />
             <Content style={{ marginTop: 75 }}>
                 <View>
                     {this.renderList()}
@@ -43,6 +46,7 @@ class Information extends Component {
                     style={{ height: 50 }}
                 />
             </Content>
+            </Container>
 
         );
     }
