@@ -90,7 +90,7 @@ class ListItem extends Component {
                         <Text style={titleStyle}>
                         {title}
                         </Text>
-                        {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}
+                        {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}  
                         <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 200 }} />
                     </CardSection>
                     {this.renderDescription()}

@@ -6,21 +6,23 @@ import { Actions } from 'react-native-router-flux';
 export default class MapHeader extends Component {
     render() {
         return (
-            <Header>
+            <Header style={{ backgroundColor: '#4A90E2', titleFontColor: '#8e8e93' }}>
                 <Left>
                 </Left>
-                <Body>
-                    <Title>Visby Pistkarta</Title>
+                <Body >
+                    <Title style={{ color: "white" }} >PISTKARTA</Title>
+
                 </Body>
                 <Right>
                 <Button transparent onPress={Actions.feedback}>
-                        <Icon name='at' />
+                        <Icon name='at' style={{ color: "white" }}/>
                     </Button>
                     <Button transparent onPress={Actions.settings}>
-                        <Icon name='settings' />
+                        <Icon name='settings' style={{ color: "white" }} />
                     </Button>
                 </Right>
             </Header>
         );
     }
 }
+
