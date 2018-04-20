@@ -45,7 +45,7 @@ export default class App extends Component {
                     <Container>
                         <Router>
                             <Scene key='map' component={Map} title='Map' hideNavBar={true} hideTabBar={false} />
-                            <Scene key='information' component={Information} title='Information' hideNavBar={true} hideTabBar={false}/>
+                            <Scene key='information' component={Information} title='Information' hideNavBar={true} hideTabBar={true}/>
                             <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} hideTabBar={true}/>
                             <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
                             <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />

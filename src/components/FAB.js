@@ -6,31 +6,33 @@ export default class FAB extends Component {
     constructor() {
         super();
         this.state = {
-            active: 'true'
+            active: 'false'
         };
     }
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <Container style={{ marginBottom: 210}}>
+            <View style={{ flex: 1}}>
                 <Fab
                     active={this.state.active}
                     direction="up"
                     containerStyle={{}}
-                    style={{ backgroundColor: '#5067FF' }}
+                    style={{ backgroundColor: '#5067FF', marginBottom: 210 }}
                     position="bottomRight"
                     onPress={() => this.setState({ active: !this.state.active })}>
                     <Icon name="share" />
-                    <Button style={{ backgroundColor: '#34A34F' }}>
+                    <Button style={{ backgroundColor: '#34A34F', marginBottom: 210 }}>
                         <Icon name="logo-whatsapp" />
                     </Button>
-                    <Button style={{ backgroundColor: '#3B5998' }} onPress={Actions.feedback}>
+                    <Button style={{ backgroundColor: '#3B5998', marginBottom: 210 }} onPress={Actions.feedback}>
                         <Icon name="logo-facebook" />
                     </Button>
-                    <Button disabled style={{ backgroundColor: '#DD5144' }} onPress={Actions.feedback}>
+                    <Button style={{ backgroundColor: '#DD5144', marginBottom: 210 }} onPress={Actions.feedback}>
                         <Icon name="mail" />
                     </Button>
                 </Fab>
             </View>
+            </Container>
         );
     }
 }

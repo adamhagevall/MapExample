@@ -197,7 +197,7 @@ export default class Map extends Component {
               />
               {this.renderTiles()}
             </MapView>
-            <FAB style={{ marginBottom: 100 }} />
+            <FAB  />
           </View>
         </Content>
         {/* </LoadingView> */}
