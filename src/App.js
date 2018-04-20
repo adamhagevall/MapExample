@@ -17,6 +17,11 @@ import Calendar from './components/pages/Calendar';
 
 export default class App extends Component {
 
+    constructor() {
+        super();
+        this.state = { showFooter: true }
+    }
+
     async requestLocationsPermission() {
         console.log('location request');
         try {
@@ -39,13 +44,13 @@ export default class App extends Component {
 
     footerCallback = (noFooter) => {
         this.setState({ showFooter: noFooter });
-        
-      };
+        console.log(showFooter);
+    };
 
     renderFooter() {
         if (this.state.showFooter) {
             return <Footer />
-        } 
+        }
     }
 
     render() {
@@ -54,16 +59,17 @@ export default class App extends Component {
                 <View style={{ flex: 1 }}>
                     <Container>
                         <Router>
-                            <Scene key='map' component={Map} title='Map' hideNavBar={true} hideTabBar={false} />
-                            <Scene key='information' component={Information} title='Information' hideNavBar={true} hideTabBar={true}/>
-                            <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} hideTabBar={true}/>
+                            <Scene key='map' component={Map} title='Map' hideNavBar={true} />
+                            <Scene key='information' component={Information} title='Information' hideNavBar={true} />
+                            <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
                             <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
                             <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />
                         </Router>
-                        <Footer />
+                        {this.renderFooter()};
                     </Container>
                 </View>
             </Provider>
+
         );
     };
 }
