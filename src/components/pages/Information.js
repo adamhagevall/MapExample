@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { ListView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Content, Container } from 'native-base';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import ListItem from '../ListItem';
 import { Button } from '../common/Button';
 import InfoHeader from '../InfoHeader';
+import reducers from '../../reducers';
 
 class Information extends Component {
 
@@ -50,7 +53,7 @@ class Information extends Component {
 
         );
     }
-
+    
 }
 
 

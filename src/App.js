@@ -6,10 +6,9 @@ import { Router, Scene } from 'react-native-router-flux';
 import { Container, Content } from 'native-base';
 import reducers from './reducers';
 import SearchBar from './components/SearchBar';
-import Map from './components/pages/Map';
 import Footer from './components/Footer';
 import FAB from './components/FAB';
-
+import Map from './components/pages/Map';
 import Information from './components/pages/Information';
 import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
@@ -36,6 +35,17 @@ export default class App extends Component {
 
     componentWillMount() {
         this.requestLocationsPermission();
+    }
+
+    footerCallback = (noFooter) => {
+        this.setState({ showFooter: noFooter });
+        
+      };
+
+    renderFooter() {
+        if (this.state.showFooter) {
+            return <Footer />
+        } 
     }
 
     render() {

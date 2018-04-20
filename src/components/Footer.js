@@ -6,7 +6,10 @@ export default class FooterEx extends Component {
 
     constructor() {
         super();
-        this.state = { activeTabName: 'map', tabShown: true };
+        this.state = { 
+            activeTabName: 'map', 
+            tabShown: true 
+        };
     }
 
     tabAction(tab) {

@@ -3,7 +3,18 @@ import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, Ch
 
 
 export default class Settings extends Component {
+    constructor() {
+        super();
+        this.state = { showFooter: false }
+    }
+
+    footerFunction(noFooter) {
+        console.log(noFooter);
+        this.props.callbackFromParent(noFooter);
+    }
+
     render() {
+        {this.footerFunction(this.state.showFooter)}
         return (
             <Container>
                 <Header />
