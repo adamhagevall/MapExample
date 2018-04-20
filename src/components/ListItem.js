@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
+import { Icon } from 'native-base';
 
 
 class ListItem extends Component {
@@ -35,13 +36,14 @@ class ListItem extends Component {
 
         return (
             <TouchableWithoutFeedback
-                onPress={() => this.props.selectLibrary(id)}
+                onPress={() => this.props.selectLibrary(id) && console.log('fkn2')}
             >
                 <View>
                     <CardSection>
                         <Text style={titleStyle}>
                         {title}
                         </Text>
+                        <Icon name="arrow-down" style={{ color: 'black', left: 200 }} />
                     </CardSection>
                     {this.renderDescription()}
                 </View>
