@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, CheckBox, Body, List, ListItem, Switch, Separator } from 'native-base';
+import {
+    Container,
+    Header,
+    Content,
+    Card,
+    CardItem,
+    Text,
+    Icon,
+    Right,
+    Left,
+    CheckBox,
+    Body,
+    List,
+    ListItem,
+    Switch,
+    Separator
+} from 'native-base';
 
 
 export default class Settings extends Component {
+    
     constructor() {
         super();
         this.state = { showFooter: false }
     }
 
-    footerFunction(noFooter) {
-        console.log(noFooter);
-        this.props.callbackFromParent(noFooter);
-    }
+    // footerFunction(noFooter) {
+    //     console.log(noFooter);
+    //     this.props.callbackFromParent(noFooter);
+    // }
 
     render() {
-        {this.footerFunction(this.state.showFooter)}
+        // { this.footerFunction(this.state.showFooter) }
         return (
             <Container>
                 <Header />

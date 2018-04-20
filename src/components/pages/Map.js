@@ -42,6 +42,47 @@ export default class Map extends Component {
       // loading: true
     }
   }
+  
+
+  renderOriginMarker() {
+    if (this.state.originDetails != {}) {
+      console.log('hej');
+      return (
+        <MapView.Marker
+          style={{ height: 1 }}
+          coordinate={this.state.originDetails}
+          pinColor={'red'}
+        />
+      );
+    }
+  }
+
+  renderDestinationMarker() {
+    if (this.state.destinationDetails != {}) {
+      return (
+        <MapView.Marker
+          style={{ height: 1 }}
+          coordinate={this.state.destinationDetails}
+          pinColor={'green'}
+        />
+      );
+    }
+  }
+
+  renderRoute() {
+    console.log('legend');
+    if (this.state.originDetails != {} && this.state.destinationDetails != {}) {
+      return (
+        <MapViewDirections
+          origin={this.state.originDetails}
+          destination={this.state.destinationDetails}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={5}
+          strokeColor='yellow'
+        />
+      );
+    }
+  }
 
   updateStyle() {
     this.setState({
@@ -121,6 +162,7 @@ export default class Map extends Component {
 
 
   renderTiles() {
+    console.log(this.state.originDetails)
     return this.state.tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
     );
@@ -178,26 +220,12 @@ export default class Map extends Component {
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
               />
-              <MapView.Marker
-                style={{ height: 1 }}
-                coordinate={this.state.originDetails}
-                pinColor={'red'}
-              />
-              <MapView.Marker
-                style={{ height: 1 }}
-                coordinate={this.state.destinationDetails}
-                pinColor={'green'}
-              />
-              <MapViewDirections
-                origin={this.state.originDetails}
-                destination={this.state.destinationDetails}
-                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                strokeWidth={5}
-                strokeColor='yellow'
-              />
-              {this.renderTiles()}
+              {this.renderOriginMarker()};
+              {this.renderDestinationMarker()};
+              {this.renderRoute()};
+              {this.renderTiles()};
             </MapView>
-            <FAB  />
+            <FAB />
           </View>
         </Content>
         {/* </LoadingView> */}
