@@ -38,14 +38,16 @@ export default class Map extends Component {
       mapStyle: {},
       originDetails: {},
       destinationDetails: {},
-      routeTile: []
+      routeTile: [],
       // loading: true
+      originDefined: false,
+      destinationDefined: false
     }
   }
   
 
   renderOriginMarker() {
-    if (this.state.originDetails != {}) {
+    if (this.state.originDefined) {
       console.log('hej');
       return (
         <MapView.Marker
@@ -58,7 +60,7 @@ export default class Map extends Component {
   }
 
   renderDestinationMarker() {
-    if (this.state.destinationDetails != {}) {
+    if (this.state.destinationDefined) {
       return (
         <MapView.Marker
           style={{ height: 1 }}
@@ -71,7 +73,7 @@ export default class Map extends Component {
 
   renderRoute() {
     console.log('legend');
-    if (this.state.originDetails != {} && this.state.destinationDetails != {}) {
+    if (this.state.originDefined && this.state.destinationDefined) {
       return (
         <MapViewDirections
           origin={this.state.originDetails}
@@ -150,12 +152,12 @@ export default class Map extends Component {
   // }
 
   originCallback = (detailsFromSearch) => {
-    this.setState({ originDetails: detailsFromSearch })
+    this.setState({ originDetails: detailsFromSearch, originDefined: true })
     console.log('originDetails: ', this.state.originDetails);
   };
 
   destinationCallback = (detailsFromSearch) => {
-    this.setState({ destinationDetails: detailsFromSearch })
+    this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true })
     console.log('destinationDetails: ', this.state.destinationDetails);
   }
 
