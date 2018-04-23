@@ -198,11 +198,11 @@ export default class Map extends Component {
               }}
             >
               <MapView.Marker
-                style={{ height: 1 }}
+                style={{ height: 1}}
                 coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
                 title={'Tillgänglighetsarenan'}
-                //image={custom}
-                pinColor={'blue'}
+                image={custom}
+                // pinColor={'blue'}
               />
               <MapView.Marker
                 style={{ height: 1 }}
