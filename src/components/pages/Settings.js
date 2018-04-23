@@ -20,18 +20,13 @@ import {
 
 export default class Settings extends Component {
     
-    constructor() {
-        super();
-        this.state = { showFooter: false }
-    }
-
-    // footerFunction(noFooter) {
-    //     console.log(noFooter);
-    //     this.props.callbackFromParent(noFooter);
+    // showFooter(isFalse) {
+    //     console.log(isFalse);
+    //     this.props.callbackFromParent(isFalse);
     // }
 
     render() {
-        // { this.footerFunction(this.state.showFooter) }
+        // { this.showFooter(false) }
         return (
             <Container>
                 <Header />
