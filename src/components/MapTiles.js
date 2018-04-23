@@ -12,6 +12,7 @@ const MapTiles = ({ tile }) => {
             apikey={apikey}
             strokeWidth={strokeWidth}
             strokeColor={strokeColor}
+            mode='walking'
         />   
     );
 };

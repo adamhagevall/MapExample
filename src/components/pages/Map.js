@@ -12,7 +12,7 @@ import NewHeader from '../MapHeader';
 import FAB from '../FAB';
 
 
-var custom = require('../101.jpg');
+var customToilet = require('../101.jpg');
 let { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -23,7 +23,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const searchDetails = {};
 
 export default class Map extends Component {
-
 
   constructor() {
     super();
@@ -81,6 +80,7 @@ export default class Map extends Component {
           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
           strokeWidth={5}
           strokeColor='yellow'
+          mode='walking'
         />
       );
     }
@@ -192,8 +192,6 @@ export default class Map extends Component {
               style={styles.container}
               initialRegion={{
                 latitude: 57.637545, 
-
-
                 longitude: 18.293706,
                 latitudeDelta: 0.00012,
                 longitudeDelta: 0.020
@@ -203,7 +201,6 @@ export default class Map extends Component {
                 style={{ height: 1}}
                 coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
                 title={'Tillgänglighetsarenan'}
-                image={custom}
                 // pinColor={'blue'}
               />
               <MapView.Marker
@@ -217,6 +214,7 @@ export default class Map extends Component {
                 coordinate={{ longitude: 18.2892483, latitude: 57.6402041 }}
                 title={'Tillgängliga toaletter'}
                 pinColor={'blue'}
+                image={customToilet}
               />
               <MapView.Marker
                 style={{ height: 1 }}
