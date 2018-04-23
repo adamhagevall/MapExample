@@ -17,7 +17,7 @@ export default class FAB extends Component {
                     active={this.state.active}
                     direction="up"
                     containerStyle={{}}
-                    style={{ backgroundColor: '#5067FF', marginBottom: 210 }}
+                    style={{ backgroundColor: '#4A90E2', marginBottom: 210 }}
                     position="bottomRight"
                     onPress={() => this.setState({ active: !this.state.active })}>
                     <Icon name="share" />
