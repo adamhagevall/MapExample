@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Footer, FooterTab, Button, Icon, Text } from 'native-base';
+import { Footer, FooterTab, Button, Icon, Text, StyleProvider} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+
+import getTheme from '../../native-base-theme/components';
+import commonColor from '../../native-base-theme/variables/commonColor';
 
 export default class FooterEx extends Component {
 
@@ -25,6 +28,7 @@ export default class FooterEx extends Component {
 
     render() {
         return (
+            <StyleProvider style={getTheme(commonColor)}>
             <Footer >
                 <FooterTab>
                     <Button vertical active={(this.state.activeTabName === 'map') ? true : ""} onPress={() => { this.tabAction('map') }}>
@@ -37,6 +41,7 @@ export default class FooterEx extends Component {
                     </Button>
                 </FooterTab>
             </Footer>
+            </StyleProvider>
         );
     }
 }
