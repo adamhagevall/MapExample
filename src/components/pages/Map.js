@@ -10,9 +10,13 @@ import SearchBar from '../SearchBar';
 import MapTiles from '../MapTiles';
 import NewHeader from '../MapHeader';
 import FAB from '../FAB';
+import Footer from '../Footer';
 
 
 var customToilet = require('../101.jpg');
+var customParking = require('../Parking.png');
+var customArena = require('../Arena.png');
+var customBed = require('../Bed.png');
 let { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -175,9 +179,11 @@ export default class Map extends Component {
     //       }, 8000)
   }
 
+
   render() {
     const { width, height } = Dimensions.get('window');
     const ratio = width / height;
+    const onMap = true;
     return (
       <Container>
         <NewHeader />
@@ -201,6 +207,7 @@ export default class Map extends Component {
                 style={{ height: 1}}
                 coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
                 title={'Tillgänglighetsarenan'}
+                image={customArena}
                 // pinColor={'blue'}
               />
               <MapView.Marker
@@ -208,6 +215,7 @@ export default class Map extends Component {
                 coordinate={{ longitude: 18.2800916, latitude: 57.6317496 }}
                 title={'Scandic Visby'}
                 pinColor={'blue'}
+                image={customBed}
               />
               <MapView.Marker
                 style={{ height: 1 }}
@@ -221,6 +229,7 @@ export default class Map extends Component {
                 coordinate={{ longitude: 18.288044, latitude: 57.6376372 }}
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
+                image={customParking}
               />
               {this.renderOriginMarker()};
               {this.renderDestinationMarker()};

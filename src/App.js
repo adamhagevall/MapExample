@@ -31,7 +31,7 @@ export default class App extends Component {
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("Location access granted")
             } else {
-                console.log("Locatin access denied")
+                console.log("Location access denied")
             }
         } catch (err) {
             console.warn(err)
@@ -42,9 +42,9 @@ export default class App extends Component {
         this.requestLocationsPermission();
     }
 
-    footerCallback = (noFooter) => {
+    noFooterCallback = (noFooter) => {
+        console.log(noFooter);
         this.setState({ showFooter: noFooter });
-        console.log(showFooter);
     };
 
     renderFooter() {
@@ -65,7 +65,7 @@ export default class App extends Component {
                             <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
                             <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />
                         </Router>
-                        {this.renderFooter()};
+                        <Footer />
                     </Container>
                 </View>
             </Provider>
@@ -73,7 +73,8 @@ export default class App extends Component {
         );
     };
 }
-
+// callbackFromParent={this.noFooterCallback}
+// {this.renderFooter()};
 // import React from 'react';
 // import { View } from 'react-native';
 // import { Provider } from 'react-redux';

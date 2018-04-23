@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Footer, FooterTab, Button, Icon, Text, StyleProvider} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-
 import getTheme from '../../native-base-theme/components';
 import commonColor from '../../native-base-theme/variables/commonColor';
 

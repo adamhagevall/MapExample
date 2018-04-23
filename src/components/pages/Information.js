@@ -8,6 +8,7 @@ import ListItem from '../ListItem';
 import { Button } from '../common/Button';
 import InfoHeader from '../InfoHeader';
 import reducers from '../../reducers';
+import Footer from '../Footer';
 
 class Information extends Component {
 
@@ -34,6 +35,7 @@ class Information extends Component {
 
 
     render() {
+        const onMap = false;
         return (
             <Container style={{ flex: 1 }}>
                 <InfoHeader />
