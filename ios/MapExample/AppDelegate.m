@@ -9,6 +9,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+//#import "SplashScreen.h"
 
 @import GoogleMaps;
 
@@ -33,6 +34,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+//  [SplashScreen show];
   return YES;
 }
 

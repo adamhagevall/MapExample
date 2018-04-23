@@ -13,6 +13,7 @@ import Information from './components/pages/Information';
 import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
 import Calendar from './components/pages/Calendar';
+// import SplashScreen from 'react-native-splash-screen';
 
 
 export default class App extends Component {
@@ -41,6 +42,11 @@ export default class App extends Component {
     componentWillMount() {
         this.requestLocationsPermission();
     }
+
+    // componentDidMount() {
+    //     SplashScreen.hide();
+    // }
+
 
     footerCallback = (noFooter) => {
         this.setState({ showFooter: noFooter });

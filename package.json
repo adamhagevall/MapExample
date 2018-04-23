@@ -21,6 +21,7 @@
     "react-native-maps": "^0.15.3",
     "react-native-maps-directions": "^1.6.0",
     "react-native-router-flux": "^3.43.0",
+    "react-native-splash-screen": "^3.0.6",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
   },
