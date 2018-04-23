@@ -21,6 +21,7 @@ class ListItem extends Component {
     constructor() {
         super();
         this.state = { informationExpanded: false };
+        this.state = { trackedID: null }
       }
 
     renderDescription() {
@@ -37,6 +38,13 @@ class ListItem extends Component {
         }
     }
 
+    // turnBackArrow(selectID, trackID) {
+    //     if (selectID!==trackID) {
+
+    //     }
+    //     else { }
+    // }
+
     //tillagt
     renderIcon() {
         console.log("in renderIcon")
@@ -49,23 +57,20 @@ class ListItem extends Component {
     }
 
     renderInformation(selectedID) {
-        console.log("in renderInformation")
-        console.log("Current state of informationExpanded: "+this.state.informationExpanded)
-        console.log("current id: "+selectedID)
-
         if(this.state.informationExpanded) {
             this.props.selectLibrary(100)
-            console.log("this information is already expanded!")
         }
         else {
             this.props.selectLibrary(selectedID)
-            console.log("Vanliga funtionen selectLibrary")
         }
     }
 
     buttonFunction(selectedID) {
+       // this.setState({ trackedID: selectedID })
+        // this.turnBackArrow(selectedID, trackedID)
         this.renderIcon();
         this.renderInformation(selectedID)
+
     }
 
     render() {
@@ -78,20 +83,21 @@ class ListItem extends Component {
 
         return (
             <TouchableWithoutFeedback
-             //   onPress={() => this.props.selectLibrary(id) && this.setState({ informationExpanded: true })}
-            // onPress={() => this.props.selectLibrary(id) && this.renderIcon()}
-            // onPress={() => this.renderIcon() && this.renderInformation(id)}
             onPress={() => this.buttonFunction(id)}
 
 
             >
                 <View>
                     <CardSection>
+                        <View style={{ flex: 2 }}>
                         <Text style={titleStyle}>
                         {title}
                         </Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
                         {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}  
-                        <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 200 }} />
+                        <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} />
+                        </View>
                     </CardSection>
                     {this.renderDescription()}
                 </View>
@@ -103,7 +109,7 @@ class ListItem extends Component {
 const styles = {
     titleStyle: {
         fontSize: 18,
-        paddingLeft: 15
+        paddingLeft: 15,
     }
 };
 

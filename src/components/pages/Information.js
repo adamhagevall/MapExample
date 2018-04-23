@@ -41,13 +41,13 @@ class Information extends Component {
                 <View>
                     {this.renderList()}
                 </View>
-                <Image
+                {/* <Image
                     source={require('../Assets/img1.png')}
                 />
                 <Image
                     source={require('../Assets/img2.png')}
                     style={{ height: 50 }}
-                />
+                /> */}
             </Content>
             </Container>
 
