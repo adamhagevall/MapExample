@@ -191,8 +191,10 @@ export default class Map extends Component {
               provider={PROVIDER_GOOGLE}
               style={styles.container}
               initialRegion={{
-                latitude: 57.639572,
-                longitude: 18.294661,
+                latitude: 57.637545, 
+
+
+                longitude: 18.293706,
                 latitudeDelta: 0.00012,
                 longitudeDelta: 0.020
               }}
