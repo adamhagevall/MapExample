@@ -54,17 +54,17 @@ const cards = [
   {
     text: 'Seminarium 1',
     name: 'lägg till i kalender',
-    image: require('../101.jpg'),
+    image: require('../Assets/Almedalen.png'),
   },
   {
     text: 'Seminarium 2',
     name: 'lägg till i kalender',
-    image: require('../101.jpg'),
+    image: require('../Assets/people.jpg'),
   },
   {
     text: 'Seminarium 3',
     name: 'lägg till i kalender',
-    image: require('../101.jpg'),
+    image: require('../Assets/almedalen2018.jpg')
   },
 ];
 export default class DeckSwiperExample extends Component {
@@ -85,12 +85,12 @@ export default class DeckSwiperExample extends Component {
                     <Thumbnail source={item.image} />
                     <Body>
                       <Text>{item.text}</Text>
-                      <Text note>...hos tillgänglighetsarenan</Text>
+                      <Text note>För andra året i rad genomförs Tillgänglighetsarenan. Syftet är att lyfta tillgänglighet och utformning i samhällsdebatten och ge frågorna en tydlig hemvist i Almedalen.</Text>
                     </Body>
                   </Left>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image style={{ height: 300, flex: 1 }} source={item.image} />
+                  <Image style={{ height: 200, flex: 1 }} source={item.image} />
                 </CardItem>
                 <CardItem>
                   <Icon name="add-circle" style={{ color: 'blue' }} />
@@ -100,7 +100,7 @@ export default class DeckSwiperExample extends Component {
             }
           />
         </View>
-        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 20, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
+        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
           <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
             <Icon name="arrow-back" />
             <Text>Föregående</Text>

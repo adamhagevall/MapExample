@@ -14,13 +14,15 @@ export default class FAB extends Component {
             <Container style={{ marginBottom: 210}}>
             <View style={{ flex: 1}}>
                 <Fab
-                    active={this.state.active}
+                    // active={this.state.active}
+                    active={false}
                     direction="up"
                     containerStyle={{}}
                     style={{ backgroundColor: '#4A90E2', marginBottom: 210 }}
                     position="bottomRight"
-                    onPress={() => this.setState({ active: !this.state.active })}>
-                    <Icon name="share" />
+                    // onPress={() => this.setState({ active: !this.state.active })}>
+                    onPress={Actions.calendar}>
+                    <Icon name="calendar" />
                     <Button style={{ backgroundColor: '#34A34F', marginBottom: 210 }}>
                         <Icon name="logo-whatsapp" />
                     </Button>

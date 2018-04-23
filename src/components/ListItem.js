@@ -93,6 +93,9 @@ class ListItem extends Component {
                         <Text style={titleStyle}>
                         {title}
                         </Text>
+                        <Text>
+                            
+                        </Text>
                         </View>
                         <View style={{ flex: 1 }}>
                         {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}  
