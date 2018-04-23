@@ -16,16 +16,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaddningsskärmV3" translatesAutoresizingMaskIntoConstraints="NO" id="p3N-60-HJ4">
-                    <rect key="frame" x="26.5" y="167" width="360" height="402"/>
+                    <rect key="frame" x="1" y="148" width="409.5" height="440"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1560.5" y="-752"/>
+            <point key="canvasLocation" x="1560" y="-752"/>
         </view>
     </objects>
     <resources>
-        <image name="LaddningsskärmV3" width="2480" height="3508"/>
+        <image name="LaddningsskärmV3" width="2480" height="2434"/>
     </resources>
 </document>
