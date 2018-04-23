@@ -8,7 +8,7 @@ import ListItem from '../ListItem';
 import { Button } from '../common/Button';
 import InfoHeader from '../InfoHeader';
 import reducers from '../../reducers';
-import Footer from '../Footer';
+import FAB from '../FAB';
 
 class Information extends Component {
 
@@ -35,14 +35,14 @@ class Information extends Component {
 
 
     render() {
-        const onMap = false;
         return (
-            <Container style={{ flex: 1 }}>
+            <Container>
                 <InfoHeader />
             <Content style={{ marginTop: 75 }}>
                 <View>
                     {this.renderList()}
                 </View>
+                
             </Content>
             </Container>
 
