@@ -39,16 +39,16 @@ export default class Map extends Component {
       originDetails: {},
       destinationDetails: {},
       routeTile: [],
+      // loading: true
       originDefined: false,
       destinationDefined: false
-      // loading: true
     }
   }
   
 
   renderOriginMarker() {
     if (this.state.originDefined) {
-      console.log(this.state.originDetails);
+      console.log('hej');
       return (
         <MapView.Marker
           style={{ height: 1 }}
@@ -72,6 +72,7 @@ export default class Map extends Component {
   }
 
   renderRoute() {
+    console.log('legend');
     if (this.state.originDefined && this.state.destinationDefined) {
       return (
         <MapViewDirections
@@ -197,11 +198,11 @@ export default class Map extends Component {
               }}
             >
               <MapView.Marker
-                style={{ height: 1 }}
+                style={{ height: 1}}
                 coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
                 title={'Tillgänglighetsarenan'}
-                //image={custom}
-                pinColor={'blue'}
+                image={custom}
+                // pinColor={'blue'}
               />
               <MapView.Marker
                 style={{ height: 1 }}

@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 export default class MapHeader extends Component {
     render() {
         return (
-            <Header style={{ backgroundColor: '#4A90E2', titleFontColor: '#8e8e93' }}>
+            <Header style={{ backgroundColor: '#4A90E2' }}>
                 <Left>
                 </Left>
                 <Body >
