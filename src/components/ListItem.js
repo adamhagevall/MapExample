@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
-import { Icon } from 'native-base';
+import { Icon, Left, Right, Body, Thumbnail, Separator } from 'native-base';
 
+var bild = require('./Assets/Almedalen.png');
 
 class ListItem extends Component {
     componentWillUpdate() {
@@ -76,6 +77,7 @@ class ListItem extends Component {
     render() {
         const { titleStyle } = styles;
         const { id, title } = this.props.library;
+        // const { separera } = this.props.separera;
 
         //tillagt
         const expandIcon = "arrow-down"
@@ -88,7 +90,12 @@ class ListItem extends Component {
 
             >
                 <View>
+                
                     <CardSection>
+                    
+                    
+                <Thumbnail source={bild} />
+              
                         <View style={{ flex: 2 }}>
                         <Text style={titleStyle}>
                         {title}
@@ -97,10 +104,13 @@ class ListItem extends Component {
                             
                         </Text>
                         </View>
+                     
+                     
                         <View style={{ flex: 1 }}>
                         {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}  
                         <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} />
                         </View>
+                      
                     </CardSection>
                     {this.renderDescription()}
                 </View>
