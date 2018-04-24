@@ -31,11 +31,11 @@ export default class FooterEx extends Component {
             <StyleProvider style={getTheme(commonColor)}>
             <Footer >
                 <FooterTab>
-                    <Button vertical active={(this.state.activeTabName === 'map') ? true : ""} onPress={() => { this.tabAction('map') }}>
+                    <Button vertical active={(this.state.activeTabName === 'map') ? true : null} onPress={() => { this.tabAction('map') }}>
                         <Icon active name="navigate" />
                         <Text>Navigate</Text>
                     </Button>
-                    <Button vertical active={(this.state.activeTabName === 'information') ? true : ""} onPress={() => { this.tabAction('information') }}>
+                    <Button vertical active={(this.state.activeTabName === 'information') ? true : null} onPress={() => { this.tabAction('information') }}>
                         <Icon name="person" />
                         <Text>Information</Text>
                     </Button>

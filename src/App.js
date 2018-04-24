@@ -13,7 +13,7 @@ import Information from './components/pages/Information';
 import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
 import Calendar from './components/pages/Calendar';
-// import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen';
 
 
 export default class App extends Component {
@@ -35,7 +35,7 @@ export default class App extends Component {
                 console.log("Locatin access denied")
             }
         } catch (err) {
-            console.warn(err)
+        //    console.warn(err)
         }
     }
 
@@ -43,9 +43,9 @@ export default class App extends Component {
         this.requestLocationsPermission();
     }
 
-    // componentDidMount() {
-    //     SplashScreen.hide();
-    // }
+    componentDidMount() {
+        SplashScreen.hide();
+    }
 
 
     footerCallback = (noFooter) => {
