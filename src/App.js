@@ -13,6 +13,7 @@ import Information from './components/pages/Information';
 import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
 import Calendar from './components/pages/Calendar';
+import SplashScreen from 'react-native-splash-screen';
 
 
 export default class App extends Component {
@@ -31,10 +32,10 @@ export default class App extends Component {
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("Location access granted")
             } else {
-                console.log("Location access denied")
+                console.log("Locatin access denied")
             }
         } catch (err) {
-            console.warn(err)
+        //    console.warn(err)
         }
     }
 
@@ -42,9 +43,14 @@ export default class App extends Component {
         this.requestLocationsPermission();
     }
 
-    noFooterCallback = (noFooter) => {
-        console.log(noFooter);
+    componentDidMount() {
+        SplashScreen.hide();
+    }
+
+
+    footerCallback = (noFooter) => {
         this.setState({ showFooter: noFooter });
+        console.log(showFooter);
     };
 
     renderFooter() {
@@ -65,7 +71,7 @@ export default class App extends Component {
                             <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
                             <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />
                         </Router>
-                        <Footer />
+                        {this.renderFooter()};
                     </Container>
                 </View>
             </Provider>
@@ -73,8 +79,7 @@ export default class App extends Component {
         );
     };
 }
-// callbackFromParent={this.noFooterCallback}
-// {this.renderFooter()};
+
 // import React from 'react';
 // import { View } from 'react-native';
 // import { Provider } from 'react-redux';
