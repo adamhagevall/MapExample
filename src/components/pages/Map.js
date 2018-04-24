@@ -78,6 +78,7 @@ export default class Map extends Component {
     console.log('legend');
     if (this.state.originDefined && this.state.destinationDefined) {
       return (
+      
         <MapViewDirections
           origin={this.state.originDetails}
           destination={this.state.destinationDetails}
