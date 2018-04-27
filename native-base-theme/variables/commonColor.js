@@ -117,8 +117,9 @@ export default {
   },
 
   // Footer
-  footerHeight: isIphoneX ? 89 : 55,
-  footerDefaultBg: platform === "ios" ? "#AED3FF" : "#3F51B5",
+  footerHeight: isIphoneX ? 89 : 35,
+  // footerDefaultBg: platform === "ios" ? "#AED3FF" : "#3F51B5",
+  footerDefaultBg: platform === "ios" ? "#4A90E2" : "#3F51B5",
   footerPaddingBottom: isIphoneX ? 34 : 0,
 
   // FooterTab

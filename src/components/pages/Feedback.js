@@ -4,6 +4,7 @@ import { Container, Header, Left, Body, Title, Right, Textarea, Form } from "nat
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
 import Communications from 'react-native-communications';
+import FeedbackHeader from '../FeedbackHeader';
 
 
 export default class Feedback extends Component {
@@ -16,7 +17,10 @@ export default class Feedback extends Component {
 
     render() {
         return (
+            <Container>
+                  <FeedbackHeader />
             <Content style={{ marginTop: 75 }}>
+          
                 <View style={styles.view}>
                     <Text style={styles.text}>Ditt namn</Text>
                     <TextInput
@@ -42,6 +46,7 @@ export default class Feedback extends Component {
                     </TouchableHighlight>
                 </View>
             </Content>
+            </Container>
         );
     }
 }
