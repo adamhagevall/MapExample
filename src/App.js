@@ -3,7 +3,7 @@ import { View, PermissionsAndroid } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Router, Scene } from 'react-native-router-flux';
-import { Container, Content } from 'native-base';
+import { Container, Content, StyleProvider } from 'native-base';
 import reducers from './reducers';
 import SearchBar from './components/SearchBar';
 import Footer from './components/Footer';
@@ -14,7 +14,11 @@ import Settings from './components/pages/Settings';
 import Feedback from './components/pages/Feedback';
 import Calendar from './components/pages/Calendar';
 import SplashScreen from 'react-native-splash-screen';
+import addToCal from './components/pages/addtoCal';
 
+
+import getTheme from '../native-base-theme/components';
+import platform from '../native-base-theme/variables/platform';
 
 export default class App extends Component {
 
@@ -61,6 +65,7 @@ export default class App extends Component {
 
     render() {
         return (
+            <StyleProvider style={getTheme(platform)}>
             <Provider store={createStore(reducers)}>
                 <View style={{ flex: 1 }}>
                     <Container>
@@ -68,13 +73,16 @@ export default class App extends Component {
                             <Scene key='map' component={Map} title='Map' hideNavBar={true} />
                             <Scene key='information' component={Information} title='Information' hideNavBar={true} />
                             <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
-                            <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={false} />
-                            <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={false} />
+                            <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={true} />
+                            <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={true} />
+                            <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
+                            
                         </Router>
                         {this.renderFooter()};
                     </Container>
                 </View>
             </Provider>
+            </StyleProvider>
 
         );
     };

@@ -46,32 +46,36 @@ var pistmap = require('../Assets/pistmap.png');
 // }
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button } from 'native-base';
+import { Image, Linking } from 'react-native';
+import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
 
-
+import CalendarHeader from '../CalendarHeader';
+const url = 'https://www.facebook.com/events/428188540972908/';
 const cards = [
   {
     text: 'Seminarium 1',
     name: 'lägg till i kalender',
+    dela: 'dela facebook',
     image: require('../Assets/Almedalen.png'),
   },
   {
     text: 'Seminarium 2',
     name: 'lägg till i kalender',
+    dela: 'dela facebook',
     image: require('../Assets/people.jpg'),
   },
   {
     text: 'Seminarium 3',
     name: 'lägg till i kalender',
+    dela: 'dela facebook',
     image: require('../Assets/almedalen2018.jpg')
   },
 ];
 export default class DeckSwiperExample extends Component {
   render() {
     return (
-      <Container style={{ marginTop: 25 }}>
-        <Header />
+      <Container >
+        <CalendarHeader />
         <View>
           <DeckSwiper
           ref={(c) => this._deckSwiper = c}
@@ -94,18 +98,23 @@ export default class DeckSwiperExample extends Component {
                 </CardItem>
                 <CardItem>
                   <Icon name="add-circle" style={{ color: 'blue' }} />
-                  <Text>{item.name}</Text>
+                  <Text>{item.name} </Text>
+
+                  
+                  <Text style={{ marginLeft: 40}} onPress={() => Linking.openURL(url)} >{item.dela} </Text>
+                  <Icon style={{ marginLeft: 55}} name="logo-facebook" style={{ color: 'blue' }} />
+
                 </CardItem>
               </Card>
             }
           />
         </View>
         <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
-          <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
+          <Button style={{ backgroundColor: '#4A90E2'}} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
             <Icon name="arrow-back" />
             <Text>Föregående</Text>
           </Button>
-          <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
+          <Button style={{ backgroundColor: '#4A90E2'}} iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
             
             <Text>Nästa </Text>
             <Icon name="arrow-forward" />

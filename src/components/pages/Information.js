@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Content, Container } from 'native-base';
+import { Content, Container, Separator, Text, Card, CardItem, Left, Right, Icon } from 'native-base';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ListItem from '../ListItem';
@@ -9,6 +9,10 @@ import { Button } from '../common/Button';
 import InfoHeader from '../InfoHeader';
 import reducers from '../../reducers';
 import FAB from '../FAB';
+import { Actions } from 'react-native-router-flux';
+
+
+var logo = require('../Assets/raukavagen.png');
 
 class Information extends Component {
 
@@ -43,6 +47,37 @@ class Information extends Component {
                     {this.renderList()}
                 </View>
                 
+        
+        
+                    
+                    <Card>
+                    <Separator bordered>
+                        <Text>SCHEMA:</Text>
+                    </Separator>
+                   
+                    <CardItem>
+                            <Icon active name="contacts" />
+                            <Text>Seminarium 1</Text>
+                            <Right>
+                                <Icon name="arrow-forward" onPress={Actions.calendar} />
+                            </Right>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="contacts" />
+                            <Text>Seminarium 2</Text>
+                            <Right>
+                                <Icon name="arrow-forward" onPress={Actions.calendar} />
+                            </Right>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="contacts" />
+                            <Text>Seminarium 3</Text>
+                            <Right>
+                                <Icon name="arrow-forward" onPress={Actions.calendar} />
+                            </Right>
+                        </CardItem>
+                    </Card>
+            {/* <Image source={logo} /> */}
             </Content>
             </Container>
 

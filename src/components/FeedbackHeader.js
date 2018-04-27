@@ -3,7 +3,7 @@ import { Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 
-export default class InfoHeader extends Component {
+export default class FeedbackHeader extends Component {
     render() {
         return (
             <Header style={{ backgroundColor: '#4A90E2' }}>
@@ -13,12 +13,10 @@ export default class InfoHeader extends Component {
                     </Button>
                 </Left>
                 <Body>
-                    <Title style={{ color: "white" }}>Information</Title>
+                    <Title style={{ color: "white" }}>Feedback</Title>
                 </Body>
                 <Right>
-                <Button transparent onPress={Actions.calendar}>
-                        <Icon name='calendar' style={{ color: "white" }}/>
-                    </Button>
+              
                 </Right>
             </Header>
         );
