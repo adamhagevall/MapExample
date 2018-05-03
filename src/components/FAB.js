@@ -49,17 +49,27 @@ import { Actions } from 'react-native-router-flux';
 
 export default class FAB extends Component {
     state = {
-        modalVisible: false
+        modalVisible: false,
+        actionSheet: false
+
     };
 
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
     }
+    renderActionSheet() {
+        if (actionSheet = true ) {
+            console.log('hej'),
+        <View>
+            
+        </View>
+        }
+    }
 
     render() {
         return (
             <Container style={{ marginBottom: 50 }}>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, height: 100 }}>
 
                     <Modal
                         animationType="slide"
@@ -67,9 +77,10 @@ export default class FAB extends Component {
                         visible={this.state.modalVisible}
                         onRequestClose={() => {
                             alert('Modal has been closed.');
+
                         }}>
-                        <View style={{ marginTop: 22 }}>
-                            <View>
+                        <View style={{ marginTop: 300, height: 300, width: 300 }}>
+                            <View style={{ height: 100, width: 200}}>
                                 <Text>Hello World!</Text>
 
                                 <TouchableHighlight
@@ -81,7 +92,8 @@ export default class FAB extends Component {
                             </View>
                         </View>
                     </Modal>
-
+                </View>
+                <View>
                     {/* <Modal style={styles.modal} position={"bottom"} ref={"modal"}>
                             <Text>Modal on bottom with backdrop</Text>
                         </Modal> */}
@@ -92,13 +104,16 @@ export default class FAB extends Component {
                         containerStyle={{}}
                         style={{ backgroundColor: '#4A90E2', marginBottom: 100 }}
                         position="bottomRight"
-                        //onPress={() => { this.setModalVisible(true) }}
-                        onPress={() => { this.setModalVisible(true) }}
+                        // onPress={() => { this.setModalVisible(true) }}
                     //onPress={() => this.setState({ active: !this.state.active })}>
                     // onPress={this.renderModal}
+                    onPress={() => {
+                        this.state.actionSheet = true
+                    }}
                     >
                         <Icon name="settings" />
                     </Fab>
+                    {this.renderActionSheet()}
                     {/* <Fab
                         // active={this.state.active}
                         active={false}

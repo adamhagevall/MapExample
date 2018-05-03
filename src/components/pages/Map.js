@@ -12,6 +12,7 @@ import SearchBar from '../SearchBar';
 import MapTiles from '../MapTiles';
 import NewHeader from '../MapHeader';
 import FAB from '../FAB';
+import FABExample from '../pages/FABExample';
 import Footer from '../Footer';
 
 
@@ -27,6 +28,7 @@ const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const searchDetails = {};
+
 
 export default class Map extends Component {
 
@@ -80,6 +82,7 @@ export default class Map extends Component {
     console.log('legend');
     if (this.state.originDefined && this.state.destinationDefined) {
       return (
+      
         <MapViewDirections
           origin={this.state.originDetails}
           destination={this.state.destinationDetails}
@@ -91,6 +94,10 @@ export default class Map extends Component {
       );
     }
   }
+
+
+
+
 
   updateStyle() {
     this.setState({
@@ -240,14 +247,15 @@ export default class Map extends Component {
               {this.renderRoute()};
               {this.renderTiles()};
             </MapView>
-            <FAB />
+            <FABExample />
           </View>
           <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
-          <View style={{ flex: 1 }}>
-          <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
-          </View>
+         
           <View style={{ flex: 1}}>
           <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
+          </View>
+          <View style={{ flex: 1, marginTop: 35 }}>
+          <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
           </View>
           </View>
 

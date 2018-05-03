@@ -911,7 +911,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 96848SQ72Y;
+						DevelopmentTeam = RKU65843G4;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1543,7 +1543,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 96848SQ72Y;
+				DEVELOPMENT_TEAM = RKU65843G4;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
@@ -1560,6 +1560,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.visby-pistkarta.beta";
 				PRODUCT_BUNDLE_IDENTIFIER = testingapp.org.reactjs.native.example1.MapExample;
 				PRODUCT_NAME = MapExample;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1576,7 +1577,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96848SQ72Y;
+				DEVELOPMENT_TEAM = RKU65843G4;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
@@ -1593,6 +1594,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.visby-pistkarta.beta";
 				PRODUCT_BUNDLE_IDENTIFIER = testingapp.org.reactjs.native.example1.MapExample;
 				PRODUCT_NAME = MapExample;
 				PROVISIONING_PROFILE_SPECIFIER = "";

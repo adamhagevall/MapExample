@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
-import { Container, Header, Left, Body, Title, Right, Textarea, Form } from "native-base";
+import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Container, Header, Left, Body, Title, Right, Textarea, Form, ActionSheet, ListItem, CheckBox } from "native-base";
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
 import Communications from 'react-native-communications';
@@ -8,7 +8,7 @@ import FeedbackHeader from '../FeedbackHeader';
 
 
 export default class Feedback extends Component {
-    state = { mailSender: '', mailSubject: '', mailContent: '' };
+    state = { mailSender: '', mailSubject: '', mailContent: '', checked: false, ButtonStateHolder: true};
 
     onMailPress() {
         Communications.email(['johanna.dagfalk@live.se'], null, null, this.state.mailSubject, this.state.mailContent)
@@ -18,9 +18,9 @@ export default class Feedback extends Component {
     render() {
         return (
             <Container>
+                 <Content >
                   <FeedbackHeader />
-            <Content style={{ marginTop: 75 }}>
-          
+           
                 <View style={styles.view}>
                     <Text style={styles.text}>Ditt namn</Text>
                     <TextInput
@@ -41,14 +41,25 @@ export default class Feedback extends Component {
                         
                     </Form>
                     <Text style={styles.text}></Text>
-                    <TouchableHighlight style={styles.button} onPress={this.onMailPress.bind(this)}>
-                        <Text style={styles.buttonText}>Send Feedback</Text>
-                    </TouchableHighlight>
+
+                     <ListItem>
+                        <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })}/>
+        
+                        <Body>
+                            <Text>Godkänn feedbackvillkor</Text>
+                        </Body>
+                    </ListItem>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)}  activeOpacity = { .5 } 
+          disabled={this.state.ButtonStateHolder}>
+                        <Text style={styles.buttonText}>Skicka Feedback</Text>
+                    </TouchableOpacity>
                 </View>
             </Content>
             </Container>
         );
     }
+
+    
 }
 
 const styles = StyleSheet.create({
