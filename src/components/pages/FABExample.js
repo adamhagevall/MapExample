@@ -21,7 +21,7 @@ export default class FABExample extends Component {
             active={false}
             direction="up"
             containerStyle={{ }}
-            style={{ backgroundColor: '#4A90E2', marginBottom: 100 }}
+            style={{ backgroundColor: '#4A90E2', marginBottom: 200 }}
             position="bottomRight"
             // onPress={() => this.setState({ active: !this.state.active })}>
             onPress={() =>

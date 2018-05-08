@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { Header, Left, Right, Button, Icon, Body, Title } from 'native-base';
+import { Image }from 'react-native';
+import { Header, Left, Right, Button, Icon, Body, Title, Thumbnail } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+
+import BackgroundImage from './pages/BackgroundImage';
+var info = require('./Assets/information.jpg');
 
 
 export default class InfoHeader extends Component {
     render() {
         return (
-            <Header style={{ backgroundColor: '#4A90E2' }}>
+            <BackgroundImage>
+            <Header  style={{ backgroundColor: '#4A90E2', height: 150 }}>
                 <Left>
                 <Button transparent onPress={Actions.pop}>
                         <Icon name='arrow-back' style={{ color: "white" }}/>
@@ -21,6 +26,7 @@ export default class InfoHeader extends Component {
                     </Button>
                 </Right>
             </Header>
+            </BackgroundImage>
         );
     }
 }

@@ -68,7 +68,7 @@ export default class SearchBar extends Component {
     }
     
     someFunction(details) {
-        this.props.callbackFromParent({longitude: details.lng, latitude: details.lat});
+        this.props.callbackFromParent({latitude: details.lat, longitude: details.lng});
     }
 
     render() {

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Footer, FooterTab, Button, Icon, Text, StyleProvider} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
+import BackgroundImage from './pages/BackgroundImage';
+
 import getTheme from '../../native-base-theme/components';
 import commonColor from '../../native-base-theme/variables/commonColor';
+
+var bild = require('./Assets/blue2.jpg');
 
 export default class FooterEx extends Component {
 
@@ -29,7 +33,9 @@ export default class FooterEx extends Component {
     render() {
         return (
             <StyleProvider style={getTheme(commonColor)}>
+           
             <Footer >
+            <BackgroundImage>
                 <FooterTab>
                     {/* <Button vertical active={(this.state.activeTabName === 'map') ? true : null} onPress={() => { this.tabAction('map') }}>
                         <Icon active name="navigate" />
@@ -40,7 +46,9 @@ export default class FooterEx extends Component {
                         <Text>Information</Text>
                     </Button> */}
                 </FooterTab>
+                </BackgroundImage>
             </Footer>
+            
             </StyleProvider>
         );
     }

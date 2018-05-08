@@ -47,7 +47,7 @@ var pistmap = require('../Assets/pistmap.png');
 
 import React, { Component } from 'react';
 import { Image, Linking } from 'react-native';
-import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
+import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
 
 import CalendarHeader from '../CalendarHeader';
 const url = 'https://www.facebook.com/events/428188540972908/';
@@ -75,15 +75,21 @@ export default class DeckSwiperExample extends Component {
   render() {
     return (
       <Container >
+        <View style={{height: 150}}>
         <CalendarHeader />
-        <View>
+        </View>
+        <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: 105 }}>
+         
+        
+        <View styles={{position: 'absolute', flexDirection: 'column', width: 500}}>
           <DeckSwiper
           ref={(c) => this._deckSwiper = c}
             dataSource={cards}
              
                   
             renderItem={item =>
-              <Card style={{ elevation: 3 }}>
+              <Card style={styles.containerStyle}>
+              
                 <CardItem>
                   <Left>
                     <Thumbnail source={item.image} />
@@ -101,13 +107,14 @@ export default class DeckSwiperExample extends Component {
                   <Text>{item.name} </Text>
 
                   
-                  <Text style={{ marginLeft: 40}} onPress={() => Linking.openURL(url)} >{item.dela} </Text>
+                  <Text style={{ marginLeft: 10}} onPress={() => Linking.openURL(url)} >{item.dela} </Text>
                   <Icon style={{ marginLeft: 55}} name="logo-facebook" style={{ color: 'blue' }} />
 
                 </CardItem>
               </Card>
             }
           />
+        </View>
         </View>
         <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
           <Button style={{ backgroundColor: '#4A90E2'}} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
@@ -119,7 +126,26 @@ export default class DeckSwiperExample extends Component {
             <Text>Nästa </Text>
             <Icon name="arrow-forward" />
           </Button>
+          
         </View>
+      
       </Container>
     )}
+
 }
+const styles = {
+  containerStyle: {
+      borderWidth: 1,
+      borderRadius: 50,
+      borderColor: '#ddd',
+      borderBottomWidth: 0,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 20,
+      elevation: 1,
+      marginLeft: 20,
+      marginRight: 20,
+      marginTop: 10
+  }
+};
