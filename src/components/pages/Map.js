@@ -247,7 +247,7 @@ export default class Map extends Component {
           <View style={{ flex: 1 }}>
           <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
           </View>
-          <View style={{ flex: 1, marginTop: 35}}>
+          <View style={{ flex: 1}}>
           <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
           </View>
           </View>
