@@ -25,7 +25,7 @@ export default class EventDemo extends Component {
     );
   }
 
-  static addToCalendar = () => {
+  static addToCalendar = (title: string, startDateUTC: moment) => {
     const eventConfig = {
       title: 'Lunch',
       startDate: '2018-04-26T13:14:07.000Z',
