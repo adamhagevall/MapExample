@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, PermissionsAndroid } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { Router, Scene } from 'react-native-router-flux';
-import { Container, Content, StyleProvider } from 'native-base';
+import { Router, Scene, Stack } from 'react-native-router-flux';
+import { Container, Content, StyleProvider, Root } from 'native-base';
 import reducers from './reducers';
 import SearchBar from './components/SearchBar';
 import Footer from './components/Footer';
@@ -66,10 +66,13 @@ export default class App extends Component {
     render() {
         return (
             <StyleProvider style={getTheme(platform)}>
+            <Root>
             <Provider store={createStore(reducers)}>
                 <View style={{ flex: 1 }}>
                     <Container>
                         <Router>
+                            <Stack key="root">
+                            
                             <Scene key='map' component={Map} title='Map' hideNavBar={true} />
                             <Scene key='information' component={Information} title='Information' hideNavBar={true} />
                             <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
@@ -77,11 +80,13 @@ export default class App extends Component {
                             <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={true} />
                             <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
                             
+                            </Stack>
                         </Router>
                         {this.renderFooter()};
                     </Container>
                 </View>
             </Provider>
+            </Root>
             </StyleProvider>
 
         );

@@ -10,4 +10,6 @@ pod 'GoogleMaps'
 
   pod 'react-native-add-calendar-event', :path => '../node_modules/react-native-add-calendar-event'
 
+  pod 'react-native-calendar-events', :path => '../node_modules/react-native-calendar-events'
+
 end
