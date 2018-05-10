@@ -50,6 +50,7 @@ import { Image, Linking } from 'react-native';
 import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
 
 import CalendarHeader from '../CalendarHeader';
+import BackgroundImage from './bg';
 const url = 'https://www.facebook.com/events/428188540972908/';
 const cards = [
   {
@@ -75,10 +76,12 @@ export default class DeckSwiperExample extends Component {
   render() {
     return (
       <Container >
+
         <View style={{height: 150}}>
         <CalendarHeader />
         </View>
-        <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: 105 }}>
+        <BackgroundImage>
+        <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
          
         
         <View styles={{position: 'absolute', flexDirection: 'column', width: 500}}>
@@ -108,7 +111,7 @@ export default class DeckSwiperExample extends Component {
 
                   
                   <Text style={{ marginLeft: 10}} onPress={() => Linking.openURL(url)} >{item.dela} </Text>
-                  <Icon style={{ marginLeft: 55}} name="logo-facebook" style={{ color: 'blue' }} />
+                  <Icon style={{ marginLeft: 55}}  onPress={() => Linking.openURL(url)} name="logo-facebook" style={{ color: 'blue' }} />
 
                 </CardItem>
               </Card>
@@ -128,7 +131,7 @@ export default class DeckSwiperExample extends Component {
           </Button>
           
         </View>
-      
+        </BackgroundImage>
       </Container>
     )}
 

@@ -1,49 +1,187 @@
 import React, { Component } from "react";
-import { Container, Header, Button, Content, ActionSheet, Text, View, Icon, Fab } from "native-base";
-var BUTTONS = ["GRÖN", "BLÅ", "RÖD", "SVART", "Avbryt"];
-var DESTRUCTIVE_INDEX = 3;
-var CANCEL_INDEX = 4;
+import { Container, Header, Button, Content, Text, View, Icon, Fab } from "native-base";
+
+import { StyleSheet, Image } from 'react-native'
+import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
+import Action from '../ActionSheet';
+
+const CANCEL_INDEX = 0
+const DESTRUCTIVE_INDEX = 4
+const options = [
+  'Cancel',
+  {
+    component: <Image source={require('../Assets/green.png')} style={{width:300, height:50}} /> ,
+    height: 80,
+  },
+  {
+    component: <Image source={require('../Assets/blue.png')} style={{width:300, height:50}} /> ,
+    height: 80,
+  },
+  {
+    component: <Image source={require('../Assets/red.png')} style={{width:300, height:50}} /> ,
+    height: 80,
+  },
+  {
+    component: <Image source={require('../Assets/svart.png')} style={{width:300, height:50}} /> ,
+    height: 80,
+  }
+
+
+]
+const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Hur vill du anpassa din rutt?</Text>
+
 
 export default class FABExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: 'true'
+      active: 'true',
+      selected: 1,
+      selectedColor: '#008CCF'
     };
   }
+  showActionSheet() {
+    this.actionSheet.show()
+  }
+  getActionSheetRef = ref => (this.actionSheet = ref)
+
+  onButtonPress(){
+    console.log('onButtonPress')
+  
+    {this.handlePress}
+  }
+
+  handlePress = index => { this.setState({ selected: index }), this.handleColor()}
+
+  handleColor(){
+   
+    if (this.state.selected === 1) {
+      console.log('red')
+      this.setState({ selectedColor: 'green'})
+    }
+    if (this.state.selected === 2) {
+      console.log('green')
+      this.setState({ selectedColor: 'blue'})
+    }
+    if (this.state.selected === 3) {
+      console.log('green')
+      this.setState({ selectedColor: 'red'})
+    }
+    if (this.state.selected === 4) {
+      console.log('green')
+      this.setState({ selectedColor: 'black'})
+    }
+  } 
 
   render() {
-    return (  
+    const { selected, selectedColor } = this.state
+    const selectedText = options[selected].component || options[selected]
+    console.log(selectedColor)
+    console.log(selected)
+
+    return (
       <Container>
         <Header />
-        <View style={{ flex: 1 }}>
+        <View style={styles.wrapper}>
           <Fab
             active={false}
             direction="up"
-            containerStyle={{ }}
-            style={{ backgroundColor: '#4A90E2', marginBottom: 200 }}
+            containerStyle={{}}
+            style={{ backgroundColor: selectedColor, marginBottom: 200 }}
             position="bottomRight"
-            // onPress={() => this.setState({ active: !this.state.active })}>
-            onPress={() =>
-            ActionSheet.show(
-              {
-                backgroundColor: 'red',
-                options: BUTTONS,
-                cancelButtonIndex: CANCEL_INDEX,
-                destructiveButtonIndex: DESTRUCTIVE_INDEX,
-                title: "Välj ruttanpassning"
-              },
-              buttonIndex => {
-                this.setState({ clicked: BUTTONS[buttonIndex] });
-              }
-            )}
-          >
+            onPress={() => { this.showActionSheet()}}>
             <Icon name="settings" />
+             
           </Fab>
+       
+       
+          <ActionSheet
+          ref={this.getActionSheetRef}
+          title={title}
+          message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
+          options={options}
+          cancelButtonIndex={CANCEL_INDEX}
+          destructiveButtonIndex={DESTRUCTIVE_INDEX}
+          onPress= {this.handlePress}
+
+        />
+
         </View>
+
       </Container>
     );
   }
 }
 
 
+
+const styles = StyleSheet.create({
+  overlay: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      opacity: 0.4,
+      backgroundColor: '#000',
+    },
+    wrapper: {
+      flex: 1,
+      flexDirection: 'row',
+    },
+    backdrop: {
+      flex: 1,
+      alignSelf: 'flex-end',
+      backgroundColor: 'transparent',
+      marginHorizontal: 10,
+      marginBottom: 10,
+    },
+  
+    title: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#f9f9f9',
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+    },
+    titleText: {
+      color: '#8f8f8f',
+      fontSize: 13,
+      fontWeight: '600',
+    },
+    message: {
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      backgroundColor: '#f9f9f9',
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+    },
+    messageText: {
+      color: '#8f8f8f',
+      fontSize: 13,
+      textAlign: 'center',
+    },
+  
+    optionsContainer: {
+      borderRadius: 12,
+    },
+    options: {
+      backgroundColor: '#cecece',
+    },
+    buttonContainer: {
+      marginTop: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#f9f9f9',
+    },
+    buttonTitle: {
+      fontSize: 20,
+    },
+  
+    cancelButton: {
+      borderRadius: 12,
+    },
+    cancelTitle: {
+      fontWeight: '600',
+    },
+  })

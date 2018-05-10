@@ -9,14 +9,17 @@ import BackgroundImage from './BackgroundImage';
 
 
 export default class addToCalendar extends Component {
+ 
   render() {
       return (
           <BackgroundImage>
-            <Text style={styles.text}>Fullscreen!</Text>
+             <Button onPress={() => this.setState({ active: true })} />
           </BackgroundImage>
+          
       ) 
   }
-}
+};
+
 const styles = StyleSheet.create({
 
   text: {

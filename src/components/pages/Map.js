@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body, Card } from 'native-base';
@@ -16,6 +16,8 @@ import FABExample from '../pages/FABExample';
 import Footer from '../Footer';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
+import { easyRoute } from '../NodesEasy';
+import { difficultRoute} from '../NodesDifficult';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
@@ -26,6 +28,8 @@ var customParking = require('../Parking.png');
 var customArena = require('../Arena.png');
 var customBed = require('../Bed.png');
 let { width, height } = Dimensions.get('window');
+const tiles = require('../RoadColors');
+const mapStyling = require('../mapStyle.json')
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
@@ -36,175 +40,13 @@ const searchDetails = {};
 const nodeCoordinates = require('../NodeCoordinates');
 const nodeArray = require('../NodeArray');
 
-mapStyle = 
-  [
-    {
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#f5f5f5"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.icon",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#616161"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "color": "#f5f5f5"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative.land_parcel",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#bdbdbd"
-        }
-      ]
-    },
-    {
-      "featureType": "poi",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#eeeeee"
-        }
-      ]
-    },
-    {
-      "featureType": "poi",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#757575"
-        }
-      ]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#cee5b0"
-        }
-      ]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#9e9e9e"
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#ffffff"
-        }
-      ]
-    },
-    {
-      "featureType": "road.arterial",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#757575"
-        }
-      ]
-    },
-    {
-      "featureType": "road.highway",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#dadada"
-        }
-      ]
-    },
-    {
-      "featureType": "road.highway",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#616161"
-        }
-      ]
-    },
-    {
-      "featureType": "road.local",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#9e9e9e"
-        }
-      ]
-    },
-    {
-      "featureType": "transit.line",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#e5e5e5"
-        }
-      ]
-    },
-    {
-      "featureType": "transit.station",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#eeeeee"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#28447a"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#9e9e9e"
-        }
-      ]
-    }
-  ]
-
-
 
 
 export default class Map extends Component {
 
   constructor() {
     super();
+    this.mapRef = null;
     this.state = {
       region: {
         latitude: LATITUDE,
@@ -212,12 +54,10 @@ export default class Map extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       },
-      tiles: [],
       mapStyle: {},
       originDetails: {},
       destinationDetails: {},
       routeTile: [],
-      // loading: true
       originDefined: false,
       destinationDefined: false
     }
@@ -257,6 +97,13 @@ export default class Map extends Component {
         customWaypointArray.push(waypointDetails[i].coords)
       }
       console.log("här är waypoints", customWaypointArray)
+
+      this.mapRef.fitToCoordinates(
+        coordinates = [this.state.originDetails, this.state.destinationDetails], 
+        edgePadding = {top: 40, bottom: 40, left: 40, right: 40 },
+        animated = true,
+
+      );
       return (
         <MapViewDirections
           origin={this.state.originDetails}
@@ -563,11 +410,11 @@ export default class Map extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
-    axios.get('https://api.myjson.com/bins/1gjnje')
-      .then(response => this.setState({ tiles: response.data }))
-      .catch((error) => {
-        alert(error.message)
-      });
+    // axios.get('https://api.myjson.com/bins/1gjnje')
+    //   .then(response => this.setState({ tiles: response.data, visible: false }))
+    //   .catch((error) => {
+    //     alert(error.message)
+    //   });
   };
 
   // componentDidMount = () => {
@@ -617,7 +464,7 @@ export default class Map extends Component {
 
   renderTiles() {
     console.log(this.state.originDetails)
-    return this.state.tiles.map(tile =>
+    return tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
     );
     //   setTimeout(() => {
@@ -650,7 +497,7 @@ export default class Map extends Component {
           </View> */}
           <View style={{ width, height }}>
 
-          <Spinner
+          {/* <Spinner
               visible={this.state.visible}
               animation='fade'
               style={styles.activityIndicator}
@@ -661,13 +508,14 @@ export default class Map extends Component {
                   <Text style={styles.spinnerText}>Laddar pister</Text>
                 </View>
               </View>
-            </Spinner>
+            </Spinner> */}
           
 
             <MapView
+              ref = {(ref) => {this.mapRef =ref}}
               provider={PROVIDER_GOOGLE}
               style={styles.container}
-              customMapStyle={mapStyle}
+              customMapStyle={mapStyling}
               initialRegion={{
                 latitude: 57.638945, 
                 longitude: 18.292500,
@@ -714,9 +562,11 @@ export default class Map extends Component {
          <View style={{ flex: 1}}>
          <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
          </View>
-         <View style={{ flex: 1, marginTop: 35}}>
+         <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35}}>
          <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
          </View>
+         {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
+          */}
          </View>
           </View>
          

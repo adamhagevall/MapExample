@@ -23,14 +23,17 @@ export default class Feedback extends Component {
     render() {
         return (
             <Container>
-                <Content >
+     
                 <View style={{height: 150}}>
                     <CalendarHeader />
                 </View>
+     
                       <BackgroundImage>
-                          <View tyle={{ position: 'absolute', flexDirection: 'column', width: 275 }}>
                     
-                          <View styles={{position: 'absolute', flexDirection: 'column', width: 300 }}>
+
+                          <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+                    
+                          <View styles={{position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
                     <Card style={styles.containerStyle}>
                         <CardItem>
                     <View style={styles.view}>
@@ -68,10 +71,12 @@ export default class Feedback extends Component {
                     </View>
                     </CardItem>
                     </Card>
+                
                     </View>
+                
                     </View>
-                    </BackgroundImage>
-                </Content>
+                    </BackgroundImage> */}
+                   
             </Container>
         );
     }
