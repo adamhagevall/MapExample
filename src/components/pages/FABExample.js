@@ -40,9 +40,15 @@ export default class FABExample extends Component {
       selectedColor: '#008CCF'
     };
   }
+
+  sendToParent(currentIndex) {
+    this.props.callbackFromParent(currentIndex);
+  }
+
   showActionSheet() {
     this.actionSheet.show()
   }
+  
   getActionSheetRef = ref => (this.actionSheet = ref)
 
   onButtonPress(){
@@ -51,21 +57,21 @@ export default class FABExample extends Component {
     {this.handlePress}
   }
 
-  handlePress = index => { this.setState({ selected: index }), this.handleColor()}
+  handlePress = index => { this.setState({ selected: index }), this.handleColor(), this.sendToParent(index)}
 
   handleColor(){
    
     if (this.state.selected === 1) {
       console.log('red')
-      this.setState({ selectedColor: 'green'})
+      this.setState({ selectedColor: '#5aa73f'})
     }
     if (this.state.selected === 2) {
       console.log('green')
-      this.setState({ selectedColor: 'blue'})
+      this.setState({ selectedColor: '#008ccf'})
     }
     if (this.state.selected === 3) {
       console.log('green')
-      this.setState({ selectedColor: 'red'})
+      this.setState({ selectedColor: '#ff2232'})
     }
     if (this.state.selected === 4) {
       console.log('green')
