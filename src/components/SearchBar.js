@@ -104,14 +104,22 @@ export default class SearchBar extends Component {
                         width: '100%',
                         height: '100%',
                         position: 'absolute',
-                        backgroundColor: 'white'
+                        backgroundColor: 'white',
+                        borderTopWidth: 0,
+                        borderBottomWidth: 0,
+                        borderRadius: 20,
                     },
-                    // description: {
-                    //     fontWeight: 'bold',
-                    //     //position: 'absolute'
-                    // },
+                    listView: {
+                        marginTop: 30
+                    },
+                   
+                    description: {
+                        fontWeight: 'bold',
+                        position: 'relative'
+                        //marginTop: 10
+                    },
                     predefinedPlacesDescription: {
-                        color: '#1faadb', 
+                        color: '#1faadb'
                         //position: 'absolute'
                         //backgroundColor: 'blue'
                     }
