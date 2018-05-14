@@ -154,7 +154,7 @@ export default {
   // Icon
   iconFamily: "Ionicons",
   iconFontSize: platform === "ios" ? 30 : 28,
-  iconHeaderSize: platform === "ios" ? 35 : 24,
+  iconHeaderSize: platform === "ios" ? 33 : 24,
 
   // InputGroup
   inputFontSize: 17,

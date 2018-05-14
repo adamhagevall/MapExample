@@ -1,5 +1,5 @@
 
-var bild = require('../Assets/008CCF.png');
+var bild = require('../Assets/background.jpg');
 import React, { Component } from 'react';
 import {
   StyleSheet,

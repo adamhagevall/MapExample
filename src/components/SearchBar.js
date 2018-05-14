@@ -111,7 +111,7 @@ export default class SearchBar extends Component {
                     //     //position: 'absolute'
                     // },
                     predefinedPlacesDescription: {
-                        color: '#1faadb', 
+                        color: '#008CCF', 
                         //position: 'absolute'
                         //backgroundColor: 'blue'
                     }

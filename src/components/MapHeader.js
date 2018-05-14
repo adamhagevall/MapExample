@@ -48,13 +48,16 @@ export default class MapHeader extends Component {
             selected: 1,
         }
     }
+    sendToParent(runIndex) {
+        this.props.callbackFromParent(runIndex);
+      }
 
     showActionSheet() {
         this.actionSheet.show()
     }
     getActionSheetRef = ref => (this.actionSheet = ref)
 
-    handlePress = index => { this.setState({ selected: index }), this.handleColor() }
+    handlePress = index => { this.setState({ selected: index }), this.handleColor(), this.sendToParent(index) }
 
     handleColor() {
 

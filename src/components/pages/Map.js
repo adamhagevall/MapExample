@@ -57,10 +57,12 @@ export default class Map extends Component {
       mapStyle: {},
       originDetails: {},
       destinationDetails: {},
+      runOrigin: {},
       routeTile: [],
       originDefined: false,
       destinationDefined: false,
-      easyRoads: null
+      easyRoads: null,
+      runningRoad: null
     }
   }
   
@@ -70,6 +72,7 @@ export default class Map extends Component {
       console.log('hej');
       return (
         <MapView.Marker
+          zIndex={1}
           style={{ height: 1 }}
           coordinate={this.state.originDetails}
           pinColor={'red'}
@@ -82,6 +85,7 @@ export default class Map extends Component {
     if (this.state.destinationDefined) {
       return (
         <MapView.Marker
+          zIndex={2}
           style={{ height: 1 }}
           coordinate={this.state.destinationDetails}
           pinColor={'green'}
@@ -103,22 +107,94 @@ export default class Map extends Component {
       }
       this.mapRef.fitToCoordinates(
         coordinates = [this.state.originDetails, this.state.destinationDetails], 
-        edgePadding = {top: 40, bottom: 40, left: 40, right: 40 },
-        animated = true,
-      );
-      return (
-        <MapViewDirections
-          origin={this.state.originDetails}
-          destination={this.state.destinationDetails}
-          waypoints={customWaypointArray}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-          strokeWidth={5}
-          strokeColor='yellow'
-          mode='walking'
-        />
-      );
+        {
+          edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+          animated: true
+          }
+  
+        );
+        return ( 
+        
+          <MapViewDirections
+            origin={this.state.originDetails}
+            destination={this.state.destinationDetails}
+            waypoints={customWaypointArray}
+            apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+            strokeWidth={1}
+            strokeColor='blue'
+            mode='walking'
+          />
+        
+        );
+      }
     }
-  }
+    renderRoute2() {
+      if (this.state.originDefined && this.state.destinationDefined) {
+        const customWaypointArray = [];
+        if (this.state.easyRoads || this.state.easyRoads === false) {
+          console.log('Nu är blå eller grön vald')
+          const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
+          for (i = 0; i < waypointDetails.length; i++) {
+            customWaypointArray.push(waypointDetails[i].coords)
+          }
+          console.log("här är waypoints", customWaypointArray)
+        }
+        this.mapRef.fitToCoordinates(
+          coordinates = [this.state.originDetails, this.state.destinationDetails], 
+          {
+            edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+            animated: true
+            }
+    
+          );
+          return ( 
+          
+            <MapViewDirections
+              origin={this.state.originDetails}
+              destination={this.state.destinationDetails}
+              waypoints={customWaypointArray}
+              apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+              strokeWidth={10}
+              strokeColor='yellow'
+              mode='walking'
+            />
+          
+          );
+        }
+      }
+
+      runningRoute() {
+        const runWaypoints = [];
+          if (this.state.easyRoads || this.state.easyRoads === false) {
+            console.log('Nu är blå eller grön vald')
+            const runWaypoints = [];
+           
+
+
+          this.mapRef.fitToCoordinates(
+            coordinates = [this.state.originDetails, this.state.destinationDetails], 
+            {
+              edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+              animated: true
+              }
+      
+            );
+            return ( 
+            
+              <MapViewDirections
+                origin={{latitude: 57.640342, longitude: 18.287162}}
+                destination={{latitude: 57.640342, longitude: 18.287162}}
+                waypoints={runWaypoints}
+                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                strokeWidth={15}
+                strokeColor='orange'
+                mode='walking'
+              />
+            
+            );
+          }
+        }
+  
 
   findNearestNode(definedCoord) {
     console.log('definierade koordinater', definedCoord)
@@ -287,6 +363,19 @@ export default class Map extends Component {
     }
   }
 
+  runningRouteCallback = (colorRun) =>
+  {
+    if (colorRun === 1 || colorRun === 2) {
+      this.setState({ runningRoad: true })
+    }
+    else if (colorRun === 3) {
+      this.setState({ runningRoad: false })
+    }
+    else {
+      this.setState({ runningRoad: null })
+    }
+  }
+
   originCallback = (detailsFromSearch) => {
     this.setState({ originDetails: detailsFromSearch, originDefined: true })
     console.log('originDetails: ', this.state.originDetails);
@@ -319,7 +408,7 @@ export default class Map extends Component {
     return (
       <Container>
           <View style={{height: 150}}>
-       <NewHeader />
+       <NewHeader  callbackFromParent={this.runningRouteCallback}/>
        </View>
        
        
@@ -354,7 +443,7 @@ export default class Map extends Component {
               style={styles.container}
               customMapStyle={mapStyling}
               initialRegion={{
-                latitude: 57.638945, 
+                latitude: 57.637985, 
                 longitude: 18.292500,
                 latitudeDelta: 0.002,
                 longitudeDelta: 0.015
@@ -390,13 +479,15 @@ export default class Map extends Component {
               />
               {this.renderOriginMarker()};
               {this.renderDestinationMarker()};
+              {this.renderRoute2()};
               {this.renderRoute()};
+              {this.runningRoute()};
               {this.renderTiles()};
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
          
-         <View style={{ flex: 1}}>
+         <View style={{ flex: 1}} zIndex={3}>
          <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
          </View>
          <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35}}>

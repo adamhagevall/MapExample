@@ -106,12 +106,12 @@ export default class DeckSwiperExample extends Component {
                   <Image style={{ height: 200, flex: 1 }} source={item.image} />
                 </CardItem>
                 <CardItem>
-                  <Icon name="add-circle" style={{ color: 'blue' }} />
+                  <Icon name="add-circle" style={{ color: '#008ccf' }} />
                   <Text>{item.name} </Text>
 
                   
                   <Text style={{ marginLeft: 10}} onPress={() => Linking.openURL(url)} >{item.dela} </Text>
-                  <Icon style={{ marginLeft: 55}}  onPress={() => Linking.openURL(url)} name="logo-facebook" style={{ color: 'blue' }} />
+                  <Icon style={{ marginLeft: 55}}  onPress={() => Linking.openURL(url)} name="logo-facebook" style={{ color: '#008ccf' }} />
 
                 </CardItem>
               </Card>
@@ -120,11 +120,11 @@ export default class DeckSwiperExample extends Component {
         </View>
         </View>
         <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
-          <Button style={{ backgroundColor: '#4A90E2'}} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
+          <Button style={{ backgroundColor: '#008ccf'}} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
             <Icon name="arrow-back" />
             <Text>Föregående</Text>
           </Button>
-          <Button style={{ backgroundColor: '#4A90E2'}} iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
+          <Button style={{ backgroundColor: '#008ccf'}} iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
             
             <Text>Nästa </Text>
             <Icon name="arrow-forward" />
