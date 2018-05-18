@@ -25,7 +25,8 @@ import Geolocation from 'react-native-geolocation-service';
 
 const availabilityArena = {
     description: 'Tillgänglighetsarenan',
-    geometry: { location: { lat: 57.641380, lng: 18.292853 } }
+    geometry: { location: { lat: 57.640684, lng: 18.288779 } }
+   , 
 };
 const scandicHotel = {
     description: 'Scandic Visby',
@@ -104,14 +105,23 @@ export default class SearchBar extends Component {
                         width: '100%',
                         height: '100%',
                         position: 'absolute',
-                        backgroundColor: 'white'
+                        backgroundColor: 'white',
+                        borderTopWidth: 0,
+                        borderBottomWidth: 0,
+                        borderRadius: 20,
                     },
-                    // description: {
-                    //     fontWeight: 'bold',
-                    //     //position: 'absolute'
-                    // },
+                    listView: {
+                        marginTop: 30
+                    },
+                   
+                    description: {
+                        fontWeight: 'bold',
+                        position: 'relative'
+                        //marginTop: 10
+                    },
                     predefinedPlacesDescription: {
-                        color: '#008CCF', 
+
+                        color: '#1faadb'
                         //position: 'absolute'
                         //backgroundColor: 'blue'
                     }

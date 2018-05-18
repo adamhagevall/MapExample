@@ -7,11 +7,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ListItem from '../ListItem';
 import { Button } from '../common/Button';
-import InfoHeader from '../InfoHeader';
 import reducers from '../../reducers';
 import FAB from '../FAB';
 import { Actions } from 'react-native-router-flux';
 var info = require('../Assets/information.jpg');
+import InfoHeader from '../InfoHeader';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
 
@@ -61,7 +61,7 @@ class Information extends Component {
         return (
             <Container>
                 <View style={{ height: 150 }}>
-                    <CalendarHeader />
+                    <InfoHeader />
                 </View>
                 <BackgroundImage>
                 <View style={{ position: 'absolute', flexDirection: 'row', width: 375, marginTop: -30 }}>

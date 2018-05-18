@@ -17,7 +17,7 @@ import Footer from '../Footer';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
 import { easyRoute } from '../NodesEasy';
-import { difficultRoute} from '../NodesDifficult';
+import { difficultRoute } from '../NodesDifficult';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
@@ -31,6 +31,7 @@ let { width, height } = Dimensions.get('window');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
 const routeArray = [];
+const customWaypointArray = [];
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
 const LONGITUDE = 0;
@@ -65,11 +66,10 @@ export default class Map extends Component {
       runningRoad: null
     }
   }
-  
+
 
   renderOriginMarker() {
     if (this.state.originDefined) {
-      console.log('hej');
       return (
         <MapView.Marker
           zIndex={1}
@@ -96,9 +96,8 @@ export default class Map extends Component {
 
   renderRoute() {
     if (this.state.originDefined && this.state.destinationDefined) {
-      const customWaypointArray = [];
+      customWaypointArray = [];
       if (this.state.easyRoads || this.state.easyRoads === false) {
-        console.log('Nu är blå eller grön vald')
         const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
         for (i = 0; i < waypointDetails.length; i++) {
           customWaypointArray.push(waypointDetails[i].coords)
@@ -106,28 +105,56 @@ export default class Map extends Component {
         console.log("här är waypoints", customWaypointArray)
       }
       this.mapRef.fitToCoordinates(
-        coordinates = [this.state.originDetails, this.state.destinationDetails], 
+        coordinates = [this.state.originDetails, this.state.destinationDetails],
         {
           edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
           animated: true
           }
-  
-        );
-        return ( 
-        
+      );
+      if (customWaypointArray.length <= 23) {
+        return (
           <MapViewDirections
             origin={this.state.originDetails}
             destination={this.state.destinationDetails}
             waypoints={customWaypointArray}
             apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-            strokeWidth={1}
-            strokeColor='blue'
+            strokeWidth={5}
+            strokeColor='#772119'
             mode='walking'
           />
-        
+        );
+      } else {
+        return (
+          <MapViewDirections
+            origin={this.state.originDetails}
+            destination={customWaypointArray[23]}
+            waypoints={customWaypointArray.slice(0, 22)}
+            apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+            strokeWidth={5}
+            strokeColor='yellow'
+            mode='walking'
+          />
         );
       }
     }
+  }
+
+  renderLongRoute() {
+    if (customWaypointArray.length > 23) {
+      const longRouteWaypoints = customWaypointArray.slice(24, 45);
+      return (
+        <MapViewDirections
+          origin={customWaypointArray[23]}
+          destination={this.state.destinationDetails}
+          waypoints={longRouteWaypoints}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={5}
+          strokeColor='yellow'
+          mode='walking'
+        />
+      );
+    }
+  }
     renderRoute2() {
       if (this.state.originDefined && this.state.destinationDefined) {
         const customWaypointArray = [];
@@ -154,7 +181,7 @@ export default class Map extends Component {
               destination={this.state.destinationDetails}
               waypoints={customWaypointArray}
               apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-              strokeWidth={10}
+              strokeWidth={1}
               strokeColor='yellow'
               mode='walking'
             />
@@ -253,10 +280,10 @@ export default class Map extends Component {
     console.log('Här är state.easyRoads = ', this.state.easyRoads)
     const arrayToSend = [];
     if (this.state.easyRoads) {
-      routeArray = easyRoute.path(originNode, destinationNode, {trim: true } );
+      routeArray = easyRoute.path(originNode, destinationNode, { trim: true });
     }
     else if (this.state.easyRoads === false) {
-      routeArray = difficultRoute.path(originNode, destinationNode, {trim: true } );
+      routeArray = difficultRoute.path(originNode, destinationNode, { trim: true });
     }
     console.log("här är routearray", routeArray)
     // for (i = 0; i < nodeArray.length; i++) {
@@ -282,7 +309,7 @@ export default class Map extends Component {
       mapStyle: {
         height: '100%',
         width: '100%'
-    
+
       }
     })
   }
@@ -407,23 +434,23 @@ export default class Map extends Component {
     const onMap = true;
     return (
       <Container>
-          <View style={{height: 150}}>
-       <NewHeader  callbackFromParent={this.runningRouteCallback}/>
-       </View>
-       
-       
+        <View style={{ height: 150 }}>
+          <NewHeader />
+        </View>
+
+
         {/* <LoadingView loading={this.state.loading}> */}
         <Content>
-          
-       
-       
+
+
+
           {/* <View>
           <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
           <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
           </View> */}
           <View style={{ width, height }}>
 
-          {/* <Spinner
+            {/* <Spinner
               visible={this.state.visible}
               animation='fade'
               style={styles.activityIndicator}
@@ -435,15 +462,15 @@ export default class Map extends Component {
                 </View>
               </View>
             </Spinner> */}
-          
+
 
             <MapView
-              ref = {(ref) => {this.mapRef =ref}}
+              ref={(ref) => { this.mapRef = ref }}
               provider={PROVIDER_GOOGLE}
               style={styles.container}
               customMapStyle={mapStyling}
               initialRegion={{
-                latitude: 57.637985, 
+                latitude: 57.637685,
                 longitude: 18.292500,
                 latitudeDelta: 0.002,
                 longitudeDelta: 0.015
@@ -451,10 +478,10 @@ export default class Map extends Component {
             >
               <MapView.Marker
                 style={{ height: 1}}
-                coordinate={{ longitude: 18.292853, latitude: 57.641380 }}
+                coordinate={{ longitude: 18.288779, latitude: 57.640684 }}
                 title={'Tillgänglighetsarenan'}
                 image={customArena}
-                // pinColor={'blue'}
+              // pinColor={'blue'}
               />
               <MapView.Marker
                 style={{ height: 1 }}
@@ -481,23 +508,23 @@ export default class Map extends Component {
               {this.renderDestinationMarker()};
               {this.renderRoute2()};
               {this.renderRoute()};
-              {this.runningRoute()};
+              {this.renderLongRoute()};
               {this.renderTiles()};
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
-         
-         <View style={{ flex: 1}} zIndex={3}>
-         <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
-         </View>
-         <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35}}>
-         <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
-         </View>
-         {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
+
+              <View style={{ flex: 1 }} zIndex={3}>
+                <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
+              </View>
+              <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
+                <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
+              </View>
+              {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
           */}
-         </View>
+            </View>
           </View>
-         
+
         </Content>
         {/* </LoadingView> */}
       </Container>
@@ -812,7 +839,7 @@ const coordinates = [
 //       destinationDefined: false
 //     }
 //   }
-  
+
 
 //   renderOriginMarker() {
 //     if (this.state.originDefined) {
@@ -1057,7 +1084,7 @@ const coordinates = [
 //               strokeColor="blue"
 //             />
 // // class Map extends Component {
-    
+
 // //     constructor() {
 // //       super();
 
@@ -1117,7 +1144,7 @@ const coordinates = [
 // //         >
 // //           <MapView.Marker
 // //             coordinate={ this.state.region }
-            
+
 // //           />
 //         //   <MapView.Marker
 //         //     coordinate={{ longitude: 18.292853, latitude: 57.641380 }}

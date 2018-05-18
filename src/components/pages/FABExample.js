@@ -37,7 +37,7 @@ export default class FABExample extends Component {
     this.state = {
       active: 'true',
       selected: 1,
-      selectedColor: '#008CCF'
+      selectedColor: 'black'
     };
   }
 

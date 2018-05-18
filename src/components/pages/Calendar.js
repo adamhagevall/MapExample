@@ -54,22 +54,28 @@ import BackgroundImage from './bg';
 const url = 'https://www.facebook.com/events/428188540972908/';
 const cards = [
   {
-    text: 'Seminarium 1',
+    time: '14.00-14.45',
+    text: 'Bygg tillgängligt tjäna mer!',
     name: 'lägg till i kalender',
+    info: 'Det finns betydande sociala och ekonomiska vinster i att tillgänglighetsanpassa fysiska miljöer. Med avstamp i OS och Paralympics i Stockholm 2026 lyfts frågan vad ett Paralympics i en storstad kan ge för effekter för en tillgänglig stad? Skulle Sverige vinna på att stå som värd för ett Paralympics?',
     dela: 'dela facebook',
-    image: require('../Assets/Almedalen.png'),
+    image: require('../Assets/parasportalmedalen.jpg'),
   },
   {
-    text: 'Seminarium 2',
+    time: '15.00-15.45',
+    text: 'Kan miljonprogrammet lösa de bostadspolitiska utmaningarna?',
     name: 'lägg till i kalender',
+    info: 'Sverige har tre bostadspolitiska utmaningar: bostadsbristen, ett omfattande renoveringsbehov i det befintliga flerbostadshusbeståndet och bristen på tillgängliga bostäder för den växande andelen äldre. Kan våningspåbyggnad på trevåningshusen från miljonprogrammet lösa alla tre utmaningar samtidigt?',
     dela: 'dela facebook',
-    image: require('../Assets/people.jpg'),
+    image: require('../Assets/Bildhyreshus.jpg'),
   },
   {
-    text: 'Seminarium 3',
+    time: '16.00-16.45',
+    text: 'Sverige - tillgängligt för alla?!',
     name: 'lägg till i kalender',
+    info: 'I höst går Sverige till allmänna val. Tillgänglighetsarenan arrangerar appellstaffet mellan riksdagspartierna. I korta appeller beskriver partierna hur de ser på allas möjlighet att ta sig fram i den fysiska miljön och om de är beredda att påverka utvecklingen.',
     dela: 'dela facebook',
-    image: require('../Assets/almedalen2018.jpg')
+    image: require('../Assets/Rullstolhissliten.jpg')
   },
 ];
 export default class DeckSwiperExample extends Component {
@@ -97,8 +103,9 @@ export default class DeckSwiperExample extends Component {
                   <Left>
                     <Thumbnail source={item.image} />
                     <Body>
+                    <Text>{item.time}</Text>
                       <Text>{item.text}</Text>
-                      <Text note>För andra året i rad genomförs Tillgänglighetsarenan. Syftet är att lyfta tillgänglighet och utformning i samhällsdebatten och ge frågorna en tydlig hemvist i Almedalen.</Text>
+                      <Text note>{item.info}</Text>
                     </Body>
                   </Left>
                 </CardItem>
@@ -119,7 +126,7 @@ export default class DeckSwiperExample extends Component {
           />
         </View>
         </View>
-        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
+        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: -10, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
           <Button style={{ backgroundColor: '#008ccf'}} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
             <Icon name="arrow-back" />
             <Text>Föregående</Text>
