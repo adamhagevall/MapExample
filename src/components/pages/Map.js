@@ -16,8 +16,10 @@ import FABExample from '../pages/FABExample';
 import Footer from '../Footer';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
-import { easyRoute } from '../NodesEasy';
-import { difficultRoute } from '../NodesDifficult';
+import { greenRoute } from '../NodesGreen';
+import { blueRoute } from '../NodesBlue';
+import { redRoute } from '../NodesRed';
+
 
 import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
@@ -63,7 +65,7 @@ export default class Map extends Component {
       routeTile: [],
       originDefined: false,
       destinationDefined: false,
-      easyRoads: null,
+      roadIndex: 4,
       runningRoad: null,
       showToast: false
     }
@@ -99,7 +101,7 @@ export default class Map extends Component {
   renderRoute() {
     if (this.state.originDefined && this.state.destinationDefined) {
       customWaypointArray = [];
-      if (this.state.easyRoads || this.state.easyRoads === false) {
+      if (this.state.roadIndex != 4) {
         const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
         for (i = 0; i < waypointDetails.length; i++) {
           customWaypointArray.push(waypointDetails[i].coords)
@@ -280,13 +282,16 @@ export default class Map extends Component {
     console.log('Här är destinationID', destinationNode);
     console.log('Här är state.easyRoads = ', this.state.easyRoads)
     const arrayToSend = [];
-    if (this.state.easyRoads) {
-      dijkstraArray = easyRoute.path(originNode, destinationNode, { trim: true, cost: true });
+    if (this.state.roadIndex === 1) {
+      dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
-    else if (this.state.easyRoads === false) {
-      dijkstraArray = difficultRoute.path(originNode, destinationNode, { trim: true, cost: true });
+    else if (this.state.roadIndex === 2) {
+      dijkstraArray = blueRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
-    if (dijkstraArray.cost > 100) {
+    else if (this.state.roadIndex === 3) {
+      dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
+    }
+    if (dijkstraArray.cost >= 100) {
       this.renderAlert();
     }
     console.log("här är dijkstraArray", dijkstraArray)
@@ -306,7 +311,8 @@ export default class Map extends Component {
 
   renderAlert() {
     Toast.show({
-      text: 'Wrong',
+      text: 'Notera att rutten inte går att planera efter dina önskemål',
+      style: { backgroundColor: 'grey', marginBottom: 10 },
       buttonText: 'Okay',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'red' },
@@ -381,15 +387,7 @@ export default class Map extends Component {
   // }
 
   routeAlternativeCallback = (chosenIndex) => {
-    if (chosenIndex === 1 || chosenIndex === 2) {
-      this.setState({ easyRoads: true })
-    }
-    else if (chosenIndex === 3) {
-      this.setState({ easyRoads: false })
-    }
-    else {
-      this.setState({ easyRoads: null })
-    }
+    this.setState({ roadIndex: chosenIndex })
   }
 
   runningRouteCallback = (colorRun) =>
