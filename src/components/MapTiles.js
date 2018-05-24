@@ -7,6 +7,7 @@ const MapTiles = ({ tile }) => {
 
     return (
         <MapViewDirections
+            zIndex={1}
             origin={origin}
             destination={destination}
             waypoints={waypoints}

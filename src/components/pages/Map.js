@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import { Container, Content, Body, Card } from 'native-base';
+import { Container, Content, Body, Card, Toast } from 'native-base';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import LoadingView from 'react-native-loading-view';
@@ -30,7 +30,8 @@ var customBed = require('../Bed.png');
 let { width, height } = Dimensions.get('window');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
-const routeArray = [];
+const dijkstraArray = [];
+const pathArray = [];
 const customWaypointArray = [];
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
@@ -63,7 +64,8 @@ export default class Map extends Component {
       originDefined: false,
       destinationDefined: false,
       easyRoads: null,
-      runningRoad: null
+      runningRoad: null,
+      showToast: false
     }
   }
 
@@ -104,13 +106,13 @@ export default class Map extends Component {
         }
         console.log("här är waypoints", customWaypointArray)
       }
-      this.mapRef.fitToCoordinates(
-        coordinates = [this.state.originDetails, this.state.destinationDetails],
-        {
-          edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-          animated: true
-          }
-      );
+      // this.mapRef.fitToCoordinates(
+      //   coordinates = [this.state.originDetails, this.state.destinationDetails],
+      //   {
+      //     edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+      //     animated: true
+      //     }
+      // );
       if (customWaypointArray.length <= 23) {
         return (
           <MapViewDirections
@@ -118,8 +120,8 @@ export default class Map extends Component {
             destination={this.state.destinationDetails}
             waypoints={customWaypointArray}
             apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-            strokeWidth={5}
-            strokeColor='#772119'
+            strokeWidth={15}
+            strokeColor='yellow'
             mode='walking'
           />
         );
@@ -130,7 +132,7 @@ export default class Map extends Component {
             destination={customWaypointArray[23]}
             waypoints={customWaypointArray.slice(0, 22)}
             apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-            strokeWidth={5}
+            strokeWidth={15}
             strokeColor='yellow'
             mode='walking'
           />
@@ -148,79 +150,79 @@ export default class Map extends Component {
           destination={this.state.destinationDetails}
           waypoints={longRouteWaypoints}
           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-          strokeWidth={5}
+          strokeWidth={15}
           strokeColor='yellow'
           mode='walking'
         />
       );
     }
   }
-    renderRoute2() {
-      if (this.state.originDefined && this.state.destinationDefined) {
-        const customWaypointArray = [];
-        if (this.state.easyRoads || this.state.easyRoads === false) {
-          console.log('Nu är blå eller grön vald')
-          const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
-          for (i = 0; i < waypointDetails.length; i++) {
-            customWaypointArray.push(waypointDetails[i].coords)
-          }
-          console.log("här är waypoints", customWaypointArray)
-        }
-        this.mapRef.fitToCoordinates(
-          coordinates = [this.state.originDetails, this.state.destinationDetails], 
-          {
-            edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-            animated: true
-            }
+    // renderRoute2() {
+    //   if (this.state.originDefined && this.state.destinationDefined) {
+    //     const customWaypointArray = [];
+    //     if (this.state.easyRoads || this.state.easyRoads === false) {
+    //       console.log('Nu är blå eller grön vald')
+    //       const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
+    //       for (i = 0; i < waypointDetails.length; i++) {
+    //         customWaypointArray.push(waypointDetails[i].coords)
+    //       }
+    //       console.log("här är waypoints", customWaypointArray)
+    //     }
+    //     this.mapRef.fitToCoordinates(
+    //       coordinates = [this.state.originDetails, this.state.destinationDetails], 
+    //       {
+    //         edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+    //         animated: true
+    //         }
     
-          );
-          return ( 
+    //       );
+    //       return ( 
           
-            <MapViewDirections
-              origin={this.state.originDetails}
-              destination={this.state.destinationDetails}
-              waypoints={customWaypointArray}
-              apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-              strokeWidth={1}
-              strokeColor='yellow'
-              mode='walking'
-            />
+    //         <MapViewDirections
+    //           origin={this.state.originDetails}
+    //           destination={this.state.destinationDetails}
+    //           waypoints={customWaypointArray}
+    //           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+    //           strokeWidth={1}
+    //           strokeColor='yellow'
+    //           mode='walking'
+    //         />
           
-          );
-        }
-      }
+    //       );
+    //     }
+    //   }
 
-      runningRoute() {
-        const runWaypoints = [];
-          if (this.state.easyRoads || this.state.easyRoads === false) {
-            console.log('Nu är blå eller grön vald')
-            const runWaypoints = [];
+      // runningRoute() {
+      //   const runWaypoints = [];
+      //     if (this.state.easyRoads || this.state.easyRoads === false) {
+      //       console.log('Nu är blå eller grön vald')
+      //       const runWaypoints = [];
            
 
 
-          this.mapRef.fitToCoordinates(
-            coordinates = [this.state.originDetails, this.state.destinationDetails], 
-            {
-              edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-              animated: true
-              }
+      //     this.mapRef.fitToCoordinates(
+      //       coordinates = [this.state.originDetails, this.state.destinationDetails], 
+      //       {
+      //         edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+      //         animated: true
+      //         }
       
-            );
-            return ( 
+      //       );
+      //       return ( 
             
-              <MapViewDirections
-                origin={{latitude: 57.640342, longitude: 18.287162}}
-                destination={{latitude: 57.640342, longitude: 18.287162}}
-                waypoints={runWaypoints}
-                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                strokeWidth={15}
-                strokeColor='orange'
-                mode='walking'
-              />
+      //         <MapViewDirections
+      //           origin={{latitude: 57.640342, longitude: 18.287162}}
+      //           destination={{latitude: 57.640342, longitude: 18.287162}}
+      //           waypoints={runWaypoints}
+      //           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+      //           strokeWidth={15}
+      //           strokeColor='orange'
+      //           mode='walking'
+      //         />
             
-            );
-          }
-        }
+      //       );
+      //     }
+      //   }
   
 
   findNearestNode(definedCoord) {
@@ -271,7 +273,6 @@ export default class Map extends Component {
     )
   }
 
-
   renderDijkstra(originCoords, destinationCoords) {
     const originNode = this.findNearestNode(originCoords);
     const destinationNode = this.findNearestNode(destinationCoords);
@@ -280,20 +281,19 @@ export default class Map extends Component {
     console.log('Här är state.easyRoads = ', this.state.easyRoads)
     const arrayToSend = [];
     if (this.state.easyRoads) {
-      routeArray = easyRoute.path(originNode, destinationNode, { trim: true });
+      dijkstraArray = easyRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
     else if (this.state.easyRoads === false) {
-      routeArray = difficultRoute.path(originNode, destinationNode, { trim: true });
+      dijkstraArray = difficultRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
-    console.log("här är routearray", routeArray)
-    // for (i = 0; i < nodeArray.length; i++) {
-    //   if (routeArray.includes(nodeArray[i].id)) {
-    //     arrayToSend.push(nodeArray[i])
-    //   }
-    // }
-    for (i = 0; i < routeArray.length; i++) {
+    if (dijkstraArray.cost > 100) {
+      this.renderAlert();
+    }
+    console.log("här är dijkstraArray", dijkstraArray)
+    pathArray = dijkstraArray.path;
+    for (i = 0; i < pathArray.length; i++) {
       for (j = 0; j < nodeArray.length; j++) {
-        if (routeArray[i] === nodeArray[j].id) {
+        if (pathArray[i] === nodeArray[j].id) {
           arrayToSend.push(nodeArray[j])
         }
       }
@@ -302,6 +302,16 @@ export default class Map extends Component {
     return (
       arrayToSend
     )
+  }
+
+  renderAlert() {
+    Toast.show({
+      text: 'Wrong',
+      buttonText: 'Okay',
+      buttonTextStyle: { color: 'black' },
+      buttonStyle: { backgroundColor: 'red' },
+      duration: 300000
+    })
   }
 
   updateStyle() {
@@ -371,14 +381,6 @@ export default class Map extends Component {
   // }
 
   routeAlternativeCallback = (chosenIndex) => {
-    // if (chosenIndex === 1 || chosenIndex === 2) {
-    //   this.setState({ easyAlternative: true, hardAlternative: false })
-    // } 
-    // else if (chosenIndex === 3) {
-    //   this.setState({ easyAlternative: false, hardAlternative: true })
-    // } else {
-    //   this.setState({ easyAlternative: false, hardAlternative: false })
-    // }
     if (chosenIndex === 1 || chosenIndex === 2) {
       this.setState({ easyRoads: true })
     }
@@ -416,15 +418,9 @@ export default class Map extends Component {
 
 
   renderTiles() {
-    console.log(this.state.originDetails)
     return tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
     );
-    //   setTimeout(() => {
-    //         this.setState({
-    //           loading: false
-    //         })
-    //       }, 8000)
   }
 
 
@@ -477,28 +473,28 @@ export default class Map extends Component {
               }}
             >
               <MapView.Marker
-                style={{ height: 1}}
+                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.288779, latitude: 57.640684 }}
                 title={'Tillgänglighetsarenan'}
                 image={customArena}
               // pinColor={'blue'}
               />
               <MapView.Marker
-                style={{ height: 1 }}
+                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.2800916, latitude: 57.6317496 }}
                 title={'Scandic Visby'}
                 pinColor={'blue'}
                 image={customBed}
               />
               <MapView.Marker
-                style={{ height: 1 }}
+                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.2892483, latitude: 57.6402041 }}
                 title={'Tillgängliga toaletter'}
                 pinColor={'blue'}
                 image={customToilet}
               />
               <MapView.Marker
-                style={{ height: 1 }}
+                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.288044, latitude: 57.6376372 }}
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
@@ -506,7 +502,6 @@ export default class Map extends Component {
               />
               {this.renderOriginMarker()};
               {this.renderDestinationMarker()};
-              {this.renderRoute2()};
               {this.renderRoute()};
               {this.renderLongRoute()};
               {this.renderTiles()};
