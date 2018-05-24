@@ -38,7 +38,7 @@ const toilets = {
 };
 const parkingLots = {
     description: 'Parkeringsplats',
-    geometry: { location: { lat: 57.6376372, lng: 18.288044 } }
+    geometry: { location: { lat: 57.637762, lng: 18.287965 } }
 };
 
 export default class SearchBar extends Component {

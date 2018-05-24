@@ -188,5 +188,7 @@ module.exports = {
     "HE": { latitude: 57.638240, longitude: 18.290280 },
     "HF": { latitude: 57.639864, longitude: 18.297286 },
     "HG": { latitude: 57.638556, longitude: 18.289027 },
-    "HH": { latitude: 57.638529, longitude: 18.289435 }
+    "HH": { latitude: 57.638529, longitude: 18.289435 },
+    "HI": { latitude: 57.637684, longitude: 18.287486 },
+    "HJ": { latitude: 57.642389, longitude: 18.291812 }
 }

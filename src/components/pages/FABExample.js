@@ -96,7 +96,8 @@ export default class FABExample extends Component {
             style={{ backgroundColor: selectedColor, marginBottom: 200 }}
             position="bottomRight"
             onPress={() => { this.showActionSheet()}}>
-            <Icon name="settings" />
+            
+            <Image source={require('../Assets/directions2.png')} style={{width:25, height:25}}/>
              
           </Fab>
        
