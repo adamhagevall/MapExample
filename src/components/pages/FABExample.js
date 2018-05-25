@@ -86,8 +86,7 @@ export default class FABExample extends Component {
   render() {
     const { selected, selectedColor } = this.state
     const selectedText = options[selected].component || options[selected]
-    console.log(selectedColor)
-    console.log(selected)
+  
 
     return (
       <Container>

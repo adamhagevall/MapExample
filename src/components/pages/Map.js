@@ -24,6 +24,37 @@ import { redRoute } from '../NodesRed';
 import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
 
+//  spring action sheet 
+
+import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
+import Action from '../ActionSheet';
+
+const CANCEL_INDEX = 0
+const DESTRUCTIVE_INDEX = 4
+const options = [
+  'Cancel',
+  {
+    component: <Text style={{ color: 'green', fontSize: 15 }}>GRÖN</Text> ,
+    height: 45,
+  },
+  {
+    component: <Text style={{ color: 'blue', fontSize: 15 }}>BLÅ </Text> ,
+    height: 45,
+  },
+  {
+    component: <Text style={{ color: 'red', fontSize: 15 }}>RÖD </Text> ,
+    height: 45,
+  },
+  {
+    component: <Text style={{ color: 'black', fontSize: 15 }}>SVART </Text> ,
+    height: 45,
+  }
+
+
+]
+const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsrunda</Text>
+
+//Spring actionsheet slut
 
 var customToilet = require('../101.jpg');
 var customParking = require('../Parking.png');
@@ -43,7 +74,26 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const searchDetails = {};
 const nodeCoordinates = require('../NodeCoordinates');
 const nodeArray = require('../NodeArray');
-
+const runWaypoints = [
+  "57.640153, 18.289647",
+  "57.639046, 18.291496",
+  "57.637673, 18.288530",
+  "57.636289, 18.287347",
+  "57.635392, 18.289594",
+  "57.636854, 18.289970",
+  "57.637782, 18.290814",
+  "57.639045, 18.291494",
+  "57.638785, 18.292454",
+  "57.639823, 18.299277",
+  "57.640846, 18.299939",
+  "57.642395, 18.297068",
+  "57.642624, 18.292865",
+  "57.642570, 18.291898",
+  "57.642019, 18.291946",
+  "57.642357, 18.294199",
+  "57.641593, 18.296036",
+  "57.640902, 18.295103"
+  ]
 
 
 export default class Map extends Component {
@@ -67,7 +117,9 @@ export default class Map extends Component {
       destinationDefined: false,
       roadIndex: 4,
       runningRoad: null,
-      showToast: false
+      showToast: false,
+      active: 'true',
+      selected2: 0,
     }
   }
 
@@ -211,37 +263,57 @@ export default class Map extends Component {
     //     }
     //   }
 
-      // runningRoute() {
-      //   const runWaypoints = [];
-      //     if (this.state.easyRoads || this.state.easyRoads === false) {
-      //       console.log('Nu är blå eller grön vald')
-      //       const runWaypoints = [];
-           
-
-
-      //     this.mapRef.fitToCoordinates(
-      //       coordinates = [this.state.originDetails, this.state.destinationDetails], 
-      //       {
-      //         edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-      //         animated: true
-      //         }
-      
-      //       );
-      //       return ( 
-            
-      //         <MapViewDirections
-      //           origin={{latitude: 57.640342, longitude: 18.287162}}
-      //           destination={{latitude: 57.640342, longitude: 18.287162}}
-      //           waypoints={runWaypoints}
-      //           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-      //           strokeWidth={15}
-      //           strokeColor='orange'
-      //           mode='walking'
-      //         />
-            
-      //       );
-      //     }
-      //   }
+      runningRoute() {
+              if (this.state.selected2 === 1) {
+                return ( 
+                <MapViewDirections
+                origin={{latitude: 57.639741, longitude: 18.286679}}
+                destination={{latitude: 57.639354, longitude: 18.293128}}
+                waypoints={runWaypoints}
+                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                strokeWidth={15}
+                strokeColor='orange'
+                mode='walking'
+              />)
+              }
+              if (this.state.selected2 === 2) {
+                return ( 
+                  <MapViewDirections
+                  origin={{latitude: 57.639741, longitude: 18.286679}}
+                  destination={{latitude: 57.639354, longitude: 18.293128}}
+                  waypoints={runWaypoints}
+                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                  strokeWidth={15}
+                  strokeColor='orange'
+                  mode='walking'
+                />)
+              }
+              if (this.state.selected2 === 3) {
+                return ( 
+                  <MapViewDirections
+                  origin={{latitude: 57.639741, longitude: 18.286679}}
+                  destination={{latitude: 57.639354, longitude: 18.293128}}
+                  waypoints={runWaypoints}
+                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                  strokeWidth={15}
+                  strokeColor='orange'
+                  mode='walking'
+                />)
+              }
+              if (this.state.selected2 === 4) {
+                return ( 
+                  <MapViewDirections
+                  origin={{latitude: 57.639741, longitude: 18.286679}}
+                  destination={{latitude: 57.639354, longitude: 18.293128}}
+                  waypoints={runWaypoints}
+                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+                  strokeWidth={15}
+                  strokeColor='orange'
+                  mode='walking'
+                />)
+              }
+             
+          }
   
 
   findNearestNode(definedCoord) {
@@ -301,14 +373,46 @@ export default class Map extends Component {
     })
   }
 
+  showActionSheet() {
+    this.actionSheet.show()
+  }
+  
+  getActionSheetRef = ref => (this.actionSheet = ref)
+
+
+  handlePress = index => { this.setState({ selected2: index })}
+
+  handleRunning(){
+   
+    if (this.state.selected2 === 1) {
+      this.setState({ runWay: null })
+    }
+    if (this.state.selected2 === 2) {
+      console.log('green')
+    }
+    if (this.state.selected2 === 3) {
+      console.log('green')
+    }
+    if (this.state.selected2 === 4) {
+      console.log('green')
+    }
+  } 
+
   renderRunningRoute() {
+   
     if (this.state.roadIndex === 5) {
+      console.log('onButtonPress')
+      {this.showActionSheet()}
+      this.setState({ roadIndex: null })
+
+
       // Alert.alert(
       //   'Alert Title',
       //   'My Alert Msg',
       //   [
       //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-      //     {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      //     {text: 'OK', onPress: () => console.log('OK Pressed')},
+      //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
       //     {text: 'OK', onPress: () => console.log('OK Pressed')},
       //   ],
       //   { cancelable: false }
@@ -322,6 +426,7 @@ export default class Map extends Component {
       //   buttonStyle: { backgroundColor: 'red' },
       //   duration: 300000
       // })
+   
   }
 }
 
@@ -431,6 +536,10 @@ export default class Map extends Component {
     const { width, height } = Dimensions.get('window');
     const ratio = width / height;
     const onMap = true;
+
+    const { selected2, selectedColor } = this.state
+    const selectedText = options[selected2].component || options[selected2]
+  
     return (
       <Container>
         <View style={{ height: 150 }}>
@@ -498,7 +607,8 @@ export default class Map extends Component {
               />
               <MapView.Marker
                 style={{ width: '2%', height: '2%' }}
-                coordinate={{ longitude: 18.287965, latitude: 57.637762 }}
+                coordinate={{ longitude: 18.287925
+            , latitude: 57.637762 }}
                 title={'Parkeringsplats'}
                 pinColor={'blue'}
                 image={customParking}
@@ -509,6 +619,7 @@ export default class Map extends Component {
               {this.renderLongRoute()};
               {this.renderTiles()};
               {this.renderRunningRoute()};
+              {this.runningRoute()};
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
@@ -522,6 +633,16 @@ export default class Map extends Component {
               {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
           */}
             </View>
+            <ActionSheet
+      ref={this.getActionSheetRef}
+      title={title}
+      message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
+      options={options}
+      cancelButtonIndex={CANCEL_INDEX}
+      destructiveButtonIndex={DESTRUCTIVE_INDEX}
+      onPress= {this.handlePress}
+
+    />
           </View>
 
         </Content>
