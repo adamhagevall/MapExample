@@ -15,6 +15,7 @@ import Feedback from './components/pages/Feedback';
 import Calendar from './components/pages/Calendar';
 import SplashScreen from 'react-native-splash-screen';
 import addToCal from './components/pages/addtoCal';
+import firebase from 'firebase';
 
 
 import getTheme from '../native-base-theme/components';
@@ -25,6 +26,7 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = { showFooter: true }
+        // this.state = { showFooter: true, anArray: [] };
     }
 
     async requestLocationsPermission() {
@@ -45,6 +47,24 @@ export default class App extends Component {
 
     componentWillMount() {
         this.requestLocationsPermission();
+        //testing
+        const config = {
+            apiKey: 'AIzaSyDWbUEFqPdZKJZioHqRdEZJJC9rcLjv6oQ',
+            authDomain: 'tillganglighetsarenan.firebaseapp.com',
+            databaseURL: 'https://tillganglighetsarenan.firebaseio.com',
+            projectId: 'tillganglighetsarenan',
+            storageBucket: 'tillganglighetsarenan.appspot.com',
+            messagingSenderId: '770837927667'
+            // apiKey: 'AIzaSyBTXGUeZBDlMhKkM8d0cO_y0DvRP4YX_bE',
+            // authDomain: 'informationdatabase-ef265.firebaseapp.com',
+            // databaseURL: 'https://informationdatabase-ef265.firebaseio.com',
+            // projectId: 'informationdatabase-ef265',
+            // storageBucket: 'informationdatabase-ef265.appspot.com',
+            // messagingSenderId: '17200092209'
+          };   
+          firebase.initializeApp(config);
+          const database = firebase.database();
+          console.log('Firebase WOOH ' + database.ref('/0/title'));
     }
 
     componentDidMount() {
@@ -63,7 +83,29 @@ export default class App extends Component {
         }
     }
 
+    //testing
+//    createInformationList() {
+//         console.log('inside createInformationList')
+//         firebase.database().ref().once('value').then((snapshot) => {
+//             const informationArray = [];
+//             snapshot.forEach(function(childSnapshot) {
+//               var key = childSnapshot.key;
+//               var childData = childSnapshot.val();
+              
+//                 informationArray.push([
+//                 childData.id,
+//                 childData.title,
+//                 childData.description
+//                    ]);
+//             });
+//             this.setState({ anArray: this.informationArray });
+//          });
+//         return (this.informationArray);
+//     }
+
     render() {
+        // console.log('jdfjfdfj: ' + array);
+        // console.log('in render in App.js');
         return (
             <StyleProvider style={getTheme(platform)}>
             <Root>
@@ -71,7 +113,7 @@ export default class App extends Component {
                 <View style={{ flex: 1 }}>
                     <Container>
                         <Router>
-                            <Stack key="root">
+                            <Stack key='root'>
                             
                             <Scene key='map' component={Map} title='Map' hideNavBar={true} />
                             <Scene key='information' component={Information} title='Information' hideNavBar={true} />
@@ -88,9 +130,8 @@ export default class App extends Component {
             </Provider>
             </Root>
             </StyleProvider>
-
         );
-    };
+    }
 }
 
 // import React from 'react';
@@ -113,8 +154,4 @@ export default class App extends Component {
 //         </Provider>
 //     );
 // };
-
 // export default App;
-
-
-

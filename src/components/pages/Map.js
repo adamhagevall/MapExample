@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body, Card, Toast } from 'native-base';
@@ -301,6 +301,30 @@ export default class Map extends Component {
     })
   }
 
+  renderRunningRoute() {
+    if (this.state.roadIndex === 5) {
+      // Alert.alert(
+      //   'Alert Title',
+      //   'My Alert Msg',
+      //   [
+      //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+      //     {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      //     {text: 'OK', onPress: () => console.log('OK Pressed')},
+      //   ],
+      //   { cancelable: false }
+      // )
+      // Toast.show({
+      //   text: 'Sakta i backarna! Notera att rutten inte går att planera efter dina önskemål',
+      //   style: { backgroundColor: 'grey', marginBottom: 20 },
+      //   buttonText: 'Jag förstår',
+      //   buttonText: 'Jag förstår',
+      //   buttonTextStyle: { color: 'white' },
+      //   buttonStyle: { backgroundColor: 'red' },
+      //   duration: 300000
+      // })
+  }
+}
+
   updateStyle() {
     this.setState({
       mapStyle: {
@@ -484,6 +508,7 @@ export default class Map extends Component {
               {this.renderRoute()};
               {this.renderLongRoute()};
               {this.renderTiles()};
+              {this.renderRunningRoute()};
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>

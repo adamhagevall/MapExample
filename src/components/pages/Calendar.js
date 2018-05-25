@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import React, { Component } from 'react';
 import { Image, Linking } from 'react-native';
 import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
@@ -7,12 +8,11 @@ import * as AddCalendarEvent from 'react-native-add-calendar-event';
 
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
-
 var custom = require('../101.jpg');
 var pistmap = require('../Assets/pistmap.png');
 
 const url = 'https://www.facebook.com/events/428188540972908/';
-const cards = [
+const  cards = [
   {
     time: '14.00-14.45',
     text: 'Bygg tillgängligt tjäna mer!',
@@ -24,7 +24,7 @@ const cards = [
       title: 'Bygg tillgängligt tjäna mer!',
       startDate: '2018-07-03T12:00:00.000Z',
       endDate: '2018-07-03T12:45:00.000Z'
-  	}
+    }
   },
   {
     time: '15.00-15.45',
@@ -71,6 +71,37 @@ const cards = [
 
 export default class DeckSwiperExample extends Component {
 
+  constructor() {
+    super();
+    this.state = { testStateArray: [] };
+    // console.log('length of testStateArray2: ' + this.state.testStateArray2.length);
+  }
+ 
+  //TESTING
+  createInformationList() {
+     console.log('inside createInformationList')
+    firebase.database().ref().once('value').then((snapshot) => {
+        const informationArray = [];
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+          
+            informationArray.push([
+            childData.id,
+            childData.title,
+            childData.description
+               ]);
+        });
+        this.setState({ testStateArray: informationArray });
+        console.log('here is testarray', this.state.testStateArray)
+     });
+}
+// componentWillUpdate {
+//   this.createInformationList();
+//   console.log('inside ComponentDidMount');
+//   console.log("Current stateArray: " + this.state.testStateArray);
+// }
+
 
   addToCalendar(calendarEvent) {
     console.log('in addToCalendar');
@@ -83,9 +114,9 @@ export default class DeckSwiperExample extends Component {
   }
 
   render() { 
-    // this.createInformationList();
-    // console.log("Current stateArray");
 
+    {this.createInformationList()}; 
+    // console.log("Current stateArray");
     return (
       <Container >
 
@@ -129,6 +160,7 @@ export default class DeckSwiperExample extends Component {
                   <Icon style={{ marginLeft: 55}}  onPress={() => Linking.openURL(url)} name="logo-facebook" style={{ color: '#008ccf' }} />
 
                 </CardItem>
+                
               </Card>
             }
           />
