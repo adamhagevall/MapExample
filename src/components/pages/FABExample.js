@@ -11,19 +11,23 @@ const options = [
   'Cancel',
   {
     component: <Image source={require('../Assets/green.png')} style={{width:300, height:50}} /> ,
-    height: 80,
+    height: 65,
   },
   {
     component: <Image source={require('../Assets/blue.png')} style={{width:300, height:50}} /> ,
-    height: 80,
+    height: 65,
   },
   {
     component: <Image source={require('../Assets/red.png')} style={{width:300, height:50}} /> ,
-    height: 80,
+    height: 65,
   },
   {
     component: <Image source={require('../Assets/svart.png')} style={{width:300, height:50}} /> ,
-    height: 80,
+    height: 65,
+  },
+  {
+    component: <Text style={{ color: 'black', fontSize: 15 }}>Välj bland förinställda motionsrutter --> </Text> ,
+    height: 40,
   }
 
 

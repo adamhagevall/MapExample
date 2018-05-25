@@ -36,7 +36,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>this app needs access to the calendar</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
