@@ -10,12 +10,10 @@ import { Button } from '../common/Button';
 import reducers from '../../reducers';
 import FAB from '../FAB';
 import { Actions } from 'react-native-router-flux';
-var info = require('../Assets/information.jpg');
 import InfoHeader from '../InfoHeader';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
 
-var logo = require('../Assets/raukavagen.png');
 
 class Information extends Component {
     constructor() {

@@ -29,7 +29,7 @@ export default class MapHeader extends Component {
                             <Button transparent onPress={Actions.information}>
                                 <Icon name='information-circle' style={{ color: "white" }} />
                             </Button>
-                            <Image source={require('./Assets/nyrullstol.png')} style={{ width: 70, height: 70, marginLeft: 70, marginTop: -10 }} />
+                            <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} />
                             {/* <Image source={require('./Assets/windrose2.png')} style={{width:80, height:80, marginTop: -60, marginLeft: 270}} />
                             */}
 

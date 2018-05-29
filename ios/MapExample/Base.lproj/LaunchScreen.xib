@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaddningsskärmV3" translatesAutoresizingMaskIntoConstraints="NO" id="p3N-60-HJ4">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaddningsskarmV4" translatesAutoresizingMaskIntoConstraints="NO" id="p3N-60-HJ4">
                     <rect key="frame" x="1" y="148" width="410" height="440"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -26,6 +26,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LaddningsskärmV3" width="2480" height="2434"/>
+        <image name="LaddningsskarmV4" width="826" height="811"/>
     </resources>
 </document>

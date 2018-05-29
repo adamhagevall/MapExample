@@ -3,7 +3,6 @@ import { Container, Header, Button, Content, Text, View, Icon, Fab } from "nativ
 
 import { StyleSheet, Image } from 'react-native'
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
-import Action from '../ActionSheet';
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4

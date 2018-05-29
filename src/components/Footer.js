@@ -7,7 +7,6 @@ import BackgroundImage from './pages/BackgroundImage';
 import getTheme from '../../native-base-theme/components';
 import commonColor from '../../native-base-theme/variables/commonColor';
 
-var bild = require('./Assets/blue2.jpg');
 
 export default class FooterEx extends Component {
 

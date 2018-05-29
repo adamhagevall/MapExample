@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { 
     Text, 
-    TouchableWithoutFeedback, 
+    TouchableWithoutFeedback,  
     View,
     LayoutAnimation 
 } from 'react-native';
@@ -11,7 +11,7 @@ import Card from './common/Card';
 import CardSection from './common/CardSection';
 import { Icon, Left, Right, Body, Thumbnail, Separator } from 'native-base';
 
-var bild = require('./Assets/Almedalen.png');
+var bild = require('./Assets/Bannerfbfinal.png');
 
 class ListItem extends Component {
     componentWillUpdate() {

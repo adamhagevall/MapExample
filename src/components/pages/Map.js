@@ -25,7 +25,7 @@ var bild = require('../Assets/fadedmap.jpg');
 //  spring action sheet 
 
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
-import Action from '../ActionSheet';
+
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
@@ -53,10 +53,10 @@ const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsr
 
 //Spring actionsheet slut
 
-const stairCaseImage = require('../warningstairs.png');
+const stairCaseImage = require('../Assets/trappor.png');
 const arenaImage = require('../Arena.png');
-const bathroomImage = require('../101.jpg');
-const parkingImage = require('../Parking.png');
+const bathroomImage = require('../Assets/WC.png');
+const parkingImage = require('../Assets/Parking.png');
 const scandicImage = require('../Scandic.png');
 let { width, height } = Dimensions.get('window');
 const tiles = require('../RoadColors');
@@ -92,6 +92,28 @@ const runWaypoints = [
   "57.642357, 18.294199",
   "57.641593, 18.296036",
   "57.640902, 18.295103"
+]
+const coordinatesToChange = [ 
+  {latitude: 57.6394025, longitude: 18.2978174},
+  {latitude: 57.6388676, longitude: 18.2884245}, 
+  {latitude: 57.64066580000001, longitude: 18.288802},
+  {latitude: 57.6368509, longitude: 18.2940697},
+  {latitude: 57.6394697, longitude: 18.2941732},
+  {latitude: 57.637457, longitude: 18.2880791},
+  {latitude: 57.637457, longitude: 18.2880791},
+  {latitude: 57.640335, longitude: 18.2978775},
+  {latitude: 57.6390044, longitude: 18.2953983}
+]
+const newCoordinates = [
+  {latitude: 57.639463, longitude: 18.297678},
+  {latitude: 57.639001, longitude: 18.288192},
+  {latitude: 57.640982, longitude: 18.289178},
+  {latitude: 57.636779, longitude: 18.293984},
+  {latitude: 57.639418, longitude: 18.294114},
+  {latitude: 57.637438, longitude: 18.288060},
+  {latitude: 57.637438, longitude: 18.288060},
+  {latitude: 57.640295, longitude: 18.297808},
+  {latitude: 57.639070, longitude: 18.295489}
 ]
 
 export default class Map extends Component {
@@ -194,7 +216,7 @@ export default class Map extends Component {
               waypoints={customWaypointArray}
               apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
               strokeWidth={15}
-              strokeColor='yellow'
+              strokeColor='#fcff77'
               mode='walking'
             />
           );
@@ -206,7 +228,7 @@ export default class Map extends Component {
               waypoints={customWaypointArray.slice(0, 22)}
               apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
               strokeWidth={15}
-              strokeColor='yellow'
+              strokeColor='#fcff77'
               mode='walking'
             />
           );
@@ -239,7 +261,7 @@ export default class Map extends Component {
           waypoints={longRouteWaypoints}
           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
           strokeWidth={15}
-          strokeColor='yellow'
+          strokeColor='#fcff77'
           mode='walking'
         />
       );
@@ -358,13 +380,13 @@ export default class Map extends Component {
     console.log('Här är roadIndex = ', this.state.roadIndex)
     const arrayToSend = [];
     if (this.state.roadIndex === 1) {
-      dijkstraArray = greenRoute.path(originNode, destinationNode, { cost: true });
+      dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
     else if (this.state.roadIndex === 2) {
-      dijkstraArray = blueRoute.path(originNode, destinationNode, { cost: true });
+      dijkstraArray = blueRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
     else if (this.state.roadIndex === 3) {
-      dijkstraArray = redRoute.path(originNode, destinationNode, { cost: true });
+      dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
     if (dijkstraArray.cost >= 100) {
       this.renderAlert();
@@ -560,15 +582,26 @@ export default class Map extends Component {
   }
 
   originCallback = (detailsFromSearch) => {
+    for (i = 0; i < coordinatesToChange.length; i++) {
+      if (detailsFromSearch.latitude === coordinatesToChange[i].latitude && detailsFromSearch.longitude === coordinatesToChange[i].longitude) {
+        detailsFromSearch.latitude = newCoordinates[i].latitude; 
+        detailsFromSearch.longitude = newCoordinates[i].longitude;
+      }
+    }
     this.setState({ originDetails: detailsFromSearch, originDefined: true })
-    console.log('originDetails: ', this.state.originDetails);
+    console.log('Använd den här originDetails!: ', this.state.originDetails);
   }
 
   destinationCallback = (detailsFromSearch) => {
+    for (i = 0; i < coordinatesToChange.length; i++) {
+      if (detailsFromSearch.latitude === coordinatesToChange[i].latitude && detailsFromSearch.longitude === coordinatesToChange[i].longitude) {
+        detailsFromSearch.latitude = newCoordinates[i].latitude; 
+        detailsFromSearch.longitude = newCoordinates[i].longitude;
+      }
+    }
     this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true })
     console.log('destinationDetails: ', this.state.destinationDetails);
   }
-
 
   renderTiles() {
     return tiles.map(tile =>
@@ -815,8 +848,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial-BoldItalicMT'
   },
   markerImages: {
-    height: 20,
-    width: 20
+    height: 25,
+    width: 25
   },
   importantMarkerImages: {
     height: 28,
@@ -1129,7 +1162,7 @@ const coordinates = [
 //           destination={this.state.destinationDetails}
 //           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
 //           strokeWidth={5}
-//           strokeColor='yellow'
+//           strokeColor='#fcff77'
 //           mode='walking'
 //         />
 //       );

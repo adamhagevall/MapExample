@@ -49,12 +49,12 @@ export default class App extends Component {
         this.requestLocationsPermission();
         //testing
         const config = {
-            apiKey: 'AIzaSyDWbUEFqPdZKJZioHqRdEZJJC9rcLjv6oQ',
-            authDomain: 'tillganglighetsarenan.firebaseapp.com',
-            databaseURL: 'https://tillganglighetsarenan.firebaseio.com',
-            projectId: 'tillganglighetsarenan',
-            storageBucket: 'tillganglighetsarenan.appspot.com',
-            messagingSenderId: '770837927667'
+            apiKey: 'AIzaSyCz8QVb9p7xj1GKGoWPeK-J3UUbcDlphrs',
+            authDomain: 'tillganglighetsarenan-ee2ce.firebaseapp.com',
+            databaseURL: 'https://tillganglighetsarenan-ee2ce.firebaseio.com',
+            projectId: 'tillganglighetsarenan-ee2ce',
+            storageBucket: 'tillganglighetsarenan-ee2ce.appspot.com',
+            messagingSenderId: '733038426427'
             // apiKey: 'AIzaSyBTXGUeZBDlMhKkM8d0cO_y0DvRP4YX_bE',
             // authDomain: 'informationdatabase-ef265.firebaseapp.com',
             // databaseURL: 'https://informationdatabase-ef265.firebaseio.com',

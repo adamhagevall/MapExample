@@ -1,17 +1,10 @@
 [
     {"id": 0,
         "title": "Tillgänglighetsarenan",
-        "description": "Välkommen till Tillgänglighetsarenan i Almedalen måndag den 4 juli! Under en hel dag kommer vi ägna oss åt att diskutera hur vi skapar ett samhälle som är tillgängligt för alla. Tillgänglighetsarenan kommer att äga rum kl 8-16 i centrala Visby, trädgården vid S:ta Katarina, och avslutas med ett mingel kl. 16-19. Under dagen kommer sex seminarier att hållas med olika teman kopplade till tillgänglighet. Se program för dagen här. Föranmälan krävs för att delta i minglet kl. 16.00-19.00. Anmäl dig senast den 30 juni via epost till charlotte.teglgaard@tebab.com Bakom arenan står följande organisationer: SPF Seniorerna, DHR, Parasport Sverige, Hissförbundet och Centre for Ageing and Supportive Environments (CASE) vid Lunds Universitet." 
-    },
-
-
+        "description": "För tredje året i rad arrangeras Tillgänglighetsarenan under Almedalsveckan. Bakom arenan står DHR, SPF Seniorerna, Parasport Sverige, Hissförbundet och Scandic Hotels. Medarrangörerna förenas i övertygelsen att många främjas av ökad tillgänglighet och tillgänglighet i grunden angår oss alla – det är en demokratisk fråga att alla ska ha möjlighet att ta del i samhället utifrån sina möjligheter."},
         {"id": 1,
-        "title": "Almedalen",
-        "description": "React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes."
-        },
-        {"id": 2,
         "title": "Om pistkartan",
-        "description": "Välkommen till Tillgänglighetsarenan i Almedalen måndag den 4 juli! Under en hel dag kommer vi ägna oss åt att diskutera hur vi skapar ett samhälle som är tillgängligt för alla. Tillgänglighetsarenan kommer att äga rum kl 8-16 i centrala Visby, trädgården vid S:ta Katarina, och avslutas med ett mingel kl. 16-19. Under dagen kommer sex seminarier att hållas med olika teman kopplade till tillgänglighet. Se program för dagen här. Föranmälan krävs för att delta i minglet kl. 16.00-19.00. Anmäl dig senast den 30 juni via epost till charlotte.teglgaard@tebab.com Bakom arenan står följande organisationer: SPF Seniorerna, DHR, Parasport Sverige, Hissförbundet och Centre for Ageing and Supportive Environments (CASE) vid Lunds Universitet." 
-    }
+        "description": "Pistkartan är ett hjälpmedel för att underlätta navigering i Visby under Almedalsveckan. Med underlag av en papperskarta har ni Pistkartan lanserats 2018 som applikation att ladda ner på både IOS- och Androidenheter"
+        }
        
 ]
