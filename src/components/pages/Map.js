@@ -1,25 +1,23 @@
 
-
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import { Container, Content, Body, Card, Toast } from 'native-base';
+import { Container, Content, Body, Card, Toast, Fab, Icon } from 'native-base';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import LoadingView from 'react-native-loading-view';
 import SearchBar from '../SearchBar';
 import MapTiles from '../MapTiles';
 import NewHeader from '../MapHeader';
-import FAB from '../FAB';
 import FABExample from '../pages/FABExample';
+import FAB from '../FAB';
 import Footer from '../Footer';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
 import { greenRoute } from '../NodesGreen';
 import { blueRoute } from '../NodesBlue';
 import { redRoute } from '../NodesRed';
-
 
 import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
@@ -34,32 +32,32 @@ const DESTRUCTIVE_INDEX = 4
 const options = [
   'Cancel',
   {
-    component: <Text style={{ color: 'green', fontSize: 15 }}>GRÖN</Text> ,
+    component: <Text style={{ color: 'green', fontSize: 15 }}>GRÖN</Text>,
     height: 45,
   },
   {
-    component: <Text style={{ color: 'blue', fontSize: 15 }}>BLÅ </Text> ,
+    component: <Text style={{ color: 'blue', fontSize: 15 }}>BLÅ </Text>,
     height: 45,
   },
   {
-    component: <Text style={{ color: 'red', fontSize: 15 }}>RÖD </Text> ,
+    component: <Text style={{ color: 'red', fontSize: 15 }}>RÖD </Text>,
     height: 45,
   },
   {
-    component: <Text style={{ color: 'black', fontSize: 15 }}>SVART </Text> ,
+    component: <Text style={{ color: 'black', fontSize: 15 }}>SVART </Text>,
     height: 45,
   }
-
 
 ]
 const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsrunda</Text>
 
 //Spring actionsheet slut
 
-var customToilet = require('../101.jpg');
-var customParking = require('../Parking.png');
-var customArena = require('../Arena.png');
-var customBed = require('../Bed.png');
+const stairCaseImage = require('../warningstairs.png');
+const arenaImage = require('../Arena.png');
+const bathroomImage = require('../101.jpg');
+const parkingImage = require('../Parking.png');
+const scandicImage = require('../Scandic.png');
 let { width, height } = Dimensions.get('window');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
@@ -74,6 +72,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const searchDetails = {};
 const nodeCoordinates = require('../NodeCoordinates');
 const nodeArray = require('../NodeArray');
+
 const runWaypoints = [
   "57.640153, 18.289647",
   "57.639046, 18.291496",
@@ -93,8 +92,7 @@ const runWaypoints = [
   "57.642357, 18.294199",
   "57.641593, 18.296036",
   "57.640902, 18.295103"
-  ]
-
+]
 
 export default class Map extends Component {
 
@@ -123,15 +121,24 @@ export default class Map extends Component {
     }
   }
 
-
   renderOriginMarker() {
     if (this.state.originDefined) {
+      const pinColor = null;
+      if (this.state.roadIndex === 1) {
+        pinColor = '#5aa73f';
+      } else if (this.state.roadIndex === 2) {
+        pinColor = '#008ccf';
+      } else if (this.state.roadIndex === 3) {
+        pinColor = '#ff2232';
+      } else {
+        pinColor = 'black';
+      }
       return (
         <MapView.Marker
           zIndex={1}
           style={{ height: 1 }}
           coordinate={this.state.originDetails}
-          pinColor={'red'}
+          pinColor={pinColor}
         />
       );
     }
@@ -139,12 +146,22 @@ export default class Map extends Component {
 
   renderDestinationMarker() {
     if (this.state.destinationDefined) {
+      const pinColor = null;
+      if (this.state.roadIndex === 1) {
+        pinColor = '#5aa73f';
+      } else if (this.state.roadIndex === 2) {
+        pinColor = '#008ccf';
+      } else if (this.state.roadIndex === 3) {
+        pinColor = '#ff2232';
+      } else {
+        pinColor = 'black';
+      }
       return (
         <MapView.Marker
           zIndex={2}
           style={{ height: 1 }}
           coordinate={this.state.destinationDetails}
-          pinColor={'green'}
+          pinColor={pinColor}
         />
       );
     }
@@ -163,12 +180,12 @@ export default class Map extends Component {
           console.log("här är waypoints", customWaypointArray)
         }
         // this.mapRef.fitToCoordinates(
-      //   coordinates = [this.state.originDetails, this.state.destinationDetails],
-      //   {
-      //     edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-      //     animated: true
-      //     }
-      // );
+        //   coordinates = [this.state.originDetails, this.state.destinationDetails],
+        //   {
+        //     edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+        //     animated: true
+        //     }
+        // );
         if (customWaypointArray.length <= 23) {
           return (
             <MapViewDirections
@@ -206,8 +223,8 @@ export default class Map extends Component {
       text: 'Det gick inte att skapa någon vägbeskrivning. Vänligen kontrollera dina val.',
       style: { backgroundColor: 'grey', marginBottom: 20 },
       buttonText: 'Jag förstår',
-      buttonTextStyle: { color: 'white' },
-      buttonStyle: { backgroundColor: 'red' },
+      buttonTextStyle: { color: 'black' },
+      buttonStyle: { backgroundColor: 'white', marginTop: 30, },
       duration: 300000
     })
   }
@@ -228,93 +245,98 @@ export default class Map extends Component {
       );
     }
   }
-    // renderRoute2() {
-    //   if (this.state.originDefined && this.state.destinationDefined) {
-    //     const customWaypointArray = [];
-    //     if (this.state.easyRoads || this.state.easyRoads === false) {
-    //       console.log('Nu är blå eller grön vald')
-    //       const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
-    //       for (i = 0; i < waypointDetails.length; i++) {
-    //         customWaypointArray.push(waypointDetails[i].coords)
-    //       }
-    //       console.log("här är waypoints", customWaypointArray)
-    //     }
-    //     this.mapRef.fitToCoordinates(
-    //       coordinates = [this.state.originDetails, this.state.destinationDetails], 
-    //       {
-    //         edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-    //         animated: true
-    //         }
-    
-    //       );
-    //       return ( 
-          
-    //         <MapViewDirections
-    //           origin={this.state.originDetails}
-    //           destination={this.state.destinationDetails}
-    //           waypoints={customWaypointArray}
-    //           apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-    //           strokeWidth={1}
-    //           strokeColor='yellow'
-    //           mode='walking'
-    //         />
-          
-    //       );
-    //     }
-    //   }
+ 
+  runningRoute() {
+    if (this.state.selected2 === 1) {
+      return (
+        <MapViewDirections
+          origin={{ latitude: 57.639741, longitude: 18.286679 }}
+          destination={{ latitude: 57.639354, longitude: 18.293128 }}
+          waypoints={runWaypoints}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={15}
+          strokeColor='orange'
+          mode='walking'
+        />
 
-      runningRoute() {
-              if (this.state.selected2 === 1) {
-                return ( 
-                <MapViewDirections
-                origin={{latitude: 57.639741, longitude: 18.286679}}
-                destination={{latitude: 57.639354, longitude: 18.293128}}
-                waypoints={runWaypoints}
-                apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                strokeWidth={15}
-                strokeColor='orange'
-                mode='walking'
-              />)
-              }
-              if (this.state.selected2 === 2) {
-                return ( 
-                  <MapViewDirections
-                  origin={{latitude: 57.639741, longitude: 18.286679}}
-                  destination={{latitude: 57.639354, longitude: 18.293128}}
-                  waypoints={runWaypoints}
-                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                  strokeWidth={15}
-                  strokeColor='orange'
-                  mode='walking'
-                />)
-              }
-              if (this.state.selected2 === 3) {
-                return ( 
-                  <MapViewDirections
-                  origin={{latitude: 57.639741, longitude: 18.286679}}
-                  destination={{latitude: 57.639354, longitude: 18.293128}}
-                  waypoints={runWaypoints}
-                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                  strokeWidth={15}
-                  strokeColor='orange'
-                  mode='walking'
-                />)
-              }
-              if (this.state.selected2 === 4) {
-                return ( 
-                  <MapViewDirections
-                  origin={{latitude: 57.639741, longitude: 18.286679}}
-                  destination={{latitude: 57.639354, longitude: 18.293128}}
-                  waypoints={runWaypoints}
-                  apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
-                  strokeWidth={15}
-                  strokeColor='orange'
-                  mode='walking'
-                />)
-              }
-             
-          }
-  
+
+      )
+    }
+    if (this.state.selected2 === 2) {
+      return (
+        <MapViewDirections
+          origin={{ latitude: 57.639741, longitude: 18.286679 }}
+          destination={{ latitude: 57.639354, longitude: 18.293128 }}
+          waypoints={runWaypoints}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={15}
+          strokeColor='orange'
+          mode='walking'
+        />)
+    }
+    if (this.state.selected2 === 3) {
+      return (
+        <MapViewDirections
+          origin={{ latitude: 57.639741, longitude: 18.286679 }}
+          destination={{ latitude: 57.639354, longitude: 18.293128 }}
+          waypoints={runWaypoints}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={15}
+          strokeColor='orange'
+          mode='walking'
+        />)
+    }
+    if (this.state.selected2 === 4) {
+      return (
+        <MapViewDirections
+          origin={{ latitude: 57.639741, longitude: 18.286679 }}
+          destination={{ latitude: 57.639354, longitude: 18.293128 }}
+          waypoints={runWaypoints}
+          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          strokeWidth={15}
+          strokeColor='orange'
+          mode='walking'
+        />)
+    }
+
+  }
+  runningExitButton() {
+    if (this.state.selected2 === 1) {
+      return (
+        
+      <FAB />
+      )
+    }
+    if (this.state.selected2 === 2) {
+      return (
+        <Fab
+        active={this.state.active}
+        active={false}
+        direction="up"
+        containerStyle={{}}
+        style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
+        position="bottomLeft"
+    onPress={() => {
+    }}
+    >
+        <Icon name="close-circle" />
+    </Fab>
+
+      )
+    }
+    if (this.state.selected2 === 3) {
+      return (
+        <FABExample />
+      )
+    }
+    if (this.state.selected2 === 4) {
+      return (
+        <FABExample />
+      )
+    }
+
+  }
+
 
   findNearestNode(definedCoord) {
     console.log('definierade koordinater', definedCoord)
@@ -336,13 +358,13 @@ export default class Map extends Component {
     console.log('Här är roadIndex = ', this.state.roadIndex)
     const arrayToSend = [];
     if (this.state.roadIndex === 1) {
-      dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      dijkstraArray = greenRoute.path(originNode, destinationNode, { cost: true });
     }
     else if (this.state.roadIndex === 2) {
-      dijkstraArray = blueRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      dijkstraArray = blueRoute.path(originNode, destinationNode, { cost: true });
     }
     else if (this.state.roadIndex === 3) {
-      dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      dijkstraArray = redRoute.path(originNode, destinationNode, { cost: true });
     }
     if (dijkstraArray.cost >= 100) {
       this.renderAlert();
@@ -364,11 +386,11 @@ export default class Map extends Component {
 
   renderAlert() {
     Toast.show({
-      text: 'Sakta i backarna! Notera att rutten inte går att planera efter dina önskemål',
-      style: { backgroundColor: 'grey', marginBottom: 20 },
+      text: 'Notera att rutten inte går att planera efter dina önskemål',
+      style: { backgroundColor: 'grey', marginBottom: 38 },
       buttonText: 'Jag förstår',
-      buttonTextStyle: { color: 'white' },
-      buttonStyle: { backgroundColor: 'red' },
+      buttonTextStyle: { color: 'black' },
+      buttonStyle: { backgroundColor: 'white', marginTop: 5 },
       duration: 300000
     })
   }
@@ -376,14 +398,13 @@ export default class Map extends Component {
   showActionSheet() {
     this.actionSheet.show()
   }
-  
+
   getActionSheetRef = ref => (this.actionSheet = ref)
 
+  handlePress = index => { this.setState({ selected2: index }) }
 
-  handlePress = index => { this.setState({ selected2: index })}
+  handleRunning() {
 
-  handleRunning(){
-   
     if (this.state.selected2 === 1) {
       this.setState({ runWay: null })
     }
@@ -396,15 +417,14 @@ export default class Map extends Component {
     if (this.state.selected2 === 4) {
       console.log('green')
     }
-  } 
+  }
 
   renderRunningRoute() {
-   
+
     if (this.state.roadIndex === 5) {
       console.log('onButtonPress')
-      {this.showActionSheet()}
+      { this.showActionSheet() }
       this.setState({ roadIndex: null })
-
 
       // Alert.alert(
       //   'Alert Title',
@@ -426,9 +446,9 @@ export default class Map extends Component {
       //   buttonStyle: { backgroundColor: 'red' },
       //   duration: 300000
       // })
-   
+
+    }
   }
-}
 
   updateStyle() {
     this.setState({
@@ -442,6 +462,7 @@ export default class Map extends Component {
 
   componentWillMount() {
     setTimeout(() => this.updateStyle(), 1000);
+    Geolocation.clearWatch(this.watchID);//tillagt currentPosition
     Geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -462,6 +483,32 @@ export default class Map extends Component {
     //     alert(error.message)
     //   });
   };
+
+//tillagt currentPosition
+  componentDidMount() {
+   Geolocation.watchPosition((position) => {
+      // Create the object to update this.state.mapRegion through the onRegionChange function
+      const region = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.00922 * 1.5,
+        longitudeDelta: 0.00421 * 1.5
+      };
+      this.onRegionChange(region, region.latitude, region.longitude);
+    });
+  };
+
+  onRegionChange(region, lastLat, lastLong) {
+    this.setState({
+      mapRegion: region,
+      // If there are no new values set use the the current ones
+      lastLat: lastLat || this.state.lastLat,
+      lastLong: lastLong || this.state.lastLong
+    });
+  }
+
+//*tillagt currentPosition
+
 
   // componentDidMount = () => {
   //   // This is just ment as an example of how you handle an asynchronus operation 
@@ -500,8 +547,7 @@ export default class Map extends Component {
     this.setState({ roadIndex: chosenIndex })
   }
 
-  runningRouteCallback = (colorRun) =>
-  {
+  runningRouteCallback = (colorRun) => {
     if (colorRun === 1 || colorRun === 2) {
       this.setState({ runningRoad: true })
     }
@@ -524,13 +570,11 @@ export default class Map extends Component {
   }
 
 
-
   renderTiles() {
     return tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
     );
   }
-
 
   render() {
     const { width, height } = Dimensions.get('window');
@@ -539,17 +583,16 @@ export default class Map extends Component {
 
     const { selected2, selectedColor } = this.state
     const selectedText = options[selected2].component || options[selected2]
-  
+
     return (
+      console.log('runFab', this.state.selected2),
       <Container>
         <View style={{ height: 150 }}>
           <NewHeader />
         </View>
 
-
         {/* <LoadingView loading={this.state.loading}> */}
         <Content scrollEnabled={false}>
-
 
 
           {/* <View>
@@ -571,7 +614,6 @@ export default class Map extends Component {
               </View>
             </Spinner> */}
 
-
             <MapView
               ref={(ref) => { this.mapRef = ref }}
               provider={PROVIDER_GOOGLE}
@@ -583,36 +625,109 @@ export default class Map extends Component {
                 latitudeDelta: 0.002,
                 longitudeDelta: 0.015
               }}
+
+              showsUserLocation //tilagt currentPosition
+              followUserLocation //tillagt currentPosition
             >
               <MapView.Marker
-                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.288779, latitude: 57.640684 }}
                 title={'Tillgänglighetsarenan'}
-                image={customArena}
-              // pinColor={'blue'}
-              />
+              >
+                <Image
+                  source={arenaImage}
+                  style={styles.importantMarkerImages}
+                />
+              </MapView.Marker>
+
               <MapView.Marker
-                style={{ width: '2%', height: '2%' }}
-                coordinate={{ longitude: 18.2800916, latitude: 57.6317496 }}
+                coordinate={{ longitude: 18.279900, latitude: 57.632387 }}
                 title={'Scandic Visby'}
-                pinColor={'blue'}
-                image={customBed}
-              />
+              >
+                <Image
+                  source={scandicImage}
+                  style={{ width: 58, height: 12 }}
+                />
+              </MapView.Marker>
+
               <MapView.Marker
-                style={{ width: '2%', height: '2%' }}
                 coordinate={{ longitude: 18.2892483, latitude: 57.6402041 }}
                 title={'Tillgängliga toaletter'}
-                pinColor={'blue'}
-                image={customToilet}
-              />
+              >
+                <Image
+                  source={bathroomImage}
+                  style={styles.importantMarkerImages}
+                />
+              </MapView.Marker>
+
               <MapView.Marker
-                style={{ width: '2%', height: '2%' }}
-                coordinate={{ longitude: 18.287925
-            , latitude: 57.637762 }}
+                coordinate={{ longitude: 18.287965, latitude: 57.637762 }}
                 title={'Parkeringsplats'}
-                pinColor={'blue'}
-                image={customParking}
-              />
+              >
+                <Image
+                  source={parkingImage}
+                  style={styles.importantMarkerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.298341, latitude: 57.641226 }}
+                title={'Kyrktrappan'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.292950, latitude: 57.639786 }}
+                title={'Dubbens gränd (Trappa)'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.292564, latitude: 57.637437 }}
+                title={'Trappgränd (Trappa)'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.291309, latitude: 57.641052 }}
+                title={'Trappa'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.290150, latitude: 57.636165 }}
+                title={'Stenklivet (Trappa)'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
+
+              <MapView.Marker
+                coordinate={{ longitude: 18.297649, latitude: 57.642097 }}
+                title={'Trappa'}
+              >
+                <Image
+                  source={stairCaseImage}
+                  style={styles.markerImages}
+                />
+              </MapView.Marker>
               {this.renderOriginMarker()};
               {this.renderDestinationMarker()};
               {this.renderRoute()};
@@ -620,8 +735,23 @@ export default class Map extends Component {
               {this.renderTiles()};
               {this.renderRunningRoute()};
               {this.runningRoute()};
+              {this.runningExitButton()};
+              
+
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
+            {/* <Fab
+                        active={this.state.active}
+                        active={false}
+                        direction="up"
+                        containerStyle={{}}
+                        style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
+                        position="bottomLeft"
+                    onPress={() => {
+                    }}
+                    >
+                        <Icon name="close-circle" />
+                    </Fab> */}
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
 
               <View style={{ flex: 1 }} zIndex={3}>
@@ -634,15 +764,15 @@ export default class Map extends Component {
           */}
             </View>
             <ActionSheet
-      ref={this.getActionSheetRef}
-      title={title}
-      message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
-      options={options}
-      cancelButtonIndex={CANCEL_INDEX}
-      destructiveButtonIndex={DESTRUCTIVE_INDEX}
-      onPress= {this.handlePress}
+              ref={this.getActionSheetRef}
+              title={title}
+              message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
+              options={options}
+              cancelButtonIndex={CANCEL_INDEX}
+              destructiveButtonIndex={DESTRUCTIVE_INDEX}
+              onPress={this.handlePress}
 
-    />
+            />
           </View>
 
         </Content>
@@ -683,9 +813,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textShadowColor: 'black',
     fontFamily: 'Arial-BoldItalicMT'
-  }
+  },
+  markerImages: {
+    height: 20,
+    width: 20
+  },
+  importantMarkerImages: {
+    height: 28,
+    width: 28
+  },
 });
-
 
 
 
@@ -812,7 +949,6 @@ const coordinates = [
 
 
 
-
 // import React, { Component } from 'react';
 // import { Dimensions, StyleSheet } from 'react-native';
 // import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -924,7 +1060,6 @@ const coordinates = [
 // import FAB from '../FAB';
 // import Footer from '../Footer';
 
-
 // var customToilet = require('../101.jpg');
 // var customParking = require('../Parking.png');
 // var customArena = require('../Arena.png');
@@ -959,7 +1094,6 @@ const coordinates = [
 //       destinationDefined: false
 //     }
 //   }
-
 
 //   renderOriginMarker() {
 //     if (this.state.originDefined) {
@@ -1078,7 +1212,6 @@ const coordinates = [
 //   }
 
 
-
 //   renderTiles() {
 //     console.log(this.state.originDetails)
 //     return this.state.tiles.map(tile =>
@@ -1090,7 +1223,6 @@ const coordinates = [
 //     //         })
 //     //       }, 8000)
 //   }
-
 
 //   render() {
 //     const { width, height } = Dimensions.get('window');
@@ -1163,7 +1295,6 @@ const coordinates = [
 //     width: '100%'
 //   }
 // });
-
 
 
 
@@ -1290,7 +1421,6 @@ const coordinates = [
 
 
 
-
 // // import React, { Component } from 'react';
 // // import { Dimensions, StyleSheet } from 'react-native';
 // // import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -1387,6 +1517,7 @@ const coordinates = [
 // // }
 
 // // export default Map;
+
 
 
 

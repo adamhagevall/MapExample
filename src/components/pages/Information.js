@@ -79,21 +79,21 @@ class Information extends Component {
                                     </View>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Seminarium 1</Text>
+                                        <Text>Bygg tillgängligt tjäna mer!</Text>
                                         <Right>
                                             <Icon name="arrow-forward" onPress={Actions.calendar} />
                                         </Right>
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Seminarium 2</Text>
+                                        <Text>Kan miljonprogrammet lösa de bostadspolitiska utmaningarna?</Text>
                                         <Right>
                                             <Icon name="arrow-forward" onPress={Actions.calendar} />
                                         </Right>
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Seminarium 3</Text>
+                                        <Text>Sverige - tillgängligt för alla?! </Text>
                                         <Right>
                                             <Icon name="arrow-forward" onPress={Actions.calendar} />
                                         </Right>

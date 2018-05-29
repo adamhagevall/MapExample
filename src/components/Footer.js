@@ -36,16 +36,8 @@ export default class FooterEx extends Component {
            
             <Footer >
             <BackgroundImage>
-                <FooterTab>
-                    {/* <Button vertical active={(this.state.activeTabName === 'map') ? true : null} onPress={() => { this.tabAction('map') }}>
-                        <Icon active name="navigate" />
-                        <Text>Navigate</Text>
-                    </Button>
-                    <Button vertical active={(this.state.activeTabName === 'information') ? true : null} onPress={() => { this.tabAction('information') }}>
-                        <Icon name="person" />
-                        <Text>Information</Text>
-                    </Button> */}
-                </FooterTab>
+                <FooterTab />
+                   
                 </BackgroundImage>
             </Footer>
             

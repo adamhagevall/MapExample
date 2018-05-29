@@ -1,21 +1,3 @@
-// import React, { Component } from 'react';
-// import { Container, Header, Item, Input, Icon, Button, Text } from 'native-base';
-// export default class SearchBar extends Component {
-//     render() {
-//         return (
-//                 <Header searchBar rounded>
-//                     <Item>
-//                         <Icon name="ios-search" />
-//                         <Input placeholder="Search" />
-//                         <Icon name="ios-people" />
-//                     </Item>
-//                     <Button transparent>
-//                         <Text>Search</Text>
-//                     </Button>
-//                 </Header>
-//         );
-//     }
-// }
 
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
@@ -23,14 +5,31 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import Geolocation from 'react-native-geolocation-service';
 
 
+// 57.640661, 18.288623 ny arena koord
 const availabilityArena = {
     description: 'Tillgänglighetsarenan',
-    geometry: { location: { lat: 57.640684, lng: 18.288779 } }
+    geometry: { location: { lat: 57.640699, lng: 18.288784 } }
    , 
+};
+const Donnersplats = {
+    description: 'Donnersplats',
+    geometry: { location: { lat: 57.639033, lng: 18.291397 } }
+};
+const Storatorget = {
+    description: 'Stora torget',
+    geometry: { location: { lat: 57.640659, lng: 18.295976 } }
+};
+const stHansplan = {
+    description: 'S:t Hansplan',
+    geometry: { location: { lat: 57.638585, lng: 18.293005 } }
+};
+const Almedalsscenen = {
+    description: 'Almedalsscenen',
+    geometry: { location: { lat: 57.639914, lng: 18.290777 } }
 };
 const scandicHotel = {
     description: 'Scandic Visby',
-    geometry: { location: { lat: 57.6317496, lng: 18.2800916 } }
+    geometry: { location: { lat: 57.632362, lng: 18.279776 } }
 };
 const toilets = {
     description: 'Tillgängliga toaletter',
@@ -57,10 +56,12 @@ export default class SearchBar extends Component {
         Geolocation.getCurrentPosition(
             position => {
                 this.setState({
-                    currentPosition: {
-                        geometry: { location: { lat: position.coords.lat, lng: position.coords.lng} }
+                    currentPosition: { //tillagt currentPosition
+                        description: 'Din position',
+                        geometry: { location: { lat: position.coords.latitude, lng: position.coords.longitude } }
+
                     }
-                })
+                });
                 console.log(this.state);
             },
             (error) => console.log(error.message),
@@ -86,7 +87,7 @@ export default class SearchBar extends Component {
                 fetchDetails={true}
                 renderDescription={row => row.description} // custom description render
                 onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                    {this.someFunction(details.geometry.location)};
+                    {this.componentWillMount(), this.someFunction(details.geometry.location)};
                 }
             }
 
@@ -140,7 +141,7 @@ export default class SearchBar extends Component {
                 }}
 
                 filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-                predefinedPlaces={[this.state.currentPosition, availabilityArena, scandicHotel, toilets, parkingLots]}
+                predefinedPlaces={[this.state.currentPosition, availabilityArena, Donnersplats, Storatorget, stHansplan, Almedalsscenen, scandicHotel, toilets, parkingLots]}
 
                 debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
             //   renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
@@ -150,7 +151,6 @@ export default class SearchBar extends Component {
         );
     }
 }
-
 
 // // import React, { Component } from 'react';
 // // import { Container, Header, Item, Input, Icon, Button, Text } from 'native-base';
@@ -175,7 +175,6 @@ export default class SearchBar extends Component {
 // import { View, Image } from 'react-native';
 // import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 // import Geolocation from 'react-native-geolocation-service';
-
 
 // const availabilityArena = {
 //     description: 'Tillgänglighetsarenan',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Container, Header, Left, Body, Title, Right, Textarea, Form, ListItem, CheckBox, Card, CardItem } from "native-base";
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
@@ -65,7 +65,7 @@ export default class Feedback extends Component {
                     
 
                           <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
-                    
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                           <View styles={{position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
                     <Card style={styles.containerStyle}>
                         <CardItem>
@@ -111,7 +111,7 @@ export default class Feedback extends Component {
                     </Card>
                 
                     </View>
-                
+                </ TouchableWithoutFeedback>
                     </View>
                     </BackgroundImage> */}
                     <ActionSheet
