@@ -16,8 +16,6 @@ import Calendar from './components/pages/Calendar';
 import SplashScreen from 'react-native-splash-screen';
 import addToCal from './components/pages/addtoCal';
 import firebase from 'firebase';
-
-
 import getTheme from '../native-base-theme/components';
 import platform from '../native-base-theme/variables/platform';
 
@@ -41,7 +39,7 @@ export default class App extends Component {
                 console.log("Locatin access denied")
             }
         } catch (err) {
-        //    console.warn(err)
+            //    console.warn(err)
         }
     }
 
@@ -61,74 +59,62 @@ export default class App extends Component {
             // projectId: 'informationdatabase-ef265',
             // storageBucket: 'informationdatabase-ef265.appspot.com',
             // messagingSenderId: '17200092209'
-          };   
-          firebase.initializeApp(config);
-          const database = firebase.database();
-          console.log('Firebase WOOH ' + database.ref('/0/title'));
+        };
+        firebase.initializeApp(config);
+        const database = firebase.database();
+        console.log('Firebase WOOH ' + database.ref('/0/title'));
     }
 
     componentDidMount() {
         SplashScreen.hide();
     }
 
-
-    footerCallback = (noFooter) => {
-        this.setState({ showFooter: noFooter });
-        console.log(showFooter);
-    };
-
-    renderFooter() {
-        if (this.state.showFooter) {
-            return <Footer />
-        }
-    }
-
     //testing
-//    createInformationList() {
-//         console.log('inside createInformationList')
-//         firebase.database().ref().once('value').then((snapshot) => {
-//             const informationArray = [];
-//             snapshot.forEach(function(childSnapshot) {
-//               var key = childSnapshot.key;
-//               var childData = childSnapshot.val();
-              
-//                 informationArray.push([
-//                 childData.id,
-//                 childData.title,
-//                 childData.description
-//                    ]);
-//             });
-//             this.setState({ anArray: this.informationArray });
-//          });
-//         return (this.informationArray);
-//     }
+    //    createInformationList() {
+    //         console.log('inside createInformationList')
+    //         firebase.database().ref().once('value').then((snapshot) => {
+    //             const informationArray = [];
+    //             snapshot.forEach(function(childSnapshot) {
+    //               var key = childSnapshot.key;
+    //               var childData = childSnapshot.val();
+
+    //                 informationArray.push([
+    //                 childData.id,
+    //                 childData.title,
+    //                 childData.description
+    //                    ]);
+    //             });
+    //             this.setState({ anArray: this.informationArray });
+    //          });
+    //         return (this.informationArray);
+    //     }
 
     render() {
         // console.log('jdfjfdfj: ' + array);
         // console.log('in render in App.js');
         return (
             <StyleProvider style={getTheme(platform)}>
-            <Root>
-            <Provider store={createStore(reducers)}>
-                <View style={{ flex: 1 }}>
-                    <Container>
-                        <Router>
-                            <Stack key='root'>
-                            
-                            <Scene key='map' component={Map} title='Map' hideNavBar={true} />
-                            <Scene key='information' component={Information} title='Information' hideNavBar={true} />
-                            <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
-                            <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={true} />
-                            <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={true} />
-                            <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
-                            
-                            </Stack>
-                        </Router>
-                        {this.renderFooter()};
-                    </Container>
-                </View>
-            </Provider>
-            </Root>
+                <Root>
+                    <Provider store={createStore(reducers)}>
+                        <View style={{ flex: 1 }}>
+                            <Container>
+                                <Router>
+                                    <Stack key='root'>
+
+                                        <Scene key='map' component={Map} title='Map' hideNavBar={true} />
+                                        <Scene key='information' component={Information} title='Information' hideNavBar={true} />
+                                        <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
+                                        <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={true} />
+                                        <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={true} />
+                                        <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
+
+                                    </Stack>
+                                </Router>
+                                {/* <Footer /> */}
+                            </Container>
+                        </View>
+                    </Provider>
+                </Root>
             </StyleProvider>
         );
     }

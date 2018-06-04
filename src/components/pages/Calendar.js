@@ -28,7 +28,7 @@ export default class DeckSwiperExample extends Component {
           var key = childSnapshot.key;
           var childData = childSnapshot.val();
           informationArray.push([
-            childData.id, 
+            childData.id,
             childData.title,
             childData.info,
             childData.facebookurl,
@@ -43,7 +43,6 @@ export default class DeckSwiperExample extends Component {
         this.createCards();
       });
     };
-
   }
 
   createCards() {
@@ -54,7 +53,7 @@ export default class DeckSwiperExample extends Component {
         text: this.state.testStateArray[0][1],
         info: this.state.testStateArray[0][2],
         image: require('../Assets/parasportalmedalen.jpg'),
-        url:  this.state.testStateArray[0][3],
+        url: this.state.testStateArray[0][3],
         location: this.state.testStateArray[1][7],
         calendarInfo: {
           title: this.state.testStateArray[0][1],
@@ -67,7 +66,7 @@ export default class DeckSwiperExample extends Component {
         text: this.state.testStateArray[1][1],
         info: this.state.testStateArray[1][2],
         image: require('../Assets/Bildhyreshus.jpg'),
-        url:  this.state.testStateArray[1][3],
+        url: this.state.testStateArray[1][3],
         location: this.state.testStateArray[1][7],
         calendarInfo: {
           title: this.state.testStateArray[1][1],
@@ -80,7 +79,7 @@ export default class DeckSwiperExample extends Component {
         text: this.state.testStateArray[2][1],
         info: this.state.testStateArray[2][2],
         image: require('../Assets/Rullstolhissliten.jpg'),
-        url:  this.state.testStateArray[2][3],
+        url: this.state.testStateArray[2][3],
         location: this.state.testStateArray[1][7],
         calendarInfo: {
           title: this.state.testStateArray[2][1],
@@ -92,8 +91,9 @@ export default class DeckSwiperExample extends Component {
         time: this.state.testStateArray[3][4],
         text: this.state.testStateArray[3][1],
         info: this.state.testStateArray[3][2],
-        image: require('../Assets/Sandwishesonatablethebuffee.jpeg'),
-        url:  this.state.testStateArray[3][3],
+        //image: require('../Assets/Sandwishesonatablethebuffee.jpeg'),
+        image: require('../Assets/Rullstolhissliten.jpg'),
+        url: this.state.testStateArray[3][3],
         location: this.state.testStateArray[1][7],
         calendarInfo: {
           title: this.state.testStateArray[3][1],
@@ -115,7 +115,6 @@ export default class DeckSwiperExample extends Component {
           dataSource={cards}
           renderItem={item =>
             <Card style={styles.containerStyle}>
-
               <CardItem style={{}} >
                 <Left>
                   <Body>
@@ -137,9 +136,7 @@ export default class DeckSwiperExample extends Component {
                 </Text>
                 <Text style={{ marginLeft: 73 }} onPress={() => Linking.openURL(item.url)} >Gilla </Text>
                 <Icon onPress={() => Linking.openURL(item.url)} name="logo-facebook" style={{ color: '#4266b2', marginLeft: 5 }} />
-
               </CardItem>
-
             </Card>
           }
         />
@@ -154,7 +151,6 @@ export default class DeckSwiperExample extends Component {
 
   render() {
     return (
-
       <Container >
         {this.createInformationList()}
         <View style={{ height: 150 }}>
@@ -166,19 +162,17 @@ export default class DeckSwiperExample extends Component {
               {this.createContent()};
             </View>
           </View>
-
           <View style={styles.buttonViewStyle}>
             <TouchableOpacity iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
               <Image source={swipeForward} style={styles.buttonStyle} />
             </TouchableOpacity>
           </View>
-
         </BackgroundImage>
       </Container>
     )
   }
-
 }
+
 const styles = {
   containerStyle: {
     borderWidth: 1,
@@ -199,7 +193,7 @@ const styles = {
     flexDirection: "column",
     alignItems: 'flex-end',
     position: "absolute",
-    padding: 10 ,
+    padding: 10,
     justifyContent: 'center',
     right: -10,
     top: '30%'
@@ -214,22 +208,15 @@ const styles = {
     textAlign: 'center',
   },
   infoStyle: {
-
     textAlign: 'center',
-
   },
   titleStyle: {
-
     textAlign: 'center',
-
   },
   linkStyle: {
     textDecorationLine: 'underline',
     color: '#008ccf',
-
     textAlign: 'center',
-
   }
-
 };
 

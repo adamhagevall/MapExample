@@ -8,8 +8,6 @@ var bild = require('./Assets/fadedmap.jpg');
 import BackgroundImage from './pages/BackgroundImage';
 const backgroundImage = require('./Assets/fadedmap.jpg');
 
-
-
 export default class MapHeader extends Component {
     constructor(props) {
         super(props);
@@ -17,46 +15,33 @@ export default class MapHeader extends Component {
             runRoute: 'white'
         }
     }
-
     render() {
         const { runRoute } = this.state
 
         return (
             <BackgroundImage>
-                    <Header span style={{ backgroundColor: 'transparent', height: 150 }}>
-
-                        <Left>
-                            <Button transparent onPress={Actions.information}>
-                                <Icon name='information-circle' style={{ color: "white" }} />
-                            </Button>
-                            <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} />
-                            {/* <Image source={require('./Assets/windrose2.png')} style={{width:80, height:80, marginTop: -60, marginLeft: 270}} />
-                            */}
-
-                        </Left>
-                        <Body >
-                            {/*                     
-                    <Title style={{ color: "white" }} >PISTKARTA</Title> */}
-                            <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80, marginLeft: 20 }} />
-
-                        </Body>
-                        <Right>
-                            <Button transparent onPress={Actions.feedback}>
-                                <Icon name='text' style={{ color: "white" }} />
-                            </Button>
-                            <Button transparent onPress={Actions.calendar} >
-                                <Icon name='calendar' style={{ color: "white" }} />
-                            </Button>
-                            {/* <Image source={require('./Assets/rauka.png')} style={{width:50, height:50}} />
+                <Header span style={{ backgroundColor: 'transparent', height: 150 }}>
+                    <Left>
+                        <Button transparent onPress={Actions.information}>
+                            <Icon name='information-circle' style={{ color: "white" }} />
+                        </Button>
+                        <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} />
+                    </Left>
+                    <Body>
+                        <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80, marginLeft: 20 }} />
+                    </Body>
+                    <Right>
+                        <Button transparent onPress={Actions.feedback}>
+                            <Icon name='text' style={{ color: "white" }} />
+                        </Button>
+                        <Button transparent onPress={Actions.calendar} >
+                            <Icon name='calendar' style={{ color: "white" }} />
+                        </Button>
+                        {/* <Image source={require('./Assets/rauka.png')} style={{width:50, height:50}} />
                      */}
-                        </Right>
-
-                    </Header>
-                   
-
+                    </Right>
+                </Header>
             </BackgroundImage>
-
-
         );
     }
 }

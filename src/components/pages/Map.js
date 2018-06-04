@@ -93,27 +93,27 @@ const runWaypoints = [
   "57.641593, 18.296036",
   "57.640902, 18.295103"
 ]
-const coordinatesToChange = [ 
-  {latitude: 57.6394025, longitude: 18.2978174},
-  {latitude: 57.6388676, longitude: 18.2884245}, 
-  {latitude: 57.64066580000001, longitude: 18.288802},
-  {latitude: 57.6368509, longitude: 18.2940697},
-  {latitude: 57.6394697, longitude: 18.2941732},
-  {latitude: 57.637457, longitude: 18.2880791},
-  {latitude: 57.637457, longitude: 18.2880791},
-  {latitude: 57.640335, longitude: 18.2978775},
-  {latitude: 57.6390044, longitude: 18.2953983}
+const coordinatesToChange = [
+  { latitude: 57.6394025, longitude: 18.2978174 },
+  { latitude: 57.6388676, longitude: 18.2884245 },
+  { latitude: 57.64066580000001, longitude: 18.288802 },
+  { latitude: 57.6368509, longitude: 18.2940697 },
+  { latitude: 57.6394697, longitude: 18.2941732 },
+  { latitude: 57.637457, longitude: 18.2880791 },
+  { latitude: 57.637457, longitude: 18.2880791 },
+  { latitude: 57.640335, longitude: 18.2978775 },
+  { latitude: 57.6390044, longitude: 18.2953983 }
 ]
 const newCoordinates = [
-  {latitude: 57.639463, longitude: 18.297678},
-  {latitude: 57.639001, longitude: 18.288192},
-  {latitude: 57.640982, longitude: 18.289178},
-  {latitude: 57.636779, longitude: 18.293984},
-  {latitude: 57.639418, longitude: 18.294114},
-  {latitude: 57.637438, longitude: 18.288060},
-  {latitude: 57.637438, longitude: 18.288060},
-  {latitude: 57.640295, longitude: 18.297808},
-  {latitude: 57.639070, longitude: 18.295489}
+  { latitude: 57.639463, longitude: 18.297678 },
+  { latitude: 57.639001, longitude: 18.288192 },
+  { latitude: 57.640982, longitude: 18.289178 },
+  { latitude: 57.636779, longitude: 18.293984 },
+  { latitude: 57.639418, longitude: 18.294114 },
+  { latitude: 57.637438, longitude: 18.288060 },
+  { latitude: 57.637438, longitude: 18.288060 },
+  { latitude: 57.640295, longitude: 18.297808 },
+  { latitude: 57.639070, longitude: 18.295489 }
 ]
 
 export default class Map extends Component {
@@ -193,7 +193,6 @@ export default class Map extends Component {
     if (this.state.originDefined && this.state.destinationDefined) {
       customWaypointArray = [];
       if (this.state.originDetails.latitude !== this.state.destinationDetails.latitude && this.state.originDetails.longitude !== this.state.destinationDetails.longitude) {
-        console.log('De är inte lika')
         if (this.state.roadIndex != 4) {
           const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
           for (i = 0; i < waypointDetails.length; i++) {
@@ -234,7 +233,6 @@ export default class Map extends Component {
           );
         }
       } else {
-        console.log('De är lika')
         this.renderError();
       }
     }
@@ -247,7 +245,7 @@ export default class Map extends Component {
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 30, },
-      duration: 300000
+      duration: 15000
     })
   }
 
@@ -267,7 +265,7 @@ export default class Map extends Component {
       );
     }
   }
- 
+
   runningRoute() {
     if (this.state.selected2 === 1) {
       return (
@@ -280,8 +278,6 @@ export default class Map extends Component {
           strokeColor='orange'
           mode='walking'
         />
-
-
       )
     }
     if (this.state.selected2 === 2) {
@@ -325,25 +321,24 @@ export default class Map extends Component {
   runningExitButton() {
     if (this.state.selected2 === 1) {
       return (
-        
-      <FAB />
+
+        <FAB />
       )
     }
     if (this.state.selected2 === 2) {
       return (
         <Fab
-        active={this.state.active}
-        active={false}
-        direction="up"
-        containerStyle={{}}
-        style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
-        position="bottomLeft"
-    onPress={() => {
-    }}
-    >
-        <Icon name="close-circle" />
-    </Fab>
-
+          active={this.state.active}
+          active={false}
+          direction="up"
+          containerStyle={{}}
+          style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
+          position="bottomLeft"
+          onPress={() => {
+          }}
+        >
+          <Icon name="close-circle" />
+        </Fab>
       )
     }
     if (this.state.selected2 === 3) {
@@ -356,17 +351,11 @@ export default class Map extends Component {
         <FABExample />
       )
     }
-
   }
 
-
   findNearestNode(definedCoord) {
-    console.log('definierade koordinater', definedCoord)
-    console.log("här är noderna", nodeCoordinates)
     nodeCoordinates.InputLocation = definedCoord;
-    console.log("här är ett nytt objekt", nodeCoordinates)
     const nearestNode = geolib.findNearest(nodeCoordinates["InputLocation"], nodeCoordinates, 1);
-    console.log('Närmast', nearestNode.key)
     return (
       nearestNode.key
     )
@@ -375,9 +364,6 @@ export default class Map extends Component {
   renderDijkstra(originCoords, destinationCoords) {
     const originNode = this.findNearestNode(originCoords);
     const destinationNode = this.findNearestNode(destinationCoords);
-    console.log('Här är originID', originNode);
-    console.log('Här är destinationID', destinationNode);
-    console.log('Här är roadIndex = ', this.state.roadIndex)
     const arrayToSend = [];
     if (this.state.roadIndex === 1) {
       dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
@@ -391,8 +377,8 @@ export default class Map extends Component {
     if (dijkstraArray.cost >= 100) {
       this.renderAlert();
     }
-    console.log("här är dijkstraArray", dijkstraArray)
     pathArray = dijkstraArray.path;
+    console.log('Kolla här', pathArray)
     for (i = 0; i < pathArray.length; i++) {
       for (j = 0; j < nodeArray.length; j++) {
         if (pathArray[i] === nodeArray[j].id) {
@@ -413,7 +399,7 @@ export default class Map extends Component {
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 5 },
-      duration: 300000
+      duration: 15000
     })
   }
 
@@ -477,7 +463,6 @@ export default class Map extends Component {
       mapStyle: {
         height: '100%',
         width: '100%'
-
       }
     })
   }
@@ -506,10 +491,9 @@ export default class Map extends Component {
     //   });
   };
 
-//tillagt currentPosition
+  //tillagt currentPosition
   componentDidMount() {
-   Geolocation.watchPosition((position) => {
-      // Create the object to update this.state.mapRegion through the onRegionChange function
+    Geolocation.watchPosition((position) => {
       const region = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
@@ -523,13 +507,12 @@ export default class Map extends Component {
   onRegionChange(region, lastLat, lastLong) {
     this.setState({
       mapRegion: region,
-      // If there are no new values set use the the current ones
       lastLat: lastLat || this.state.lastLat,
       lastLong: lastLong || this.state.lastLong
     });
   }
 
-//*tillagt currentPosition
+  //*tillagt currentPosition
 
 
   // componentDidMount = () => {
@@ -540,10 +523,6 @@ export default class Map extends Component {
   //       loading: false
   //     })
   //   }, 8000)
-  // }
-
-  // componentDidMount() {
-  //     this.getDirections("18.299425, 57.636907", "18.301871, 57.635942")
   // }
 
   // async getDirections(startLoc, destLoc) {
@@ -566,7 +545,10 @@ export default class Map extends Component {
   // }
 
   routeAlternativeCallback = (chosenIndex) => {
-    this.setState({ roadIndex: chosenIndex })
+    if (chosenIndex != 0) {
+      this.setState({ roadIndex: chosenIndex })
+      console.log('Nuvarande index', chosenIndex)
+    }
   }
 
   runningRouteCallback = (colorRun) => {
@@ -584,7 +566,7 @@ export default class Map extends Component {
   originCallback = (detailsFromSearch) => {
     for (i = 0; i < coordinatesToChange.length; i++) {
       if (detailsFromSearch.latitude === coordinatesToChange[i].latitude && detailsFromSearch.longitude === coordinatesToChange[i].longitude) {
-        detailsFromSearch.latitude = newCoordinates[i].latitude; 
+        detailsFromSearch.latitude = newCoordinates[i].latitude;
         detailsFromSearch.longitude = newCoordinates[i].longitude;
       }
     }
@@ -595,7 +577,7 @@ export default class Map extends Component {
   destinationCallback = (detailsFromSearch) => {
     for (i = 0; i < coordinatesToChange.length; i++) {
       if (detailsFromSearch.latitude === coordinatesToChange[i].latitude && detailsFromSearch.longitude === coordinatesToChange[i].longitude) {
-        detailsFromSearch.latitude = newCoordinates[i].latitude; 
+        detailsFromSearch.latitude = newCoordinates[i].latitude;
         detailsFromSearch.longitude = newCoordinates[i].longitude;
       }
     }
@@ -769,8 +751,6 @@ export default class Map extends Component {
               {this.renderRunningRoute()};
               {this.runningRoute()};
               {this.runningExitButton()};
-              
-
             </MapView>
             <FABExample callbackFromParent={this.routeAlternativeCallback} />
             {/* <Fab
@@ -788,10 +768,10 @@ export default class Map extends Component {
             <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
 
               <View style={{ flex: 1 }} zIndex={3}>
-                <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
+                <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
               </View>
               <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
-                <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
+                <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
               </View>
               {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
           */}
@@ -804,7 +784,6 @@ export default class Map extends Component {
               cancelButtonIndex={CANCEL_INDEX}
               destructiveButtonIndex={DESTRUCTIVE_INDEX}
               onPress={this.handlePress}
-
             />
           </View>
 

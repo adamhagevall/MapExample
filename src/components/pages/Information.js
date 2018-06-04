@@ -14,7 +14,6 @@ import InfoHeader from '../InfoHeader';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
 
-
 class Information extends Component {
     constructor() {
         super()
@@ -28,7 +27,6 @@ class Information extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-
         this.dataSource = ds.cloneWithRows(this.props.libraries);
     }
 
@@ -45,12 +43,9 @@ class Information extends Component {
         );
     }
 
-
     updateIndex(selectedIndex) {
         this.setState({ selectedIndex })
     }
-
-
 
     render() {
         const buttons = ['Information', 'Schema']
@@ -62,15 +57,12 @@ class Information extends Component {
                     <InfoHeader />
                 </View>
                 <BackgroundImage>
-                <View style={{ position: 'absolute', flexDirection: 'row', width: 375, marginTop: -30 }}>
-                    <Card style={styles.containerStyle}>
-                        <CardItem>
-
-                            <View style= {{width: 300}}>
-                                {this.renderList()}
-                        
-                              
-                                    <View>
+                    <View style={{ position: 'absolute', flexDirection: 'row', width: 375, marginTop: -30 }}>
+                        <Card style={styles.containerStyle}>
+                            <CardItem>
+                                <View style={{ width: 300 }}>
+                                    {this.renderList()}
+                                    <View style={{ marginTop: 10 }}>
                                         <Separator bordered>
                                             <Text>SCHEMA:</Text>
                                         </Separator>
@@ -96,22 +88,14 @@ class Information extends Component {
                                             <Icon name="arrow-forward" onPress={Actions.calendar} />
                                         </Right>
                                     </CardItem>
-                              
-                            </View>
-
-
-                        </CardItem>
-                    </Card>
-
-                </View>
+                                </View>
+                            </CardItem>
+                        </Card>
+                    </View>
                 </BackgroundImage>
-
-
             </Container>
-
         );
     }
-
 }
 
 const styles = {

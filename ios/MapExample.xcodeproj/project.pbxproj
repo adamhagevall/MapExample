@@ -1591,7 +1591,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = testingapp.org.reactjs.native.example1.MapExample;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.visby-pistkarta.beta";
 				PRODUCT_NAME = MapExample;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1624,7 +1624,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = testingapp.org.reactjs.native.example1.MapExample;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.visby-pistkarta.beta";
 				PRODUCT_NAME = MapExample;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
