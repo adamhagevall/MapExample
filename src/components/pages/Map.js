@@ -54,12 +54,12 @@ const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsr
 
 //Spring actionsheet slut
 
+let { width, height } = Dimensions.get('window');
 const stairCaseImage = require('../Assets/trappor.png');
-const arenaImage = require('../Arena.png');
+const arenaImage = require('../Assets/Arena.png');
 const bathroomImage = require('../Assets/WC.png');
 const parkingImage = require('../Assets/Parking.png');
-const scandicImage = require('../Scandic.png');
-let { width, height } = Dimensions.get('window');
+const scandicImage = require('../Assets/Scandic.png');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
 const dijkstraArray = [];
@@ -201,13 +201,13 @@ export default class Map extends Component {
           }
           console.log("här är waypoints", customWaypointArray)
         }
-        // this.mapRef.fitToCoordinates(
-        //   coordinates = [this.state.originDetails, this.state.destinationDetails],
-        //   {
-        //     edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
-        //     animated: true
-        //     }
-        // );
+        this.mapRef.fitToCoordinates(
+          coordinates = [this.state.originDetails, this.state.destinationDetails],
+          {
+            edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+            animated: true
+            }
+        );
         if (customWaypointArray.length <= 23) {
           return (
             <MapViewDirections
@@ -317,12 +317,11 @@ export default class Map extends Component {
           mode='walking'
         />)
     }
-
   }
+
   runningExitButton() {
     if (this.state.selected2 === 1) {
       return (
-
         <FAB />
       )
     }
@@ -379,7 +378,6 @@ export default class Map extends Component {
       this.renderAlert();
     }
     pathArray = dijkstraArray.path;
-    console.log('Kolla här', pathArray)
     for (i = 0; i < pathArray.length; i++) {
       for (j = 0; j < nodeArray.length; j++) {
         if (pathArray[i] === nodeArray[j].id) {
@@ -548,7 +546,7 @@ export default class Map extends Component {
   routeAlternativeCallback = (chosenIndex) => {
     if (chosenIndex != 0) {
       this.setState({ roadIndex: chosenIndex })
-      console.log('Nuvarande index', chosenIndex)
+      console.log('Nuvarande index (får inte vara 0)', chosenIndex)
     }
   }
 
@@ -572,7 +570,6 @@ export default class Map extends Component {
       }
     }
     this.setState({ originDetails: detailsFromSearch, originDefined: true })
-    console.log('Använd den här originDetails!: ', this.state.originDetails);
   }
 
   destinationCallback = (detailsFromSearch) => {
@@ -583,7 +580,6 @@ export default class Map extends Component {
       }
     }
     this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true })
-    console.log('destinationDetails: ', this.state.destinationDetails);
   }
 
   renderTiles() {
@@ -596,10 +592,8 @@ export default class Map extends Component {
     const { width, height } = Dimensions.get('window');
     const ratio = width / height;
     const onMap = true;
-
     const { selected2, selectedColor } = this.state
     const selectedText = options[selected2].component || options[selected2]
-
     return (
       console.log('runFab', this.state.selected2),
       <Container>

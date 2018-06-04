@@ -7,18 +7,16 @@ import Communications from 'react-native-communications';
 import FeedbackHeader from '../FeedbackHeader';
 import CalendarHeader from '../CalendarHeader';
 import { Tile } from 'react-native-elements';
-var bild = require('../Assets/fadedmap.jpg');
 import BackgroundImage from './bg';
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
 
-
-
+const bild = require('../Assets/fadedmap.jpg');
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 1
 const options = [
     'Cancel',
     {
-        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify'}}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
+        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify' }}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
 
         Missbruka inte våra Tjänster. Du får till exempel inte störa våra Tjänster eller försöka komma åt dem med en annan metod än gränssnittet och anvisningarna som vi tillhandahåller. Du får endast använda våra Tjänster i enlighet med gällande lagstiftning, inklusive tillämpliga lagar och regler avseende export och återexport. Vi kan stänga av eller upphöra att tillhandahålla dig våra Tjänster om du inte uppfyller våra villkor eller policyer eller om vi utreder misstänkta oegentligheter.</Text>,
         height: 180,
@@ -27,17 +25,11 @@ const options = [
         component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
         height: 50,
     },
-
-
-
 ]
 const title = <Text style={{ color: 'blue', fontSize: 20 }}>Villkor gällande personuppgifter</Text>
 
-
-
 export default class Feedback extends Component {
     state = { mailSender: '', mailSubject: '', mailContent: '', checked: false, ButtonStateHolder: true, selected: 1 };
-
     onMailPress() {
         Communications.email(['johanna.dagfalk@live.se'], null, null, this.state.mailSubject, this.state.mailContent)
         console.log(this.state.mailSender);
@@ -56,14 +48,10 @@ export default class Feedback extends Component {
 
         return (
             <Container>
-
                 <View style={{ height: 150 }}>
                     <CalendarHeader />
                 </View>
-
                 <BackgroundImage>
-
-
                     <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                             <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
@@ -86,7 +74,6 @@ export default class Feedback extends Component {
                                             <Form style={{ backgroundColor: 'white' }}>
                                                 <Textarea rowSpan={5} bordered
                                                     onChangeText={(mailContent) => this.setState({ mailContent })} />
-
                                             </Form>
                                             <Text style={styles.text}></Text>
 
@@ -113,7 +100,7 @@ export default class Feedback extends Component {
                             </View>
                         </ TouchableWithoutFeedback>
                     </View>
-                </BackgroundImage> */}
+                </BackgroundImage>
                     <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
