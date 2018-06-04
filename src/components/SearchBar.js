@@ -70,9 +70,7 @@ export default class SearchBar extends Component {
     }
 
     render() {
-
         let label = this.props.placeholder;
-
         return (
             <GooglePlacesAutocomplete
                 placeholder={label}
@@ -86,16 +84,13 @@ export default class SearchBar extends Component {
                     { this.componentWillMount(), this.sendDetails(details.geometry.location) };
                 }
                 }
-
                 getDefaultValue={() => ''}
-
                 query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
                     key: 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ',
                     language: 'sv', // language of the results
                     types: 'address' // default: 'geocode'
                 }}
-
                 styles={{
                     textInputContainer: {
                         flex: 1,
@@ -132,10 +127,8 @@ export default class SearchBar extends Component {
                     rankby: 'distance',
                     types: 'food'
                 }}
-
                 filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
                 predefinedPlaces={[this.state.currentPosition, availabilityArena, Donnersplats, Storatorget, stHansplan, Almedalsscenen, scandicHotel, toilets, parkingLots]}
-
                 debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
             //   renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
             //   renderRightButton={() => <Text>Custom text after the input</Text>}

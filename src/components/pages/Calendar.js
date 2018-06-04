@@ -5,10 +5,8 @@ import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
-var custom = require('../101.jpg');
-var pistmap = require('../Assets/pistmap.png');
-const swipeForward = require('../Assets/forwardArrow.png');
 
+const swipeForward = require('../Assets/forwardArrow.png');
 const url = 'https://www.facebook.com/events/428188540972908/';
 const cards = [];
 

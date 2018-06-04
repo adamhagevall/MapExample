@@ -46,8 +46,6 @@ export default class MapHeader extends Component {
     }
 }
 
-
-
 const styles = StyleSheet.create({
     overlay: {
         position: 'absolute',
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginBottom: 10,
     },
-
     title: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -94,7 +91,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         textAlign: 'center',
     },
-
     optionsContainer: {
         borderRadius: 12,
     },
@@ -110,7 +106,6 @@ const styles = StyleSheet.create({
     buttonTitle: {
         fontSize: 20,
     },
-
     cancelButton: {
         borderRadius: 12,
     },

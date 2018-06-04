@@ -20,7 +20,6 @@ export default class BackgroundImage extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
@@ -28,7 +27,6 @@ const styles = StyleSheet.create({
         height: null
 
     },
-
     text: {
         textAlign: 'center',
         color: 'white',
