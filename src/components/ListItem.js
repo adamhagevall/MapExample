@@ -18,11 +18,10 @@ class ListItem extends Component {
         LayoutAnimation.easeInEaseOut();
     }
 
-    //tillagt
     constructor() {
         super();
         this.state = { informationExpanded: false };
-        this.state = { trackedID: null }
+        // this.state = { trackedID: null }
       }
 
     renderDescription() {
@@ -31,7 +30,7 @@ class ListItem extends Component {
         if (expanded) {
             return (
                 <CardSection>
-                    <Text style={{ paddingLeft: 10, paddingRight: 10 }}>
+                    <Text style={{ paddingLeft: 7, paddingRight: 7, paddingTop: 10, paddingBottom: 10, fontSize: 16 }}>
                     {library.description}
                     </Text>
                 </CardSection>
@@ -39,16 +38,7 @@ class ListItem extends Component {
         }
     }
 
-    // turnBackArrow(selectID, trackID) {
-    //     if (selectID!==trackID) {
-
-    //     }
-    //     else { }
-    // }
-
-    //tillagt
-    renderIcon() {
-        console.log("in renderIcon")
+    renderState() {
         if (this.state.informationExpanded) {
             this.setState({ informationExpanded: false })
         }
@@ -67,9 +57,7 @@ class ListItem extends Component {
     }
 
     buttonFunction(selectedID) {
-       // this.setState({ trackedID: selectedID })
-        // this.turnBackArrow(selectedID, trackedID)
-        this.renderIcon();
+        this.renderState();
         this.renderInformation(selectedID)
 
     }
@@ -77,17 +65,13 @@ class ListItem extends Component {
     render() {
         const { titleStyle } = styles;
         const { id, title } = this.props.library;
-        // const { separera } = this.props.separera;
 
-        //tillagt
-        const expandIcon = "arrow-down"
-        const shrinkIcon = "arrow-up"
+        // const expandIcon = "arrow-down"
+        // const shrinkIcon = "arrow-up"
 
         return (
             <TouchableWithoutFeedback
             onPress={() => this.buttonFunction(id)}
-
-
             >
                 <View>
                 
@@ -95,7 +79,8 @@ class ListItem extends Component {
                     
                     
                 <Thumbnail source={bild} />
-                        <View style={{ flex: 2 }}>
+                        {/* <View style={{ flex: 2 }}> */}
+                        <View>
                         <Text style={titleStyle}>
                         {title}
                         </Text>
@@ -105,10 +90,9 @@ class ListItem extends Component {
                         </View>
                      
                      
-                        <View style={{ flex: 1 }}>
-                        {/* <Icon name= "arrow-down" style={{ color: 'black', left: 200 }} /> */}  
-                        <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} />
-                        </View>
+                        {/* <View style={{ flex: 1 }}> */}
+                        {/* <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} /> */}
+                        {/* </View> */}
                       
                     </CardSection>
                     {this.renderDescription()}

@@ -21,7 +21,7 @@ const options = [
         component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify'}}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
 
         Missbruka inte våra Tjänster. Du får till exempel inte störa våra Tjänster eller försöka komma åt dem med en annan metod än gränssnittet och anvisningarna som vi tillhandahåller. Du får endast använda våra Tjänster i enlighet med gällande lagstiftning, inklusive tillämpliga lagar och regler avseende export och återexport. Vi kan stänga av eller upphöra att tillhandahålla dig våra Tjänster om du inte uppfyller våra villkor eller policyer eller om vi utreder misstänkta oegentligheter.</Text>,
-        height: 180,
+        height: 190,
     },
     {
         component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
@@ -95,7 +95,8 @@ export default class Feedback extends Component {
 
                                                 <Body>
                                                     <Text > Godkänn
-                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}> feedbackvillkor
+                                                        <Text> </Text>
+                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>feedbackvillkor
                             </Text>
                                                     </Text>
 
@@ -117,7 +118,7 @@ export default class Feedback extends Component {
                     <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
-                    message="För att sända feedback måste följande villkor godkännas"
+                    message="För att skicka feedback måste följande villkor godkännas:"
                     options={options}
                     cancelButtonIndex={CANCEL_INDEX}
                     destructiveButtonIndex={DESTRUCTIVE_INDEX}

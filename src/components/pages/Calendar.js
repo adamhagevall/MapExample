@@ -91,8 +91,8 @@ export default class DeckSwiperExample extends Component {
         time: this.state.testStateArray[3][4],
         text: this.state.testStateArray[3][1],
         info: this.state.testStateArray[3][2],
-        //image: require('../Assets/Sandwishesonatablethebuffee.jpeg'),
-        image: require('../Assets/Rullstolhissliten.jpg'),
+        image: require('../Assets/SandwishesonatablethebuffeeMINDRE.jpg'),
+        // image: require('../Assets/Rullstolhissliten.jpg'),
         url: this.state.testStateArray[3][3],
         location: this.state.testStateArray[1][7],
         calendarInfo: {

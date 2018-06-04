@@ -69,30 +69,30 @@ class Information extends Component {
                                     </View>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Bygg tillgängligt tjäna mer!</Text>
+                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Bygg tillgängligt tjäna mer!</Text>
                                         <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} />
+                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
                                         </Right>
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Kan miljonprogrammet lösa de bostadspolitiska utmaningarna?</Text>
+                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Kan miljonprogrammet lösa de bostadspolitiska utmaningarna?</Text>
                                         <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} />
+                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
                                         </Right>
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Sverige - tillgängligt för alla?!</Text>
+                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Sverige - tillgängligt för alla?!</Text>
                                         <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} />
+                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
                                         </Right>
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Eftersnack</Text>
+                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Eftersnack</Text>
                                         <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} />
+                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
                                         </Right>
                                     </CardItem>
                                 </View>
