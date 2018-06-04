@@ -18,16 +18,16 @@ const DESTRUCTIVE_INDEX = 1
 const options = [
     'Cancel',
     {
-        component: <Text style={{  color: 'grey', fontSize: 12 }}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
+        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify'}}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
 
         Missbruka inte våra Tjänster. Du får till exempel inte störa våra Tjänster eller försöka komma åt dem med en annan metod än gränssnittet och anvisningarna som vi tillhandahåller. Du får endast använda våra Tjänster i enlighet med gällande lagstiftning, inklusive tillämpliga lagar och regler avseende export och återexport. Vi kan stänga av eller upphöra att tillhandahålla dig våra Tjänster om du inte uppfyller våra villkor eller policyer eller om vi utreder misstänkta oegentligheter.</Text>,
         height: 180,
-      },
-      {
+    },
+    {
         component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
         height: 50,
-      },
-  
+    },
+
 
 
 ]
@@ -56,76 +56,75 @@ export default class Feedback extends Component {
 
         return (
             <Container>
-     
-                <View style={{height: 150}}>
+
+                <View style={{ height: 150 }}>
                     <CalendarHeader />
                 </View>
-     
-                      <BackgroundImage>
-                    
 
-                          <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                          <View styles={{position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
-                    <Card style={styles.containerStyle}>
-                        <CardItem>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Ditt namn</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            onChangeText={(mailSender) => this.setState({ mailSender })}
-                        >
-                        </TextInput>
-                        <Text style={styles.text}>Angående plats/gata</Text>
-                        <TextInput
-                            keyboardType="numbers-and-punctuation"
-                            style={styles.textInput}
-                            onChangeText={(mailSubject) => this.setState({ mailSubject })}
-                        ></TextInput>
-                        <Text style={styles.text}>Feedback</Text>
-                        <Form style={{backgroundColor: 'white'}}>
-                            <Textarea rowSpan={5} bordered 
-                                onChangeText={(mailContent) => this.setState({ mailContent })} />
+                <BackgroundImage>
 
-                        </Form>
-                        <Text style={styles.text}></Text>
 
-                        <ListItem>
-                            <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })} />
+                    <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                            <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
+                                <Card style={styles.containerStyle}>
+                                    <CardItem>
+                                        <View style={styles.view}>
+                                            <Text style={styles.text}>Ditt namn</Text>
+                                            <TextInput
+                                                style={styles.textInput}
+                                                onChangeText={(mailSender) => this.setState({ mailSender })}
+                                            >
+                                            </TextInput>
+                                            <Text style={styles.text}>Angående plats/gata</Text>
+                                            <TextInput
+                                                keyboardType="numbers-and-punctuation"
+                                                style={styles.textInput}
+                                                onChangeText={(mailSubject) => this.setState({ mailSubject })}
+                                            ></TextInput>
+                                            <Text style={styles.text}>Feedback</Text>
+                                            <Form style={{ backgroundColor: 'white' }}>
+                                                <Textarea rowSpan={5} bordered
+                                                    onChangeText={(mailContent) => this.setState({ mailContent })} />
 
-                            <Body>
-                            <Text > Godkänn 
-                            <Text style= {{textDecorationLine: 'underline', color: '#008ccf'}} onPress={() => { this.showActionSheet() }}> feedbackvillkor
+                                            </Form>
+                                            <Text style={styles.text}></Text>
+
+                                            <ListItem>
+                                                <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })} />
+
+                                                <Body>
+                                                    <Text > Godkänn
+                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}> feedbackvillkor
                             </Text>
-                            </Text> 
-                               
-           
-                            </Body>
-                        </ListItem>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)} activeOpacity={.5}
-                            disabled={this.state.ButtonStateHolder}>
-                            <Text style={styles.buttonText}>Skicka Feedback</Text>
-                        </TouchableOpacity>
+                                                    </Text>
+
+
+                                                </Body>
+                                            </ListItem>
+                                            <TouchableOpacity style={[styles.button, { backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)} activeOpacity={.5}
+                                                disabled={this.state.ButtonStateHolder}>
+                                                <Text style={styles.buttonText}>Skicka Feedback</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </CardItem>
+                                </Card>
+
+                            </View>
+                        </ TouchableWithoutFeedback>
                     </View>
-                    </CardItem>
-                    </Card>
-                
-                    </View>
-                </ TouchableWithoutFeedback>
-                    </View>
-                    </BackgroundImage> */}
+                </BackgroundImage> */}
                     <ActionSheet
-             ref={this.getActionSheetRef}
-             title={title}
-             message="För att sända feedback måste följande villkor godkännas"
-              options={options}
-             cancelButtonIndex={CANCEL_INDEX}
-             destructiveButtonIndex={DESTRUCTIVE_INDEX}
-             onPress= {this.handlePress}
-   
-           />
+                    ref={this.getActionSheetRef}
+                    title={title}
+                    message="För att sända feedback måste följande villkor godkännas"
+                    options={options}
+                    cancelButtonIndex={CANCEL_INDEX}
+                    destructiveButtonIndex={DESTRUCTIVE_INDEX}
+                    onPress={this.handlePress}
+                />
             </Container>
-          
+
         );
     }
 

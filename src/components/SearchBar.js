@@ -9,7 +9,7 @@ import Geolocation from 'react-native-geolocation-service';
 const availabilityArena = {
     description: 'Tillgänglighetsarenan',
     geometry: { location: { lat: 57.640699, lng: 18.288784 } }
-   , 
+    ,
 };
 const Donnersplats = {
     description: 'Donnersplats',
@@ -68,9 +68,9 @@ export default class SearchBar extends Component {
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
         );
     }
-    
-    someFunction(details) {
-        this.props.callbackFromParent({latitude: details.lat, longitude: details.lng});
+
+    sendDetails(details) {
+        this.props.callbackFromParent({ latitude: details.lat, longitude: details.lng });
     }
 
     render() {
@@ -87,9 +87,9 @@ export default class SearchBar extends Component {
                 fetchDetails={true}
                 renderDescription={row => row.description} // custom description render
                 onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                    {this.componentWillMount(), this.someFunction(details.geometry.location)};
+                    { this.componentWillMount(), this.sendDetails(details.geometry.location) };
                 }
-            }
+                }
 
                 getDefaultValue={() => ''}
 
@@ -114,14 +114,11 @@ export default class SearchBar extends Component {
                     listView: {
                         marginTop: 30
                     },
-                   
                     description: {
                         fontWeight: 'bold',
                         position: 'relative'
-                        //marginTop: 10
                     },
                     predefinedPlacesDescription: {
-
                         color: '#1faadb'
                         //position: 'absolute'
                         //backgroundColor: 'blue'
@@ -146,7 +143,7 @@ export default class SearchBar extends Component {
                 debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
             //   renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
             //   renderRightButton={() => <Text>Custom text after the input</Text>}
-            
+
             />
         );
     }
@@ -219,7 +216,7 @@ export default class SearchBar extends Component {
 //             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
 //         );
 //     }
-    
+
 //     someFunction(details) {
 //         this.props.callbackFromParent({longitude: details.lng, latitude: details.lat});
 //     }
@@ -281,7 +278,7 @@ export default class SearchBar extends Component {
 //                 debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
 //             //   renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
 //             //   renderRightButton={() => <Text>Custom text after the input</Text>}
-            
+
 //             />
 //         );
 //     }

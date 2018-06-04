@@ -51,6 +51,7 @@ const options = [
 ]
 const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsrunda</Text>
 
+
 //Spring actionsheet slut
 
 const stairCaseImage = require('../Assets/trappor.png');
