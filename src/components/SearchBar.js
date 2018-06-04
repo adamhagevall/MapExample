@@ -71,13 +71,14 @@ export default class SearchBar extends Component {
 
     render() {
         let label = this.props.placeholder;
+        console.log(this.props.booleanFromParent)
         return (
             <GooglePlacesAutocomplete
                 placeholder={label}
                 minLength={2} // minimum length of text to search
                 autoFocus={false}
                 returnKeyType={'default'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                listViewDisplayed={false}    // true/false/undefined
+                listViewDisplayed={this.props.booleanFromParent}    // true/false/undefined
                 fetchDetails={true}
                 renderDescription={row => row.description} // custom description render
                 onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true

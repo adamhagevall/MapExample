@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body, Card, Toast, Fab, Icon } from 'native-base';
@@ -13,6 +13,7 @@ import NewHeader from '../MapHeader';
 import FABExample from '../pages/FABExample';
 import FAB from '../FAB';
 import Footer from '../Footer';
+import Markers from '../Markers';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
 import { greenRoute } from '../NodesGreen';
@@ -55,11 +56,6 @@ const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Välj en motionsr
 //Spring actionsheet slut
 
 let { width, height } = Dimensions.get('window');
-const stairCaseImage = require('../Assets/trappor.png');
-const arenaImage = require('../Assets/Arena.png');
-const bathroomImage = require('../Assets/WC.png');
-const parkingImage = require('../Assets/Parking.png');
-const scandicImage = require('../Assets/Scandic.png');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
 const dijkstraArray = [];
@@ -141,6 +137,7 @@ export default class Map extends Component {
       showToast: false,
       active: 'true',
       selected2: 0,
+      searchAlternatives: false
     }
   }
 
@@ -204,9 +201,9 @@ export default class Map extends Component {
         this.mapRef.fitToCoordinates(
           coordinates = [this.state.originDetails, this.state.destinationDetails],
           {
-            edgePadding: {top: 100, right: 100, bottom: 100, left: 100, },
+            edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
             animated: true
-            }
+          }
         );
         if (customWaypointArray.length <= 23) {
           return (
@@ -466,6 +463,8 @@ export default class Map extends Component {
     })
   }
 
+
+
   componentWillMount() {
     setTimeout(() => this.updateStyle(), 1000);
     Geolocation.clearWatch(this.watchID);//tillagt currentPosition
@@ -588,6 +587,11 @@ export default class Map extends Component {
     );
   }
 
+  removeList() {
+    console.log('Hallå där')
+    this.setState({ searchAlternatives: false })
+  }
+
   render() {
     const { width, height } = Dimensions.get('window');
     const ratio = width / height;
@@ -597,158 +601,40 @@ export default class Map extends Component {
     return (
       console.log('runFab', this.state.selected2),
       <Container>
-        <View style={{ height: 150 }}>
-          <NewHeader />
-        </View>
-
-        {/* <LoadingView loading={this.state.loading}> */}
+        <TouchableWithoutFeedback onPress={this.removeList.bind(this)}>
+          <View style={{ height: 150 }} >
+            <NewHeader />
+          </View>
+        </TouchableWithoutFeedback>
         <Content scrollEnabled={false}>
-
-
-          {/* <View>
-          <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
-          <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
-          </View> */}
-          <View style={{ width, height }}>
-
-            {/* <Spinner
-              visible={this.state.visible}
-              animation='fade'
-              style={styles.activityIndicator}
-            >
-              <View style={styles.spinnerView}>
-                <View style={styles.spinnerModal}>
-                  <ActivityIndicator size='large' color='black' />
-                  <Text style={styles.spinnerText}>Laddar pister</Text>
-                </View>
-              </View>
-            </Spinner> */}
-
-            <MapView
-              ref={(ref) => { this.mapRef = ref }}
-              provider={PROVIDER_GOOGLE}
-              style={styles.container}
-              customMapStyle={mapStyling}
-              initialRegion={{
-                latitude: 57.637685,
-                longitude: 18.292500,
-                latitudeDelta: 0.002,
-                longitudeDelta: 0.015
-              }}
-
-              showsUserLocation //tilagt currentPosition
-              followUserLocation //tillagt currentPosition
-            >
-              <MapView.Marker
-                coordinate={{ longitude: 18.288779, latitude: 57.640684 }}
-                title={'Tillgänglighetsarenan'}
+          <TouchableWithoutFeedback onPress={this.removeList.bind(this)}>
+            <View style={{ width, height }}>
+              <MapView
+                ref={(ref) => { this.mapRef = ref }}
+                provider={PROVIDER_GOOGLE}
+                style={styles.container}
+                customMapStyle={mapStyling}
+                initialRegion={{
+                  latitude: 57.637685,
+                  longitude: 18.292500,
+                  latitudeDelta: 0.002,
+                  longitudeDelta: 0.015
+                }}
+                showsUserLocation //tilagt currentPosition
+                followUserLocation //tillagt currentPosition
               >
-                <Image
-                  source={arenaImage}
-                  style={styles.importantMarkerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.279900, latitude: 57.632387 }}
-                title={'Scandic Visby'}
-              >
-                <Image
-                  source={scandicImage}
-                  style={{ width: 58, height: 12 }}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.2892483, latitude: 57.6402041 }}
-                title={'Tillgängliga toaletter'}
-              >
-                <Image
-                  source={bathroomImage}
-                  style={styles.importantMarkerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.287965, latitude: 57.637762 }}
-                title={'Parkeringsplats'}
-              >
-                <Image
-                  source={parkingImage}
-                  style={styles.importantMarkerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.298341, latitude: 57.641226 }}
-                title={'Kyrktrappan'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.292950, latitude: 57.639786 }}
-                title={'Dubbens gränd (Trappa)'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.292564, latitude: 57.637437 }}
-                title={'Trappgränd (Trappa)'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.291309, latitude: 57.641052 }}
-                title={'Trappa'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.290150, latitude: 57.636165 }}
-                title={'Stenklivet (Trappa)'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-
-              <MapView.Marker
-                coordinate={{ longitude: 18.297649, latitude: 57.642097 }}
-                title={'Trappa'}
-              >
-                <Image
-                  source={stairCaseImage}
-                  style={styles.markerImages}
-                />
-              </MapView.Marker>
-              {this.renderOriginMarker()};
-              {this.renderDestinationMarker()};
-              {this.renderRoute()};
-              {this.renderLongRoute()};
-              {this.renderTiles()};
-              {this.renderRunningRoute()};
-              {this.runningRoute()};
-              {this.runningExitButton()};
-            </MapView>
-            <FABExample callbackFromParent={this.routeAlternativeCallback} />
-            {/* <Fab
+                <Markers />
+                {this.renderOriginMarker()};
+                {this.renderDestinationMarker()};
+                {this.renderRoute()};
+                {this.renderLongRoute()};
+                {this.renderTiles()};
+                {this.renderRunningRoute()};
+                {this.runningRoute()};
+                {this.runningExitButton()};
+              </MapView>
+              <FABExample callbackFromParent={this.routeAlternativeCallback} />
+              {/* <Fab
                         active={this.state.active}
                         active={false}
                         direction="up"
@@ -760,30 +646,26 @@ export default class Map extends Component {
                     >
                         <Icon name="close-circle" />
                     </Fab> */}
-            <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
-
-              <View style={{ flex: 1 }} zIndex={3}>
-                <SearchBar callbackFromParent={this.originCallback} placeholder={'Från'} />
+              <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
+                <View style={{ flex: 1 }} zIndex={3}>
+                  <SearchBar callbackFromParent={this.originCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Från'} />
+                </View>
+                <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
+                  <SearchBar callbackFromParent={this.destinationCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Till'} />
+                </View>
               </View>
-              <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
-                <SearchBar callbackFromParent={this.destinationCallback} placeholder={'Till'} />
-              </View>
-              {/* <Image source={require('../Assets/windrose2.png')} style={{width:80, height:80, marginTop: 100, marginLeft: 20}} />
-          */}
+              <ActionSheet
+                ref={this.getActionSheetRef}
+                title={title}
+                message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
+                options={options}
+                cancelButtonIndex={CANCEL_INDEX}
+                destructiveButtonIndex={DESTRUCTIVE_INDEX}
+                onPress={this.handlePress}
+              />
             </View>
-            <ActionSheet
-              ref={this.getActionSheetRef}
-              title={title}
-              message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
-              options={options}
-              cancelButtonIndex={CANCEL_INDEX}
-              destructiveButtonIndex={DESTRUCTIVE_INDEX}
-              onPress={this.handlePress}
-            />
-          </View>
-
+          </TouchableWithoutFeedback>
         </Content>
-        {/* </LoadingView> */}
       </Container>
     );
   }
@@ -820,16 +702,28 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textShadowColor: 'black',
     fontFamily: 'Arial-BoldItalicMT'
-  },
-  markerImages: {
-    height: 25,
-    width: 25
-  },
-  importantMarkerImages: {
-    height: 28,
-    width: 28
-  },
+  }
 });
+
+
+{/* <LoadingView loading={this.state.loading}> */ }
+
+{/* </LoadingView> */ }
+
+{/* <Spinner
+              visible={this.state.visible}
+              animation='fade'
+              style={styles.activityIndicator}
+            >
+              <View style={styles.spinnerView}>
+                <View style={styles.spinnerModal}>
+                  <ActivityIndicator size='large' color='black' />
+                  <Text style={styles.spinnerText}>Laddar pister</Text>
+                </View>
+              </View>
+            </Spinner> */}
+
+
 
 
 
