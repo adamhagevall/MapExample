@@ -30,7 +30,7 @@ const options = [
   }
 ]
 const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Hur vill du anpassa din rutt?</Text>
-const message = <Text style={{ color: 'grey', textAlign: 'justify', fontSize: 11, marginRight: '5%', marginLeft: '5%', marginBottom: '1%'}}>Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du till exempel som mest tänka dig röda vägar men inte svarta, välj då röd inställning.</Text>
+const message = <Text style={{ color: 'grey', textAlign: 'justify', fontSize: 12, marginRight: '4%', marginLeft: '4%', marginBottom: '1%', marginTop: '-1%'}}>Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du till exempel som mest tänka dig röda vägar men inte svarta, välj då röd inställning.</Text>
 
 export default class FABExample extends Component {
   constructor(props) {

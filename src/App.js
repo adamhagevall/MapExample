@@ -24,7 +24,6 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = { showFooter: true }
-        // this.state = { showFooter: true, anArray: [] };
     }
 
     async requestLocationsPermission() {
@@ -100,14 +99,12 @@ export default class App extends Component {
                             <Container>
                                 <Router>
                                     <Stack key='root'>
-
                                         <Scene key='map' component={Map} title='Map' hideNavBar={true} />
                                         <Scene key='information' component={Information} title='Information' hideNavBar={true} />
                                         <Scene key='settings' component={Settings} title='Settings' hideNavBar={false} />
                                         <Scene key='feedback' component={Feedback} title='Feedback' hideNavBar={true} />
                                         <Scene key='calendar' component={Calendar} title='Calendar' hideNavBar={true} />
                                         <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
-
                                     </Stack>
                                 </Router>
                                 {/* <Footer /> */}

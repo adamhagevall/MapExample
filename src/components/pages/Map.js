@@ -246,7 +246,7 @@ export default class Map extends Component {
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 30, },
-      duration: 15000
+      duration: 10000
     })
   }
 
@@ -400,7 +400,7 @@ export default class Map extends Component {
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 5 },
-      duration: 15000
+      duration: 10000
     })
   }
 

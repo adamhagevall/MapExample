@@ -95,7 +95,6 @@ class ListItem extends Component {
                     
                     
                 <Thumbnail source={bild} />
-              
                         <View style={{ flex: 2 }}>
                         <Text style={titleStyle}>
                         {title}

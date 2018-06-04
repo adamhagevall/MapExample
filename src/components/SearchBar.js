@@ -1,15 +1,12 @@
-
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Geolocation from 'react-native-geolocation-service';
 
-
 // 57.640661, 18.288623 ny arena koord
 const availabilityArena = {
     description: 'Tillgänglighetsarenan',
     geometry: { location: { lat: 57.640699, lng: 18.288784 } }
-    ,
 };
 const Donnersplats = {
     description: 'Donnersplats',
@@ -59,7 +56,6 @@ export default class SearchBar extends Component {
                     currentPosition: { //tillagt currentPosition
                         description: 'Din position',
                         geometry: { location: { lat: position.coords.latitude, lng: position.coords.longitude } }
-
                     }
                 });
                 console.log(this.state);
