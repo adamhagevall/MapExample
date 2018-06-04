@@ -83,7 +83,14 @@ class Information extends Component {
                                     </CardItem>
                                     <CardItem>
                                         <Icon active name="contacts" />
-                                        <Text>Sverige - tillgängligt för alla?! </Text>
+                                        <Text>Sverige - tillgängligt för alla?!</Text>
+                                        <Right>
+                                            <Icon name="arrow-forward" onPress={Actions.calendar} />
+                                        </Right>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Icon active name="contacts" />
+                                        <Text>Eftersnack</Text>
                                         <Right>
                                             <Icon name="arrow-forward" onPress={Actions.calendar} />
                                         </Right>
