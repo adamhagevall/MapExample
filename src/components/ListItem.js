@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { 
-    Text, 
-    TouchableWithoutFeedback,  
-    View,
-    LayoutAnimation 
-} from 'react-native';
+import { Text, TouchableWithoutFeedback, View, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Card from './common/Card';
@@ -22,7 +17,7 @@ class ListItem extends Component {
         super();
         this.state = { informationExpanded: false };
         // this.state = { trackedID: null }
-      }
+    }
 
     renderDescription() {
         const { library, expanded } = this.props;
@@ -31,7 +26,7 @@ class ListItem extends Component {
             return (
                 <CardSection>
                     <Text style={{ paddingLeft: 7, paddingRight: 7, paddingTop: 10, paddingBottom: 10, fontSize: 16 }}>
-                    {library.description}
+                        {library.description}
                     </Text>
                 </CardSection>
             );
@@ -48,7 +43,7 @@ class ListItem extends Component {
     }
 
     renderInformation(selectedID) {
-        if(this.state.informationExpanded) {
+        if (this.state.informationExpanded) {
             this.props.selectLibrary(100)
         }
         else {
@@ -71,29 +66,29 @@ class ListItem extends Component {
 
         return (
             <TouchableWithoutFeedback
-            onPress={() => this.buttonFunction(id)}
+                onPress={() => this.buttonFunction(id)}
             >
                 <View>
-                
+
                     <CardSection>
-                    
-                    
-                <Thumbnail source={bild} />
+
+
+                        <Thumbnail source={bild} />
                         {/* <View style={{ flex: 2 }}> */}
                         <View>
-                        <Text style={titleStyle}>
-                        {title}
-                        </Text>
-                        <Text>
-                            
-                        </Text>
+                            <Text style={titleStyle}>
+                                {title}
+                            </Text>
+                            <Text>
+
+                            </Text>
                         </View>
-                     
-                     
+
+
                         {/* <View style={{ flex: 1 }}> */}
                         {/* <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} /> */}
                         {/* </View> */}
-                      
+
                     </CardSection>
                     {this.renderDescription()}
                 </View>

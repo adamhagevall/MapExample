@@ -7,7 +7,7 @@ import { Button } from './common';
 import Test from './Test';
 import LibraryList from './LibraryList';
 
-class TabBar extends Component {
+export default class TabBar extends Component {
     state = { selectedTab: 0 };
 
     constructor() {
@@ -15,7 +15,6 @@ class TabBar extends Component {
         this.state = {
             selectedTab: 0
         };
-        
     }
 
     handelTabPress(tab) {
@@ -25,38 +24,33 @@ class TabBar extends Component {
     render() {
         return (
             <TabBarIOS>
-                    <TabBarIOS.Item 
-                        systemIcon="favorites"
-                        selected={this.state.selectedTab === 0}
-                        onPress={this.handelTabPress.bind(this, 0)}
-                    >
+                <TabBarIOS.Item
+                    systemIcon="favorites"
+                    selected={this.state.selectedTab === 0}
+                    onPress={this.handelTabPress.bind(this, 0)}
+                >
                     <LibraryList />
-                    </TabBarIOS.Item>
-                    <TabBarIOS.Item
-                        systemIcon="more"
-                        selected={this.state.selectedTab === 1}
-                        onPress={this.handelTabPress.bind(this, 1)}
-                    >
-                        <Map />
-                    </TabBarIOS.Item>
-                </TabBarIOS>
-
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    systemIcon="more"
+                    selected={this.state.selectedTab === 1}
+                    onPress={this.handelTabPress.bind(this, 1)}
+                >
+                    <Map />
+                </TabBarIOS.Item>
+            </TabBarIOS>
         )
     }
 }
+
 const styles = StyleSheet.create({
     text: {
-      textAlign: 'center',
-      color: '#333333',
-      marginTop: 50,
+        textAlign: 'center',
+        color: '#333333',
+        marginTop: 50,
     },
     view: {
-      backgroundColor: '#fed',
-      flex: 1
+        backgroundColor: '#fed',
+        flex: 1
     }
-  });
-
-
-
-export default TabBar;
-
+});
