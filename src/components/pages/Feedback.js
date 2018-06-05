@@ -16,9 +16,15 @@ const DESTRUCTIVE_INDEX = 1
 const options = [
     'Cancel',
     {
-        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify' }}>Jag godkänner att mina uppgifter kommer att användas och samlas fram till september 2019. Du måste följa alla policyer som du får tillgång till via Tjänsterna.
+        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify' }}>
 
-        Missbruka inte våra Tjänster. Du får till exempel inte störa våra Tjänster eller försöka komma åt dem med en annan metod än gränssnittet och anvisningarna som vi tillhandahåller. Du får endast använda våra Tjänster i enlighet med gällande lagstiftning, inklusive tillämpliga lagar och regler avseende export och återexport. Vi kan stänga av eller upphöra att tillhandahålla dig våra Tjänster om du inte uppfyller våra villkor eller policyer eller om vi utreder misstänkta oegentligheter.</Text>,
+        Personuppgiftspolicy
+
+* Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer. Personuppgifterna kan enbart av arrangörerna av Tillgänglighetsarenan, Hissförbundet, Parasport Sverige, Scandic Hotels, SPF och DHR
+* Personuppgifterna används för att besvara frågor, motta återkoppling och informera om Tillgänglighetsarenans och arrangerande organisationers aktiviteter. 
+* Personuppgifterna delas inte med andra än Tillgänglighetsarenans arrangörer. 
+* Personuppgifterna behölls så länge det är relevant för Tillgänglighetsarenans syfte 
+* Det är möjligt att få ett registerutdrag och sina personuppgifter rättade eller raderade genom att kontakta Tillgänglighetsarenan på tgharenan@gmail.com</Text>,
         height: 190,
     },
     {
