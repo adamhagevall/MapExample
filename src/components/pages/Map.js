@@ -12,7 +12,6 @@ import MapTiles from '../MapTiles';
 import NewHeader from '../MapHeader';
 import FABExample from '../pages/FABExample';
 import FAB from '../FAB';
-import Footer from '../Footer';
 import Markers from '../Markers';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import geolib from 'geolib';
@@ -20,7 +19,6 @@ import { greenRoute } from '../NodesGreen';
 import { blueRoute } from '../NodesBlue';
 import { redRoute } from '../NodesRed';
 
-import Spinner from 'react-native-loading-spinner-overlay';
 var bild = require('../Assets/fadedmap.jpg');
 
 //  spring action sheet 
@@ -463,11 +461,9 @@ export default class Map extends Component {
     })
   }
 
-
-
   componentWillMount() {
     setTimeout(() => this.updateStyle(), 1000);
-    Geolocation.clearWatch(this.watchID);//tillagt currentPosition
+    Geolocation.clearWatch(this.watchID);
     Geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -489,7 +485,6 @@ export default class Map extends Component {
     //   });
   };
 
-  //tillagt currentPosition
   componentDidMount() {
     Geolocation.watchPosition((position) => {
       const region = {
@@ -509,38 +504,6 @@ export default class Map extends Component {
       lastLong: lastLong || this.state.lastLong
     });
   }
-
-  //*tillagt currentPosition
-
-
-  // componentDidMount = () => {
-  //   // This is just ment as an example of how you handle an asynchronus operation 
-  //   // In reality this might be a fetch or storage access 
-  //   setTimeout(() => {
-  //     this.setState({
-  //       loading: false
-  //     })
-  //   }, 8000)
-  // }
-
-  // async getDirections(startLoc, destLoc) {
-  //     console.log(this.state.coords);
-  //     try {
-  //         let resp = await fetch('https://maps.googleapis.com/maps/api/directions/json?origin=${ 18.299425, 57.636907 }&destination=${ 18.301871, 57.635942 }')
-  //         let respJson = await resp.json();
-  //         let points = PolyLine.decode(respJson.routes[0].overview_polyline.points);
-  //         let coords = points.map((point, index) => {
-  //             return {
-  //                 latitude: point[0],
-  //                 longitude: point[1]
-  //             }
-  //         })
-  //         this.setState({coords: coords})
-  //         return coords
-  //     } catch(error) {
-  //         return error
-  //     }
-  // }
 
   routeAlternativeCallback = (chosenIndex) => {
     if (chosenIndex != 0) {
@@ -678,30 +641,6 @@ const styles = StyleSheet.create({
   },
   activityIndicator: {
     flex: 1,
-  },
-  spinnerView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  spinnerModal: {
-    width: 200,
-    height: 130,
-    borderRadius: 20,
-    borderWidth: 2,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  spinnerText: {
-    fontSize: 20,
-    marginTop: 10,
-    textShadowColor: 'black',
-    fontFamily: 'Arial-BoldItalicMT'
   }
 });
 
@@ -710,6 +649,9 @@ const styles = StyleSheet.create({
 
 {/* </LoadingView> */ }
 
+
+
+// import Spinner from 'react-native-loading-spinner-overlay';
 {/* <Spinner
               visible={this.state.visible}
               animation='fade'
@@ -722,6 +664,31 @@ const styles = StyleSheet.create({
                 </View>
               </View>
             </Spinner> */}
+
+            // spinnerView: {
+            //   position: 'absolute',
+            //   top: 0,
+            //   left: 0,
+            //   right: 0,
+            //   bottom: 0,
+            //   justifyContent: 'center',
+            //   alignItems: 'center'
+            // },
+            // spinnerModal: {
+            //   width: 200,
+            //   height: 130,
+            //   borderRadius: 20,
+            //   borderWidth: 2,
+            //   backgroundColor: 'white',
+            //   justifyContent: 'center',
+            //   alignItems: 'center'
+            // },
+            // spinnerText: {
+            //   fontSize: 20,
+            //   marginTop: 10,
+            //   textShadowColor: 'black',
+            //   fontFamily: 'Arial-BoldItalicMT'
+            // }
 
 
 
