@@ -209,7 +209,7 @@ export default class Map extends Component {
               origin={this.state.originDetails}
               destination={this.state.destinationDetails}
               waypoints={customWaypointArray}
-              apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+              apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
               strokeWidth={15}
               strokeColor='#fcff77'
               mode='walking'
@@ -221,7 +221,7 @@ export default class Map extends Component {
               origin={this.state.originDetails}
               destination={customWaypointArray[23]}
               waypoints={customWaypointArray.slice(0, 22)}
-              apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+              apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
               strokeWidth={15}
               strokeColor='#fcff77'
               mode='walking'
@@ -253,7 +253,7 @@ export default class Map extends Component {
           origin={customWaypointArray[23]}
           destination={this.state.destinationDetails}
           waypoints={longRouteWaypoints}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
           strokeWidth={15}
           strokeColor='#fcff77'
           mode='walking'
@@ -269,7 +269,7 @@ export default class Map extends Component {
           origin={{ latitude: 57.639741, longitude: 18.286679 }}
           destination={{ latitude: 57.639354, longitude: 18.293128 }}
           waypoints={runWaypoints}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
           strokeWidth={15}
           strokeColor='orange'
           mode='walking'
@@ -282,7 +282,7 @@ export default class Map extends Component {
           origin={{ latitude: 57.639741, longitude: 18.286679 }}
           destination={{ latitude: 57.639354, longitude: 18.293128 }}
           waypoints={runWaypoints}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
           strokeWidth={15}
           strokeColor='orange'
           mode='walking'
@@ -294,7 +294,7 @@ export default class Map extends Component {
           origin={{ latitude: 57.639741, longitude: 18.286679 }}
           destination={{ latitude: 57.639354, longitude: 18.293128 }}
           waypoints={runWaypoints}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
           strokeWidth={15}
           strokeColor='orange'
           mode='walking'
@@ -306,7 +306,7 @@ export default class Map extends Component {
           origin={{ latitude: 57.639741, longitude: 18.286679 }}
           destination={{ latitude: 57.639354, longitude: 18.293128 }}
           waypoints={runWaypoints}
-          apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+          apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
           strokeWidth={15}
           strokeColor='orange'
           mode='walking'

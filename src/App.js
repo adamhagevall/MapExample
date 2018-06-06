@@ -107,7 +107,7 @@ export default class App extends Component {
                                         <Scene key='addToCal' component={addToCal} title='addToCal' hideNavBar={true} />
                                     </Stack>
                                 </Router>
-                                {/* <Footer /> */}
+                                <Footer />
                             </Container>
                         </View>
                     </Provider>

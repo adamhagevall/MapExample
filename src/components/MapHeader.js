@@ -14,10 +14,13 @@ export default class MapHeader extends Component {
         this.state = {
             runRoute: 'white'
         }
+        // const { width, height } = Dimensions.get('window');
+        // console.log('height', height);
+        // console.log('width', width);
     }
     render() {
         const { runRoute } = this.state
-
+        
         return (
             <BackgroundImage>
                 <Header span style={{ backgroundColor: 'transparent', height: 150 }}>

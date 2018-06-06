@@ -70,28 +70,32 @@ export default class SearchBar extends Component {
     }
 
     render() {
+
         let label = this.props.placeholder;
-        console.log(this.props.booleanFromParent)
+
         return (
             <GooglePlacesAutocomplete
                 placeholder={label}
                 minLength={2} // minimum length of text to search
                 autoFocus={false}
                 returnKeyType={'default'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                listViewDisplayed={this.props.booleanFromParent}    // true/false/undefined
+                listViewDisplayed={false}    // true/false/undefined
                 fetchDetails={true}
                 renderDescription={row => row.description} // custom description render
                 onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
                     { this.componentWillMount(), this.sendDetails(details.geometry.location) };
                 }
                 }
+
                 getDefaultValue={() => ''}
+
                 query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
-                    key: 'AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ',
+                    key: 'AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk',
                     language: 'sv', // language of the results
                     types: 'address' // default: 'geocode'
                 }}
+
                 styles={{
                     textInputContainer: {
                         flex: 1,
@@ -100,32 +104,18 @@ export default class SearchBar extends Component {
                         position: 'absolute',
                         backgroundColor: 'white',
                         borderTopWidth: 0,
-                        borderBottomWidth: 2,
-                        borderWidth: 1,
-                        borderColor: 'black',
-                        marginLeft: '3%',
-                        marginRight: '22%',
-                        marginTop: '5%'
-                    },
-                    textInput: {
-                        marginLeft: '-0.2%',
-                        marginRight: '-0.2%',
-                        marginTop: '-4%',
-                        borderWidth: 1
+                        borderBottomWidth: 0,
+                        borderRadius: 20,
                     },
                     listView: {
-                        marginTop: '10%',
-                        width: '93.2%',
-                        marginLeft: '3.3%',
-                        
+                        marginTop: 30
                     },
                     description: {
                         fontWeight: 'bold',
-                        position: 'relative',
+                        position: 'relative'
                     },
                     predefinedPlacesDescription: {
-                        // color: '#1faadb'
-                        color: 'black'
+                        color: '#1faadb'
                         //position: 'absolute'
                         //backgroundColor: 'blue'
                     }
@@ -142,8 +132,10 @@ export default class SearchBar extends Component {
                     rankby: 'distance',
                     types: 'food'
                 }}
+
                 filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
                 predefinedPlaces={[this.state.currentPosition, availabilityArena, Donnersplats, Storatorget, stHansplan, Almedalsscenen, scandicHotel, toilets, parkingLots]}
+
                 debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
             //   renderLeftButton={()  => <Image source={require('path/custom/left-icon')} />}
             //   renderRightButton={() => <Text>Custom text after the input</Text>}
