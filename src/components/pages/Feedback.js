@@ -16,16 +16,20 @@ const DESTRUCTIVE_INDEX = 1
 const options = [
     'Cancel',
     {
-        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12, textAlign: 'justify' }}>
+        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12 }}>
 
-        Personuppgiftspolicy
-
-* Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer. Personuppgifterna kan enbart av arrangörerna av Tillgänglighetsarenan, Hissförbundet, Parasport Sverige, Scandic Hotels, SPF och DHR
+* Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer. 
+{'\n'}
 * Personuppgifterna används för att besvara frågor, motta återkoppling och informera om Tillgänglighetsarenans och arrangerande organisationers aktiviteter. 
+{'\n'}
 * Personuppgifterna delas inte med andra än Tillgänglighetsarenans arrangörer. 
+{'\n'}
 * Personuppgifterna behölls så länge det är relevant för Tillgänglighetsarenans syfte 
-* Det är möjligt att få ett registerutdrag och sina personuppgifter rättade eller raderade genom att kontakta Tillgänglighetsarenan på tgharenan@gmail.com</Text>,
-        height: 190,
+{'\n'}
+* Det är möjligt att få ett registerutdrag och sina personuppgifter rättade eller raderade genom att kontakta Tillgänglighetsarenan på tgharenan@gmail.com
+{'\n'}</Text>,
+
+    height: 210,
     },
     {
         component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
@@ -37,7 +41,7 @@ const title = <Text style={{ color: 'blue', fontSize: 20 }}>Villkor gällande pe
 export default class Feedback extends Component {
     state = { mailSender: '', mailSubject: '', mailContent: '', checked: false, ButtonStateHolder: true, selected: 1 };
     onMailPress() {
-        Communications.email(['johanna.dagfalk@live.se'], null, null, this.state.mailSubject, this.state.mailContent)
+        Communications.email(['tgharenan@gmail.com'], null, null, this.state.mailSubject, this.state.mailContent)
         console.log(this.state.mailSender);
     }
     showActionSheet() {
@@ -45,14 +49,21 @@ export default class Feedback extends Component {
     }
     getActionSheetRef = ref => (this.actionSheet = ref)
 
-    handlePress = index => { this.setState({ selected: index, checked: true, ButtonStateHolder: false }) }
+    handlePress = index => { this.setState({ selected: index }), this.handleAgree() }
 
+    handleAgree() {
+        if (this.state.selected === 2) {
+            this.setState({ checked: true, ButtonStateHolder: false })
+        }
+    
+    }
 
     render() {
         const { runRoute, selected } = this.state
         const selectedText = options[selected].component || options[selected]
 
         return (
+           
             <Container>
                 <View style={{ height: 150 }}>
                     <CalendarHeader />
@@ -76,7 +87,7 @@ export default class Feedback extends Component {
                                                 style={styles.textInput}
                                                 onChangeText={(mailSubject) => this.setState({ mailSubject })}
                                             ></TextInput>
-                                            <Text style={styles.text}>Feedback</Text>
+                                            <Text style={styles.text}>Återkoppling</Text>
                                             <Form style={{ backgroundColor: 'white' }}>
                                                 <Textarea rowSpan={5} bordered
                                                     onChangeText={(mailContent) => this.setState({ mailContent })} />
@@ -89,16 +100,15 @@ export default class Feedback extends Component {
                                                 <Body>
                                                     <Text > Godkänn
                                                         <Text> </Text>
-                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>feedbackvillkor
+                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>återkopplingsvillkor
                             </Text>
                                                     </Text>
-
 
                                                 </Body>
                                             </ListItem>
                                             <TouchableOpacity style={[styles.button, { backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)} activeOpacity={.5}
                                                 disabled={this.state.ButtonStateHolder}>
-                                                <Text style={styles.buttonText}>Skicka Feedback</Text>
+                                                <Text style={styles.buttonText}>Skicka Återkoppling </Text>
                                             </TouchableOpacity>
                                         </View>
                                     </CardItem>
@@ -111,17 +121,18 @@ export default class Feedback extends Component {
                     <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
-                    message="För att skicka feedback måste följande villkor godkännas:"
+                    message="För att skicka återkoppling måste följande villkor godkännas:"
                     options={options}
                     cancelButtonIndex={CANCEL_INDEX}
                     destructiveButtonIndex={DESTRUCTIVE_INDEX}
                     onPress={this.handlePress}
                 />
+                 
             </Container>
+           
 
         );
     }
-
 
 }
 
@@ -237,3 +248,4 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
 });
+
