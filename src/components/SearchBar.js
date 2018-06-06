@@ -71,7 +71,6 @@ export default class SearchBar extends Component {
 
     render() {
         let label = this.props.placeholder;
-        console.log(this.props.booleanFromParent)
         return (
             <GooglePlacesAutocomplete
                 placeholder={label}
