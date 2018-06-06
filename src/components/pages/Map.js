@@ -564,32 +564,29 @@ export default class Map extends Component {
       console.log('runFab', this.state.selected2),
       <Container>
         <TouchableWithoutFeedback onPress={this.removeList.bind(this)}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{ height: 150 }} >
-              <NewHeader />
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={{ height: 150 }} >
+            <NewHeader />
+          </View>
         </TouchableWithoutFeedback>
         <Content scrollEnabled={false}>
           <TouchableWithoutFeedback onPress={this.removeList.bind(this)}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={{ width, height }}>
-                <MapView
-                  ref={(ref) => { this.mapRef = ref }}
-                  provider={PROVIDER_GOOGLE}
-                  style={styles.container}
-                  customMapStyle={mapStyling}
-                  initialRegion={{
-                    latitude: 57.637685,
-                    longitude: 18.292500,
-                    latitudeDelta: 0.002,
-                    longitudeDelta: 0.015
-                  }}
-                  showsUserLocation //tilagt currentPosition
-                  followUserLocation //tillagt currentPosition
-                >
-                  <Markers />
-                  {this.renderOriginMarker()};
+            <View style={{ width, height }}>
+              <MapView
+                ref={(ref) => { this.mapRef = ref }}
+                provider={PROVIDER_GOOGLE}
+                style={styles.container}
+                customMapStyle={mapStyling}
+                initialRegion={{
+                  latitude: 57.637685,
+                  longitude: 18.292500,
+                  latitudeDelta: 0.002,
+                  longitudeDelta: 0.015
+                }}
+                showsUserLocation //tilagt currentPosition
+                followUserLocation //tillagt currentPosition
+              >
+                <Markers />
+                {this.renderOriginMarker()};
                   {this.renderDestinationMarker()};
                   {this.renderRoute()};
                   {this.renderLongRoute()};
@@ -598,8 +595,8 @@ export default class Map extends Component {
                   {this.runningRoute()};
                   {this.runningExitButton()};
                 </MapView>
-                <FABExample callbackFromParent={this.routeAlternativeCallback} />
-                {/* <Fab
+              <FABExample callbackFromParent={this.routeAlternativeCallback} />
+              {/* <Fab
                         active={this.state.active}
                         active={false}
                         direction="up"
@@ -611,25 +608,24 @@ export default class Map extends Component {
                     >
                         <Icon name="close-circle" />
                     </Fab> */}
-                <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
-                  <View style={{ flex: 1 }} zIndex={3}>
-                    <SearchBar callbackFromParent={this.originCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Från'} />
-                  </View>
-                  <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
-                    <SearchBar callbackFromParent={this.destinationCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Till'} />
-                  </View>
+              <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
+                <View style={{ flex: 1 }} zIndex={3}>
+                  <SearchBar callbackFromParent={this.originCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Från'} />
                 </View>
-                <ActionSheet
-                  ref={this.getActionSheetRef}
-                  title={title}
-                  message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
-                  options={options}
-                  cancelButtonIndex={CANCEL_INDEX}
-                  destructiveButtonIndex={DESTRUCTIVE_INDEX}
-                  onPress={this.handlePress}
-                />
+                <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
+                  <SearchBar callbackFromParent={this.destinationCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Till'} />
+                </View>
               </View>
-            </TouchableWithoutFeedback>
+              <ActionSheet
+                ref={this.getActionSheetRef}
+                title={title}
+                message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
+                options={options}
+                cancelButtonIndex={CANCEL_INDEX}
+                destructiveButtonIndex={DESTRUCTIVE_INDEX}
+                onPress={this.handlePress}
+              />
+            </View>
           </TouchableWithoutFeedback>
         </Content>
       </Container>

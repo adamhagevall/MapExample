@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View, Image } from 'react-native';
+import { ListView, View, Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Content, Container, Separator, Text, Card, CardItem, Left, Right, Icon } from 'native-base';
 import { ButtonGroup } from 'react-native-elements';
@@ -60,7 +60,7 @@ class Information extends Component {
                     <View style={{ position: 'absolute', flexDirection: 'row', width: 375, marginTop: -30 }}>
                         <Card style={styles.containerStyle}>
                             <CardItem>
-                                <View style={{ width: 300 }}>
+                                <ScrollView style={{ width: 300 }}>
                                     {this.renderList()}
                                     <View style={{ marginTop: 10 }}>
                                         <Separator bordered>
@@ -95,7 +95,7 @@ class Information extends Component {
                                             <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
                                         </Right>
                                     </CardItem>
-                                </View>
+                                </ScrollView>
                             </CardItem>
                         </Card>
                     </View>
