@@ -72,8 +72,7 @@ class ListItem extends Component {
 
                     <CardSection>
 
-
-                        <Thumbnail source={bild} />
+                        {/* <Thumbnail source={bild} /> */}
                         {/* <View style={{ flex: 2 }}> */}
                         <View>
                             <Text style={titleStyle}>
@@ -83,7 +82,6 @@ class ListItem extends Component {
 
                             </Text>
                         </View>
-
 
                         {/* <View style={{ flex: 1 }}> */}
                         {/* <Icon name={(this.state.informationExpanded === true) ? shrinkIcon : expandIcon} style={{ color: 'black', left: 65 }} /> */}
@@ -99,8 +97,9 @@ class ListItem extends Component {
 
 const styles = {
     titleStyle: {
-        fontSize: 18,
+        fontSize: 20,
         paddingLeft: 15,
+        textAlign: 'center'
     }
 };
 
@@ -111,3 +110,5 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, actions)(ListItem); 
+
+

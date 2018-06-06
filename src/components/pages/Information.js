@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ListView, View, Image, ScrollView } from 'react-native';
+import { ListView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Content, Container, Separator, Text, Card, CardItem, Left, Right, Icon } from 'native-base';
+import { Content, Container, Separator, Text, Card, CardItem, Left, Right, Body, Icon, Thumbnail } from 'native-base';
 import { ButtonGroup } from 'react-native-elements';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -13,6 +13,11 @@ import { Actions } from 'react-native-router-flux';
 import InfoHeader from '../InfoHeader';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
+
+const bild1 = require('../Assets/parasportalmedalen.jpg');
+const bild2 = require('../Assets/Bildhyreshus.jpg');
+const bild3 = require('../Assets/Rullstolhissliten.jpg');
+const bild4 = require('../Assets/SandwishesonatablethebuffeeMINDRE.jpg');
 
 class Information extends Component {
     constructor() {
@@ -57,45 +62,45 @@ class Information extends Component {
                     <InfoHeader />
                 </View>
                 <BackgroundImage>
-                    <View style={{ position: 'absolute', flexDirection: 'row', width: 375, marginTop: -30 }}>
+                    <View style={{ position: 'absolute', width: 375, marginTop: -30 }}>
                         <Card style={styles.containerStyle}>
                             <CardItem>
-                                <ScrollView style={{ width: 300 }}>
+                                <View style={{ width: 300 }}>
                                     {this.renderList()}
                                     <View style={{ marginTop: 10 }}>
                                         <Separator bordered>
-                                            <Text>SCHEMA:</Text>
+                                            <Text>TISDAG 3 JULI 2018</Text>
                                         </Separator>
                                     </View>
                                     <CardItem>
-                                        <Icon active name="contacts" />
-                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Bygg tillgängligt tjäna mer!</Text>
-                                        <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
-                                        </Right>
+                                    
+                                        <Text style={{flex: 15}}> 14.00-14.45 {'\n'} Bygg tillgängligt tjäna mer!</Text>
+                                       <Right>
+                                       <Thumbnail source={bild1} />
+                                       </Right>
+                                      
+                                    </CardItem>
+                                   
+                                    <CardItem>
+                                        <Text style={{flex: 15}}> 15.00-15.45 {'\n'} Kan miljonprogrammet lösa{'\n'} de bostadspolitiska{'\n'} utmaningarna?</Text>
+                                       <Right>
+                                       <Thumbnail source={bild2} />
+                                       </Right>
                                     </CardItem>
                                     <CardItem>
-                                        <Icon active name="contacts" />
-                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Kan miljonprogrammet lösa de bostadspolitiska utmaningarna?</Text>
-                                        <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
-                                        </Right>
+                                        <Text style={{flex: 15}}> 16.00-16.45 {'\n'} Sverige - tillgängligt{'\n'} för alla?!</Text>
+                                       <Right>
+                                       <Thumbnail source={bild3} />
+                                       </Right>
+                                        
                                     </CardItem>
                                     <CardItem>
-                                        <Icon active name="contacts" />
-                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Sverige - tillgängligt för alla?!</Text>
-                                        <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
-                                        </Right>
+                                        <Text style={{flex: 15}}> 17.00-18.00 {'\n'} Eftersnack</Text>
+                                       <Right>
+                                       <Thumbnail source={bild4} />
+                                       </Right>
                                     </CardItem>
-                                    <CardItem>
-                                        <Icon active name="contacts" />
-                                        <Text onPress={Actions.calendar} style={{flex: 15}}>Eftersnack</Text>
-                                        <Right>
-                                            <Icon name="arrow-forward" onPress={Actions.calendar} style={{flex: 1}}/>
-                                        </Right>
-                                    </CardItem>
-                                </ScrollView>
+                                </View>
                             </CardItem>
                         </Card>
                     </View>
@@ -125,3 +130,10 @@ const styles = {
 const mapStateToProps = state => ({ libraries: state.libraries });
 
 export default connect(mapStateToProps)(Information);
+
+
+
+
+
+
+
