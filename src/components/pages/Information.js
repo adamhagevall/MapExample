@@ -62,6 +62,7 @@ class Information extends Component {
                     <InfoHeader />
                 </View>
                 <BackgroundImage>
+                <View style={{flex: 1, alignItems: 'center'}}>
                     <View style={{ position: 'absolute', width: 375, marginTop: -30 }}>
                         <Card style={styles.containerStyle}>
                             <CardItem>
@@ -103,6 +104,7 @@ class Information extends Component {
                                 </View>
                             </CardItem>
                         </Card>
+                    </View>
                     </View>
                 </BackgroundImage>
             </Container>

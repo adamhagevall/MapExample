@@ -69,9 +69,10 @@ export default class Feedback extends Component {
                     <CalendarHeader />
                 </View>
                 <BackgroundImage>
-                    <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+                    <View style={{flex: 1, alignItems: 'center'}}>
+                    <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40}}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
+                            <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150}}>
                                 <Card style={styles.containerStyle}>
                                     <CardItem>
                                         <View style={styles.view}>
@@ -116,6 +117,7 @@ export default class Feedback extends Component {
 
                             </View>
                         </ TouchableWithoutFeedback>
+                    </View>
                     </View>
                 </BackgroundImage>
                     <ActionSheet
@@ -177,7 +179,9 @@ const styles = StyleSheet.create({
         elevation: 1,
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 10
+        marginTop: 10,
+        
+
     },
     overlay: {
         position: 'absolute',

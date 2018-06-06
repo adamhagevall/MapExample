@@ -9,7 +9,7 @@ export default class FooterEx extends Component {
     render() {
         return (
             <StyleProvider style={getTheme(commonColor)}>
-                <Footer >
+                <Footer style={{ height: '4%' }}>
                     <BackgroundImage>
                     </BackgroundImage>
                 </Footer>

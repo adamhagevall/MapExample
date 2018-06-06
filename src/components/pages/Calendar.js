@@ -163,10 +163,12 @@ export default class DeckSwiperExample extends Component {
           <CalendarHeader />
         </View>
         <BackgroundImage>
-          <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -30 }}>
             <View styles={{ position: 'absolute', flexDirection: 'column', width: 500 }}>
               {this.createContent()};
             </View>
+          </View>
           </View>
           <View style={styles.buttonViewStyle}>
             <TouchableOpacity iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
@@ -193,6 +195,7 @@ const styles = {
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10
+    // alignItems: 'center'
   },
   buttonViewStyle: {
     flex: 1,

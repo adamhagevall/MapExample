@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Image, View, ImageBackground, StyleSheet } from 'react-native';
-import { Header, Left, Right, Button, Icon, Body, Title, Dimensions, Content, Container, Text } from 'native-base';
+import { Image, View, ImageBackground, StyleSheet, Dimensions } from 'react-native';
+import { Header, Left, Right, Button, Icon, Body, Title, Content, Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import SearchBar from './SearchBar';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
@@ -14,16 +14,17 @@ export default class MapHeader extends Component {
         this.state = {
             runRoute: 'white'
         }
-        // const { width, height } = Dimensions.get('window');
-        // console.log('height', height);
-        // console.log('width', width);
+        const { width, height } = Dimensions.get('window');
+        console.log('height', height);
+        console.log('width', width);
+        const ratio = width/height;
     }
     render() {
         const { runRoute } = this.state
         
         return (
             <BackgroundImage>
-                <Header span style={{ backgroundColor: 'transparent', height: 150 }}>
+                <Header span style={{ backgroundColor: 'transparent', height: 150}}>
                     <Left>
                         <Button transparent onPress={Actions.information}>
                             <Icon name='information-circle' style={{ color: "white" }} />
