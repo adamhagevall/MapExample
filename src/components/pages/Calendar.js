@@ -124,6 +124,7 @@ export default class DeckSwiperExample extends Component {
                     <Text style={styles.clockStyle}>{item.time}</Text>
                     <Text style={styles.infoStyle}>{item.text}</Text>
                     <Text note style={styles.infoStyle} >{item.info}
+                    <Text> </Text>
                     <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
                     </Text>
                    

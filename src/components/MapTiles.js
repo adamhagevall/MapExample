@@ -11,7 +11,7 @@ const MapTiles = ({ tile }) => {
             origin={origin}
             destination={destination}
             waypoints={waypoints}
-            apikey="AIzaSyA9Byks-4BNqpvXaon-vrYpF2uBRn6FSKQ"
+            apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
             strokeWidth={4}
             strokeColor={strokeColor}
             mode='walking'
