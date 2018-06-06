@@ -86,6 +86,7 @@ export default class FABExample extends Component {
             direction="up"
             containerStyle={{}}
             style={{ backgroundColor: selectedColor, marginBottom: 200 }}
+            // style={{ backgroundColor: selectedColor, marginBottom: 200, marginTop: 300 }}
             position="bottomRight"
             onPress={() => { this.showActionSheet() }}>
             <Image source={require('../Assets/directions2.png')} style={{ width: 25, height: 25 }} />
