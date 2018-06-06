@@ -84,6 +84,8 @@ module.exports = [
     { "origin": "57.641555, 18.292586", "destination": "57.641706, 18.294136", "waypoints": ["57.641697, 18.293316"], "strokeColor": "#008ccf" },
     { "origin": "57.641242, 18.295674", "destination": "57.641164, 18.296392", "waypoints": [], "strokeColor": "#008ccf" },
     { "origin": "57.641061, 18.299051", "destination": "57.641117, 18.298750", "waypoints": [], "strokeColor": "#008ccf" },
+    { "origin": "57.640666, 18.288796", "destination": "57.640466, 18.289689", "waypoints": [], "strokeColor": "#008ccf" },
+    { "origin": "57.640464, 18.289694", "destination": "57.640347, 18.290310", "waypoints": [], "strokeColor": "#008ccf" },
     { "origin": "57.640970, 18.290257", "destination": "57.640500, 18.292027", "waypoints": ["57.640339, 18.290908"], "strokeColor": "#5aa73f" },
     { "origin": "57.640315, 18.290415", "destination": "57.639887, 18.290155", "waypoints": [], "strokeColor": "#5aa73f" },
     { "origin": "57.639756, 18.286679", "destination": "57.641739, 18.290746", "waypoints": ["57.641122, 18.289449"], "strokeColor": "#5aa73f" },

@@ -75,7 +75,7 @@ class Information extends Component {
                                     </View>
                                     <CardItem>
                                     
-                                        <Text style={{flex: 15}}> 14.00-14.45 {'\n'} Bygg tillgängligt tjäna mer!</Text>
+                                        <Text style={{flex: 15}}><Text style={{ fontWeight: 'bold' }}> 14.00-14.45</Text>{'\n'} Bygg tillgängligt tjäna mer!</Text>
                                        <Right>
                                        <Thumbnail source={bild1} />
                                        </Right>
@@ -83,20 +83,20 @@ class Information extends Component {
                                     </CardItem>
                                    
                                     <CardItem>
-                                        <Text style={{flex: 15}}> 15.00-15.45 {'\n'} Kan miljonprogrammet lösa{'\n'} de bostadspolitiska{'\n'} utmaningarna?</Text>
+                                        <Text style={{flex: 15}}><Text style={{ fontWeight: 'bold' }}> 15.00-15.45</Text>{'\n'} Kan miljonprogrammet lösa{'\n'} de bostadspolitiska{'\n'} utmaningarna?</Text>
                                        <Right>
                                        <Thumbnail source={bild2} />
                                        </Right>
                                     </CardItem>
                                     <CardItem>
-                                        <Text style={{flex: 15}}> 16.00-16.45 {'\n'} Sverige - tillgängligt{'\n'} för alla?!</Text>
+                                        <Text style={{flex: 15}}><Text style={{ fontWeight: 'bold' }}> 16.00-16.45</Text>{'\n'} Sverige - tillgängligt{'\n'} för alla?!</Text>
                                        <Right>
                                        <Thumbnail source={bild3} />
                                        </Right>
                                         
                                     </CardItem>
                                     <CardItem>
-                                        <Text style={{flex: 15}}> 17.00-18.00 {'\n'} Eftersnack</Text>
+                                        <Text style={{flex: 15}}><Text style={{ fontWeight: 'bold' }}> 17.00-18.00</Text>{'\n'} Eftersnack</Text>
                                        <Right>
                                        <Thumbnail source={bild4} />
                                        </Right>

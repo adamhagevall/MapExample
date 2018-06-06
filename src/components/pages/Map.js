@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body, Card, Toast, Fab, Icon } from 'native-base';
@@ -196,13 +196,13 @@ export default class Map extends Component {
           }
           console.log("här är waypoints", customWaypointArray)
         }
-        this.mapRef.fitToCoordinates(
-          coordinates = [this.state.originDetails, this.state.destinationDetails],
-          {
-            edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
-            animated: true
-          }
-        );
+        // this.mapRef.fitToCoordinates(
+        //   coordinates = [this.state.originDetails, this.state.destinationDetails],
+        //   {
+        //     edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+        //     animated: true
+        //   }
+        // );
         if (customWaypointArray.length <= 23) {
           return (
             <MapViewDirections
@@ -372,6 +372,7 @@ export default class Map extends Component {
     if (dijkstraArray.cost >= 100) {
       this.renderAlert();
     }
+    console.log('Kostnad', dijkstraArray.cost)
     pathArray = dijkstraArray.path;
     for (i = 0; i < pathArray.length; i++) {
       for (j = 0; j < nodeArray.length; j++) {
@@ -551,7 +552,8 @@ export default class Map extends Component {
   }
 
   removeList() {
-    this.setState({ searchAlternatives: false })
+    Keyboard.dismiss();
+    this.setState({ searchAlternatives: false });
   }
 
   render() {
@@ -587,14 +589,14 @@ export default class Map extends Component {
               >
                 <Markers />
                 {this.renderOriginMarker()};
-                  {this.renderDestinationMarker()};
-                  {this.renderRoute()};
-                  {this.renderLongRoute()};
-                  {this.renderTiles()};
-                  {this.renderRunningRoute()};
-                  {this.runningRoute()};
-                  {this.runningExitButton()};
-                </MapView>
+                {this.renderDestinationMarker()};
+                {this.renderRoute()};
+                {this.renderLongRoute()};
+                {this.renderTiles()};
+                {this.renderRunningRoute()};
+                {this.runningRoute()};
+                {this.runningExitButton()};
+              </MapView>
               <FABExample callbackFromParent={this.routeAlternativeCallback} />
               {/* <Fab
                         active={this.state.active}
@@ -609,10 +611,10 @@ export default class Map extends Component {
                         <Icon name="close-circle" />
                     </Fab> */}
               <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
-                <View style={{ flex: 1 }} zIndex={3}>
+                <View style={{ flex: 1 }} zIndex={3} makeScrollable={true}>
                   <SearchBar callbackFromParent={this.originCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Från'} />
                 </View>
-                <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }}>
+                <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }} makeScrollable={true}>
                   <SearchBar callbackFromParent={this.destinationCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Till'} />
                 </View>
               </View>
