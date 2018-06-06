@@ -29,10 +29,18 @@ export default class MapHeader extends Component {
                         <Button transparent onPress={Actions.information}>
                             <Icon name='information-circle' style={{ color: "white" }} />
                         </Button>
-                        <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} />
+                        {/* <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} /> ÄLDST */}
+                        {/* <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: '70%', marginTop: '-4%', alignItems: 'center'  }} /> */}
+
                     </Left>
-                    <Body>
-                        <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80, marginLeft: 20 }} />
+                    <Body style={{ flexDirection: 'row'}}>
+
+                    <Image source={require('./Assets/nyrullstol.png')} style={{ width: 51, height: 50, marginTop: 13}} />
+
+                        {/* <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80, marginLeft: 20 }} /> ÄLDST */}
+                        {/* <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80, marginLeft: '17%', alignItems: 'center' }} /> */}
+                        <Image source={require('./Assets/logon.png')} style={{ width: 130, height: 80 }} />
+
                     </Body>
                     <Right>
                         <Button transparent onPress={Actions.feedback}>
