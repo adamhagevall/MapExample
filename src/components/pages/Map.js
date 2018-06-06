@@ -157,6 +157,7 @@ export default class Map extends Component {
           style={{ height: 1 }}
           coordinate={this.state.originDetails}
           pinColor={pinColor}
+          title={'Start'}
         />
       );
     }
@@ -180,6 +181,7 @@ export default class Map extends Component {
           style={{ height: 1 }}
           coordinate={this.state.destinationDetails}
           pinColor={pinColor}
+          title={'Mål'}
         />
       );
     }
