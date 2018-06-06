@@ -88,8 +88,7 @@ export default class SearchBar extends Component {
                 query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
                     key: 'AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk',
-                    language: 'sv', // language of the results
-                    types: 'address' // default: 'geocode'
+                    language: 'sv' // language of the results
                 }}
                 styles={{
                     textInputContainer: {
@@ -101,7 +100,7 @@ export default class SearchBar extends Component {
                         marginLeft: '3%',
                         marginRight: '22%',
                         marginTop: '5%',
-                        borderColor: 'gray',
+                        borderColor: 'lightgrey',
                         borderTopWidth: 0,
                         borderBottomWidth: 2,
                         borderWidth: 1
@@ -110,13 +109,14 @@ export default class SearchBar extends Component {
                         marginLeft: '-0.2%',
                         marginRight: '-0.3%',
                         marginTop: '-3.5%',
-                        borderColor: 'grey',
+                        borderColor: 'lightgrey',
                         borderWidth: 1
                     },
                     listView: {
                         width: '93.2%',
                         marginLeft: '3.3%',
-                        marginTop: '10%'
+                        marginTop: '10%',
+                        borderColor: 'lightgray'
                     },
                     description: {
                         fontWeight: 'bold',
