@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Container, Header, Button, Content, Text, View, Icon, Fab } from "native-base";
 
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet, Image, Dimensions } from 'react-native'
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
 
+const { width, height } = Dimensions.get('window');
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
 const options = [
@@ -85,9 +86,9 @@ export default class FABExample extends Component {
             active={false}
             direction="up"
             containerStyle={{}}
-            style={{ backgroundColor: selectedColor, marginBottom: 200 }}
-            // style={{ backgroundColor: selectedColor, marginBottom: 200, marginTop: 300 }}
-            position="bottomRight"
+            // style={{ backgroundColor: selectedColor, marginBottom: 200 }}
+            style={{ backgroundColor: selectedColor, marginBottom: height*0.3}}
+            // position="bottomRight"
             onPress={() => { this.showActionSheet() }}>
             <Image source={require('../Assets/directions2.png')} style={{ width: 25, height: 25 }} />
           </Fab>
