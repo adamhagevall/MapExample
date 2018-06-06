@@ -196,13 +196,13 @@ export default class Map extends Component {
           }
           console.log("här är waypoints", customWaypointArray)
         }
-        this.mapRef.fitToCoordinates(
-          coordinates = [this.state.originDetails, this.state.destinationDetails],
-          {
-            edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
-            animated: true
-          }
-        );
+        // this.mapRef.fitToCoordinates(
+        //   coordinates = [this.state.originDetails, this.state.destinationDetails],
+        //   {
+        //     edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+        //     animated: true
+        //   }
+        // );
         if (customWaypointArray.length <= 23) {
           return (
             <MapViewDirections
@@ -372,6 +372,7 @@ export default class Map extends Component {
     if (dijkstraArray.cost >= 100) {
       this.renderAlert();
     }
+    console.log('Kostnad', dijkstraArray.cost)
     pathArray = dijkstraArray.path;
     for (i = 0; i < pathArray.length; i++) {
       for (j = 0; j < nodeArray.length; j++) {
