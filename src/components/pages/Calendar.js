@@ -34,6 +34,7 @@ export default class DeckSwiperExample extends Component {
             childData.calStarttime,
             childData.calEndtime,
             childData.location,
+            childData.more,
           ]);
         });
         this.setState({ testStateArray: informationArray });
@@ -52,7 +53,8 @@ export default class DeckSwiperExample extends Component {
         info: this.state.testStateArray[0][2],
         image: require('../Assets/parasportalmedalen.jpg'),
         url: this.state.testStateArray[0][3],
-        location: this.state.testStateArray[1][7],
+        location: this.state.testStateArray[0][7],
+        more: this.state.testStateArray[0][8],
         calendarInfo: {
           title: this.state.testStateArray[0][1],
           startDate: this.state.testStateArray[0][5],
@@ -66,6 +68,7 @@ export default class DeckSwiperExample extends Component {
         image: require('../Assets/Bildhyreshus.jpg'),
         url: this.state.testStateArray[1][3],
         location: this.state.testStateArray[1][7],
+        more: this.state.testStateArray[1][8],
         calendarInfo: {
           title: this.state.testStateArray[1][1],
           startDate: this.state.testStateArray[1][5],
@@ -79,6 +82,7 @@ export default class DeckSwiperExample extends Component {
         image: require('../Assets/Rullstolhissliten.jpg'),
         url: this.state.testStateArray[2][3],
         location: this.state.testStateArray[1][7],
+        more: this.state.testStateArray[2][8],
         calendarInfo: {
           title: this.state.testStateArray[2][1],
           startDate: this.state.testStateArray[2][5],
@@ -93,6 +97,7 @@ export default class DeckSwiperExample extends Component {
         // image: require('../Assets/Rullstolhissliten.jpg'),
         url: this.state.testStateArray[3][3],
         location: this.state.testStateArray[1][7],
+        more: this.state.testStateArray[3][8],
         calendarInfo: {
           title: this.state.testStateArray[3][1],
           startDate: this.state.testStateArray[3][5],
@@ -118,11 +123,11 @@ export default class DeckSwiperExample extends Component {
                   <Body>
                     <Text style={styles.clockStyle}>{item.time}</Text>
                     <Text style={styles.infoStyle}>{item.text}</Text>
-                    <Text note style={styles.infoStyle} >{item.info}</Text>
-                   
-                    <Text style={styles.infoStyle}>{item.location}
-                    <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>Läs mer</Text>
+                    <Text note style={styles.infoStyle} >{item.info}
+                    <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
                     </Text>
+                   
+                    <Text style={styles.locationStyle}>{item.location}</Text>
                   </Body>
                 </Left>
               </CardItem>
@@ -204,19 +209,17 @@ const styles = {
   },
   clockStyle: {
     fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: 'bold'
   },
   infoStyle: {
-    textAlign: 'center',
   },
-  titleStyle: {
-    textAlign: 'center',
+  locationStyle: {
+    fontSize: 14
   },
   linkStyle: {
     textDecorationLine: 'underline',
     color: '#008ccf',
-    textAlign: 'center',
+    fontSize: 14,
   }
 };
 
