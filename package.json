@@ -9,6 +9,7 @@
   "dependencies": {
     "@mapbox/polyline": "github:mapbox/polyline",
     "axios": "^0.18.0",
+    "fastlane": "^0.1.0",
     "firebase": "^5.0.4",
     "fish": "0.0.0",
     "geolib": "^2.0.24",

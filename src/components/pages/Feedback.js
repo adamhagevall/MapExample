@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { Container, Header, Left, Body, Title, Right, Textarea, Form, ListItem, CheckBox, Card, CardItem } from "native-base";
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
@@ -18,18 +18,18 @@ const options = [
     {
         component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12 }}>
 
-* Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer. 
+            * Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer.
 {'\n'}
-* Personuppgifterna används för att besvara frågor, motta återkoppling och informera om Tillgänglighetsarenans och arrangerande organisationers aktiviteter. 
+            * Personuppgifterna används för att besvara frågor, motta återkoppling och informera om Tillgänglighetsarenans och arrangerande organisationers aktiviteter.
 {'\n'}
-* Personuppgifterna delas inte med andra än Tillgänglighetsarenans arrangörer. 
+            * Personuppgifterna delas inte med andra än Tillgänglighetsarenans arrangörer.
 {'\n'}
-* Personuppgifterna behölls så länge det är relevant för Tillgänglighetsarenans syfte 
+            * Personuppgifterna behölls så länge det är relevant för Tillgänglighetsarenans syfte
 {'\n'}
-* Det är möjligt att få ett registerutdrag och sina personuppgifter rättade eller raderade genom att kontakta Tillgänglighetsarenan på tgharenan@gmail.com
+            * Det är möjligt att få ett registerutdrag och sina personuppgifter rättade eller raderade genom att kontakta Tillgänglighetsarenan på tgharenan@gmail.com
 {'\n'}</Text>,
 
-    height: 210,
+        height: 210,
     },
     {
         component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
@@ -55,7 +55,7 @@ export default class Feedback extends Component {
         if (this.state.selected === 2) {
             this.setState({ checked: true, ButtonStateHolder: false })
         }
-    
+
     }
 
     render() {
@@ -63,64 +63,58 @@ export default class Feedback extends Component {
         const selectedText = options[selected].component || options[selected]
 
         return (
-           
+
             <Container>
                 <View style={{ height: 150 }}>
                     <CalendarHeader />
                 </View>
                 <BackgroundImage>
-                    <View style={{flex: 1, alignItems: 'center'}}>
-                    <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40}}>
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150}}>
-                                <Card style={styles.containerStyle}>
-                                    <CardItem>
-                                        <View style={styles.view}>
-                                            <Text style={styles.text}>Ditt namn</Text>
-                                            <TextInput
-                                                style={styles.textInput}
-                                                onChangeText={(mailSender) => this.setState({ mailSender })}
-                                            >
-                                            </TextInput>
-                                            <Text style={styles.text}>Angående plats/gata</Text>
-                                            <TextInput
-                                                keyboardType="numbers-and-punctuation"
-                                                style={styles.textInput}
-                                                onChangeText={(mailSubject) => this.setState({ mailSubject })}
-                                            ></TextInput>
-                                            <Text style={styles.text}>Återkoppling</Text>
-                                            <Form style={{ backgroundColor: 'white' }}>
-                                                <Textarea rowSpan={5} bordered
-                                                    onChangeText={(mailContent) => this.setState({ mailContent })} />
-                                            </Form>
-                                            <Text style={styles.text}></Text>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+                            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                                <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
+                                    <Card style={styles.containerStyle}>
+                                        <CardItem>
+                                            <View style={styles.view}>
+                                                <Text style={styles.text}>Ditt namn</Text>
+                                                <TextInput
+                                                    style={styles.textInput}
+                                                    onChangeText={(mailSender) => this.setState({ mailSender })}
+                                                >
+                                                </TextInput>
+                                                <Text style={styles.text}>Angående plats/gata</Text>
+                                                <TextInput
+                                                    style={styles.textInput}
+                                                    onChangeText={(mailSubject) => this.setState({ mailSubject })}
+                                                ></TextInput>
+                                                <Text style={styles.text}>Återkoppling</Text>
+                                                <Form style={{ backgroundColor: 'white' }}>
+                                                    <Textarea rowSpan={5} bordered
+                                                        onChangeText={(mailContent) => this.setState({ mailContent })} />
+                                                </Form>
+                                                <Text style={styles.text}></Text>
+                                                <ListItem>
+                                                    <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })} />
+                                                    <Body>
+                                                        <Text> Godkänn <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>återkopplingsvillkor</Text>
+                                                        </Text>
+                                                    </Body>
+                                                </ListItem>
+                                                <TouchableOpacity style={[styles.button, { backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)} activeOpacity={.5}
+                                                    disabled={this.state.ButtonStateHolder}>
+                                                    <Text style={styles.buttonText}>Skicka Återkoppling </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </CardItem>
+                                    </Card>
 
-                                            <ListItem>
-                                                <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })} />
-
-                                                <Body>
-                                                    <Text > Godkänn
-                                                        <Text> </Text>
-                            <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>återkopplingsvillkor
-                            </Text>
-                                                    </Text>
-
-                                                </Body>
-                                            </ListItem>
-                                            <TouchableOpacity style={[styles.button, { backgroundColor: this.state.ButtonStateHolder ? '#e0e2e2' : '#4A90E2' }]} onPress={this.onMailPress.bind(this)} activeOpacity={.5}
-                                                disabled={this.state.ButtonStateHolder}>
-                                                <Text style={styles.buttonText}>Skicka Återkoppling </Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </CardItem>
-                                </Card>
-
-                            </View>
-                        </ TouchableWithoutFeedback>
-                    </View>
+                                </View>
+                            </ TouchableWithoutFeedback>
+                        </View>
                     </View>
                 </BackgroundImage>
-                    <ActionSheet
+
+                <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
                     message="För att skicka återkoppling måste följande villkor godkännas:"
@@ -129,9 +123,9 @@ export default class Feedback extends Component {
                     destructiveButtonIndex={DESTRUCTIVE_INDEX}
                     onPress={this.handlePress}
                 />
-                 
+
             </Container>
-           
+
 
         );
     }
@@ -154,7 +148,8 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: '3.8%'
     },
     button: {
         backgroundColor: '#4A90E2',
@@ -180,7 +175,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         marginTop: 10,
-        
+
 
     },
     overlay: {

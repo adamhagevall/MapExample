@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import React, { Component } from 'react';
-import { Image, Linking, TouchableOpacity } from 'react-native';
+import { Image, Linking, TouchableOpacity, ScrollView } from 'react-native';
 import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import CalendarHeader from '../CalendarHeader';
@@ -117,6 +117,7 @@ export default class DeckSwiperExample extends Component {
           ref={(c) => this._deckSwiper = c}
           dataSource={cards}
           renderItem={item =>
+          
             <Card style={styles.containerStyle}>
               <CardItem style={{}} >
                 <Left>
@@ -143,6 +144,7 @@ export default class DeckSwiperExample extends Component {
                 <Text style={{ marginLeft: 73 }} onPress={() => Linking.openURL(item.url)} >Gilla </Text>
                 <Icon onPress={() => Linking.openURL(item.url)} name="logo-facebook" style={{ color: '#4266b2', marginLeft: 5 }} />
               </CardItem>
+              
             </Card>
           }
         />
