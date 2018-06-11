@@ -550,6 +550,9 @@ export default class Map extends Component {
       }
     }
     this.setState({ originDetails: detailsFromSearch, originDefined: true })
+    if (this.state.alertToastNumber === 1) {
+      this.setState({ alertToastNumber: 0 })
+    }
   }
 
   destinationCallback = (detailsFromSearch) => {
@@ -560,6 +563,9 @@ export default class Map extends Component {
       }
     }
     this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true })
+    if (this.state.alertToastNumber === 1) {
+      this.setState({ alertToastNumber: 0 })
+    }
   }
 
   renderTiles() {
