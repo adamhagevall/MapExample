@@ -135,7 +135,9 @@ export default class Map extends Component {
       showToast: false,
       active: 'true',
       selected2: 0,
-      searchAlternatives: false
+      searchAlternatives: false,
+      errorToastNumber: 0,
+      alertToastNumber: 0
     }
   }
 
@@ -191,6 +193,7 @@ export default class Map extends Component {
     if (this.state.originDefined && this.state.destinationDefined) {
       customWaypointArray = [];
       if (this.state.originDetails.latitude !== this.state.destinationDetails.latitude && this.state.originDetails.longitude !== this.state.destinationDetails.longitude) {
+        this.checkErrorToast();
         if (this.state.roadIndex != 4) {
           const waypointDetails = this.renderDijkstra(this.state.originDetails, this.state.destinationDetails);
           for (i = 0; i < waypointDetails.length; i++) {
@@ -231,21 +234,32 @@ export default class Map extends Component {
           );
         }
       } else {
-        this.renderError();
+        if (this.state.errorToastNumber === 0) {
+          this.renderError();
+        }
       }
     }
   }
 
   renderError() {
+    this.setState({ errorToastNumber: 1 })
     Toast.show({
       text: 'Det gick inte att skapa någon vägbeskrivning. Vänligen kontrollera dina val.',
-      style: { backgroundColor: 'grey', marginBottom: 20 },
+      textStyle: { marginBottom: '5%' },
+      style: { backgroundColor: 'grey', marginBottom: '10%' },
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 30, },
-      duration: 10000
+      duration: 300000
     })
   }
+
+  checkErrorToast() {
+    if (this.state.errorToastNumber === 1) {
+      this.setState({ errorToastNumber: 0})
+    }
+  }
+
 
   renderLongRoute() {
     if (customWaypointArray.length > 23) {
