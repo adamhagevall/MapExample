@@ -250,7 +250,7 @@ export default class Map extends Component {
       buttonText: 'Jag förstår',
       buttonTextStyle: { color: 'black' },
       buttonStyle: { backgroundColor: 'white', marginTop: 30, },
-      duration: 300000
+      duration: 10000
     })
   }
 
@@ -385,7 +385,7 @@ export default class Map extends Component {
     else if (this.state.roadIndex === 3) {
       dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
     }
-    if (dijkstraArray.cost >= 100) {
+    if (dijkstraArray.cost >= 100 && this.state.alertToastNumber === 0) {
       this.renderAlert();
     }
     console.log('Kostnad', dijkstraArray.cost)
@@ -412,6 +412,7 @@ export default class Map extends Component {
       buttonStyle: { backgroundColor: 'white', marginTop: 5 },
       duration: 10000
     })
+    this.setState({ alertToastNumber: 1 })
   }
 
   showActionSheet() {
@@ -524,7 +525,7 @@ export default class Map extends Component {
 
   routeAlternativeCallback = (chosenIndex) => {
     if (chosenIndex != 0) {
-      this.setState({ roadIndex: chosenIndex })
+      this.setState({ roadIndex: chosenIndex, alertToastNumber: 0 })
       console.log('Nuvarande index (får inte vara 0)', chosenIndex)
     }
   }
