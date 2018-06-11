@@ -71,7 +71,7 @@ export default class SearchBar extends Component {
 
     clearText(text) {
         console.log(text)
-        this.props.anotherCallback(text);
+        this.props.resetCallback(text);
     }
 
     render() {

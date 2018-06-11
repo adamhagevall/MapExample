@@ -648,10 +648,10 @@ export default class Map extends Component {
                     </Fab> */}
               <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
                 <View style={{ flex: 1 }} zIndex={3} makeScrollable={true}>
-                  <SearchBar callbackFromParent={this.originCallback} anotherCallback={this.removeOriginMarker} booleanFromParent={this.state.searchAlternativesOrigin} placeholder={'Från'} />
+                  <SearchBar callbackFromParent={this.originCallback} resetCallback={this.removeOriginMarker} booleanFromParent={this.state.searchAlternativesOrigin} placeholder={'Från'} />
                 </View>
                 <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }} makeScrollable={true}>
-                  <SearchBar callbackFromParent={this.destinationCallback} anotherCallback={this.removeDestinationMarker} booleanFromParent={this.state.searchAlternativesDestination} placeholder={'Till'} />
+                  <SearchBar callbackFromParent={this.destinationCallback} resetCallback={this.removeDestinationMarker} booleanFromParent={this.state.searchAlternativesDestination} placeholder={'Till'} />
                 </View>
               </View>
               <ActionSheet
