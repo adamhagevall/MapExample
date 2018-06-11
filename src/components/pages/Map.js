@@ -135,7 +135,8 @@ export default class Map extends Component {
       showToast: false,
       active: 'true',
       selected2: 0,
-      searchAlternatives: false,
+      searchAlternativesOrigin: false,
+      searchAlternativesDestination: false,
       errorToastNumber: 0,
       alertToastNumber: 0
     }
@@ -262,7 +263,7 @@ export default class Map extends Component {
 
 
   renderLongRoute() {
-    if (customWaypointArray.length > 23) {
+    if (customWaypointArray.length > 23 && this.state.originDefined && this.state.destinationDefined) {
       const longRouteWaypoints = customWaypointArray.slice(24, 45);
       return (
         <MapViewDirections
@@ -549,7 +550,7 @@ export default class Map extends Component {
         detailsFromSearch.longitude = newCoordinates[i].longitude;
       }
     }
-    this.setState({ originDetails: detailsFromSearch, originDefined: true })
+    this.setState({ originDetails: detailsFromSearch, originDefined: true, searchAlternativesOrigin: false })
     if (this.state.alertToastNumber === 1) {
       this.setState({ alertToastNumber: 0 })
     }
@@ -562,9 +563,21 @@ export default class Map extends Component {
         detailsFromSearch.longitude = newCoordinates[i].longitude;
       }
     }
-    this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true })
+    this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true, searchAlternativesDestination: false })
     if (this.state.alertToastNumber === 1) {
       this.setState({ alertToastNumber: 0 })
+    }
+  }
+
+  removeOriginMarker = (text) => {
+    if (text === '') {
+      this.setState({ originDefined: false, searchAlternativesOrigin: true })
+    }
+  }
+
+  removeDestinationMarker = (text) => {
+    if (text === '') {
+      this.setState({ destinationDefined: false, searchAlternativesDestination: true })
     }
   }
 
@@ -576,7 +589,7 @@ export default class Map extends Component {
 
   removeList() {
     Keyboard.dismiss();
-    this.setState({ searchAlternatives: false });
+    this.setState({ searchAlternativesOrigin: false, searchAlternativesDestination: false });
   }
 
   render() {
@@ -627,7 +640,7 @@ export default class Map extends Component {
                         direction="up"
                         containerStyle={{}}
                         style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
-                        position="bottomLeft"
+                        position="bottomLeft"anotherCallback={this.removeOriginMarker} anotherCallback={this.removeDestinationMarker}
                     onPress={() => {
                     }}
                     >
@@ -635,10 +648,10 @@ export default class Map extends Component {
                     </Fab> */}
               <View style={{ position: 'absolute', flexDirection: 'column', width: width }}>
                 <View style={{ flex: 1 }} zIndex={3} makeScrollable={true}>
-                  <SearchBar callbackFromParent={this.originCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Från'} />
+                  <SearchBar callbackFromParent={this.originCallback} anotherCallback={this.removeOriginMarker} booleanFromParent={this.state.searchAlternativesOrigin} placeholder={'Från'} />
                 </View>
                 <View style={{ position: 'absolute', flexDirection: 'column', width: width, flex: 1, marginTop: 35 }} makeScrollable={true}>
-                  <SearchBar callbackFromParent={this.destinationCallback} booleanFromParent={this.state.searchAlternatives} placeholder={'Till'} />
+                  <SearchBar callbackFromParent={this.destinationCallback} anotherCallback={this.removeDestinationMarker} booleanFromParent={this.state.searchAlternativesDestination} placeholder={'Till'} />
                 </View>
               </View>
               <ActionSheet

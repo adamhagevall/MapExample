@@ -69,6 +69,11 @@ export default class SearchBar extends Component {
         this.props.callbackFromParent({ latitude: details.lat, longitude: details.lng });
     }
 
+    clearText(text) {
+        console.log(text)
+        this.props.anotherCallback(text);
+    }
+
     render() {
         let label = this.props.placeholder;
         return (
@@ -90,6 +95,9 @@ export default class SearchBar extends Component {
                     key: 'AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk',
                     language: 'sv' // language of the results
                 }}
+                textInputProps={{
+                    onChangeText: (text) => { this.clearText(text) }
+                   }}
                 styles={{
                     textInputContainer: {
                         flex: 1,
