@@ -36,9 +36,9 @@
 		</dict>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Appen begär tillgång till din privata kalender för att kunna lägga till evenemang.</string>
+	<string>Appen begär tillgång till din kalender på mobilen för att kunna lägga till evenemang.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Din nuvarande position kommer vara synlig på kartan och kommer användas för att beräkna vägbeskrivningar.</string>
+	<string>Din nuvarande position kommer vara synlig på kartan och används för att beräkna vägbeskrivningar.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
