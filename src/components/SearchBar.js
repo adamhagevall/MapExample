@@ -97,7 +97,7 @@ export default class SearchBar extends Component {
                 }}
                 textInputProps={{
                     onChangeText: (text) => { this.clearText(text) }
-                   }}
+                }}
                 styles={{
                     textInputContainer: {
                         flex: 1,

@@ -257,7 +257,7 @@ export default class Map extends Component {
 
   checkErrorToast() {
     if (this.state.errorToastNumber === 1) {
-      this.setState({ errorToastNumber: 0})
+      this.setState({ errorToastNumber: 0 })
     }
   }
 
