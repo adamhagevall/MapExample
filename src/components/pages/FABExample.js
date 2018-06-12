@@ -25,10 +25,10 @@ const options = [
     component: <Image source={require('../Assets/svart.png')} style={{ width: 300, height: 50 }} />,
     height: 65,
   },
-  {
-    component: <Text style={{ color: 'black', fontSize: 15 }}>Välj bland förinställda motionsrutter --> </Text>,
-    height: 40,
-  }
+  // {
+  //   component: <Text style={{ color: 'black', fontSize: 15 }}>Välj bland förinställda motionsrutter --> </Text>,
+  //   height: 40,
+  // }
 ]
 const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Hur vill du anpassa din rutt?</Text>
 const message = <Text style={{ color: 'grey', textAlign: 'justify', fontSize: 12, marginRight: '4%', marginLeft: '4%', marginBottom: '1%', marginTop: '-1%'}}>Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du till exempel som mest tänka dig röda vägar men inte svarta, välj då röd inställning.</Text>
