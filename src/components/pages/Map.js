@@ -242,25 +242,26 @@ export default class Map extends Component {
     const originNode = this.findNearestNode(originCoords);
     const destinationNode = this.findNearestNode(destinationCoords);
     const arrayToSend = [];
-    if (this.state.roadIndex === 1) {
-      dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
-    }
-    else if (this.state.roadIndex === 2) {
-      dijkstraArray = blueRoute.path(originNode, destinationNode, { trim: true, cost: true });
-    }
-    else if (this.state.roadIndex === 3) {
-      dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
-    }
-    if (dijkstraArray.cost >= 100 && this.state.alertToastNumber === 0) {
-      this.renderAlert();
-    }
-    console.log('Kostnad', dijkstraArray.cost)
-    pathArray = dijkstraArray.path;
-    if (pathArray.length > 0) {
-      for (i = 0; i < pathArray.length; i++) {
-        for (j = 0; j < nodeArray.length; j++) {
-          if (pathArray[i] === nodeArray[j].id) {
-            arrayToSend.push(nodeArray[j])
+    if (originNode !== destinationNode) {
+      if (this.state.roadIndex === 1) {
+        dijkstraArray = greenRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      }
+      else if (this.state.roadIndex === 2) {
+        dijkstraArray = blueRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      }
+      else if (this.state.roadIndex === 3) {
+        dijkstraArray = redRoute.path(originNode, destinationNode, { trim: true, cost: true });
+      }
+      if (dijkstraArray.cost >= 100 && this.state.alertToastNumber === 0) {
+        this.renderAlert();
+      }
+      pathArray = dijkstraArray.path;
+      if (pathArray.length > 0) {
+        for (i = 0; i < pathArray.length; i++) {
+          for (j = 0; j < nodeArray.length; j++) {
+            if (pathArray[i] === nodeArray[j].id) {
+              arrayToSend.push(nodeArray[j])
+            }
           }
         }
       }
@@ -523,170 +524,170 @@ const styles = StyleSheet.create({
 // ]
 
 // runningRoute() {
-  //   if (this.state.selected2 === 1) {
-  //     return (
-  //       <MapViewDirections
-  //         origin={{ latitude: 57.639741, longitude: 18.286679 }}
-  //         destination={{ latitude: 57.639354, longitude: 18.293128 }}
-  //         waypoints={runWaypoints}
-  //         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
-  //         strokeWidth={15}
-  //         strokeColor='orange'
-  //         mode='walking'
-  //       />
-  //     )
-  //   }
-  //   if (this.state.selected2 === 2) {
-  //     return (
-  //       <MapViewDirections
-  //         origin={{ latitude: 57.639741, longitude: 18.286679 }}
-  //         destination={{ latitude: 57.639354, longitude: 18.293128 }}
-  //         waypoints={runWaypoints}
-  //         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
-  //         strokeWidth={15}
-  //         strokeColor='orange'
-  //         mode='walking'
-  //       />)
-  //   }
-  //   if (this.state.selected2 === 3) {
-  //     return (
-  //       <MapViewDirections
-  //         origin={{ latitude: 57.639741, longitude: 18.286679 }}
-  //         destination={{ latitude: 57.639354, longitude: 18.293128 }}
-  //         waypoints={runWaypoints}
-  //         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
-  //         strokeWidth={15}
-  //         strokeColor='orange'
-  //         mode='walking'
-  //       />)
-  //   }
-  //   if (this.state.selected2 === 4) {
-  //     return (
-  //       <MapViewDirections
-  //         origin={{ latitude: 57.639741, longitude: 18.286679 }}
-  //         destination={{ latitude: 57.639354, longitude: 18.293128 }}
-  //         waypoints={runWaypoints}
-  //         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
-  //         strokeWidth={15}
-  //         strokeColor='orange'
-  //         mode='walking'
-  //       />)
-  //   }
-  // }
+//   if (this.state.selected2 === 1) {
+//     return (
+//       <MapViewDirections
+//         origin={{ latitude: 57.639741, longitude: 18.286679 }}
+//         destination={{ latitude: 57.639354, longitude: 18.293128 }}
+//         waypoints={runWaypoints}
+//         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
+//         strokeWidth={15}
+//         strokeColor='orange'
+//         mode='walking'
+//       />
+//     )
+//   }
+//   if (this.state.selected2 === 2) {
+//     return (
+//       <MapViewDirections
+//         origin={{ latitude: 57.639741, longitude: 18.286679 }}
+//         destination={{ latitude: 57.639354, longitude: 18.293128 }}
+//         waypoints={runWaypoints}
+//         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
+//         strokeWidth={15}
+//         strokeColor='orange'
+//         mode='walking'
+//       />)
+//   }
+//   if (this.state.selected2 === 3) {
+//     return (
+//       <MapViewDirections
+//         origin={{ latitude: 57.639741, longitude: 18.286679 }}
+//         destination={{ latitude: 57.639354, longitude: 18.293128 }}
+//         waypoints={runWaypoints}
+//         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
+//         strokeWidth={15}
+//         strokeColor='orange'
+//         mode='walking'
+//       />)
+//   }
+//   if (this.state.selected2 === 4) {
+//     return (
+//       <MapViewDirections
+//         origin={{ latitude: 57.639741, longitude: 18.286679 }}
+//         destination={{ latitude: 57.639354, longitude: 18.293128 }}
+//         waypoints={runWaypoints}
+//         apikey="AIzaSyAVoFdCevwg5QcC11Kzn3AOKS_UcGFgvMk"
+//         strokeWidth={15}
+//         strokeColor='orange'
+//         mode='walking'
+//       />)
+//   }
+// }
 
-  // runningExitButton() {
-  //   if (this.state.selected2 === 1) {
-  //     return (
-  //       <FAB />
-  //     )
-  //   }
-  //   if (this.state.selected2 === 2) {
-  //     return (
-  //       <Fab
-  //         active={this.state.active}
-  //         active={false}
-  //         direction="up"
-  //         containerStyle={{}}
-  //         style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
-  //         position="bottomLeft"
-  //         onPress={() => {
-  //         }}
-  //       >
-  //         <Icon name="close-circle" />
-  //       </Fab>
-  //     )
-  //   }
-  //   if (this.state.selected2 === 3) {
-  //     return (
-  //       <FABExample />
-  //     )
-  //   }
-  //   if (this.state.selected2 === 4) {
-  //     return (
-  //       <FABExample />
-  //     )
-  //   }
-  // }
+// runningExitButton() {
+//   if (this.state.selected2 === 1) {
+//     return (
+//       <FAB />
+//     )
+//   }
+//   if (this.state.selected2 === 2) {
+//     return (
+//       <Fab
+//         active={this.state.active}
+//         active={false}
+//         direction="up"
+//         containerStyle={{}}
+//         style={{ backgroundColor: 'red', marginBottom: 200, width: 40, height: 40 }}
+//         position="bottomLeft"
+//         onPress={() => {
+//         }}
+//       >
+//         <Icon name="close-circle" />
+//       </Fab>
+//     )
+//   }
+//   if (this.state.selected2 === 3) {
+//     return (
+//       <FABExample />
+//     )
+//   }
+//   if (this.state.selected2 === 4) {
+//     return (
+//       <FABExample />
+//     )
+//   }
+// }
 
-  // showActionSheet() {
-  //   this.actionSheet.show()
-  // }
+// showActionSheet() {
+//   this.actionSheet.show()
+// }
 
-  // getActionSheetRef = ref => (this.actionSheet = ref)
+// getActionSheetRef = ref => (this.actionSheet = ref)
 
-  // handlePress = index => { this.setState({ selected2: index }) }
+// handlePress = index => { this.setState({ selected2: index }) }
 
-  // handleRunning() {
+// handleRunning() {
 
-  //   if (this.state.selected2 === 1) {
-  //     this.setState({ runWay: null })
-  //   }
-  //   if (this.state.selected2 === 2) {
-  //     console.log('green')
-  //   }
-  //   if (this.state.selected2 === 3) {
-  //     console.log('green')
-  //   }
-  //   if (this.state.selected2 === 4) {
-  //     console.log('green')
-  //   }
-  // }
+//   if (this.state.selected2 === 1) {
+//     this.setState({ runWay: null })
+//   }
+//   if (this.state.selected2 === 2) {
+//     console.log('green')
+//   }
+//   if (this.state.selected2 === 3) {
+//     console.log('green')
+//   }
+//   if (this.state.selected2 === 4) {
+//     console.log('green')
+//   }
+// }
 
-  // renderRunningRoute() {
+// renderRunningRoute() {
 
-  //   if (this.state.roadIndex === 5) {
-  //     console.log('onButtonPress')
-  //     { this.showActionSheet() }
-  //     this.setState({ roadIndex: null })
+//   if (this.state.roadIndex === 5) {
+//     console.log('onButtonPress')
+//     { this.showActionSheet() }
+//     this.setState({ roadIndex: null })
 
-  //     // Alert.alert(
-  //     //   'Alert Title',
-  //     //   'My Alert Msg',
-  //     //   [
-  //     //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-  //     //     {text: 'OK', onPress: () => console.log('OK Pressed')},
-  //     //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-  //     //     {text: 'OK', onPress: () => console.log('OK Pressed')},
-  //     //   ],
-  //     //   { cancelable: false }
-  //     // )
-  //     // Toast.show({
-  //     //   text: 'Sakta i backarna! Notera att rutten inte går att planera efter dina önskemål',
-  //     //   style: { backgroundColor: 'grey', marginBottom: 20 },
-  //     //   buttonText: 'Jag förstår',
-  //     //   buttonText: 'Jag förstår',
-  //     //   buttonTextStyle: { color: 'white' },
-  //     //   buttonStyle: { backgroundColor: 'red' },
-  //     //   duration: 300000
-  //     // })
+//     // Alert.alert(
+//     //   'Alert Title',
+//     //   'My Alert Msg',
+//     //   [
+//     //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+//     //     {text: 'OK', onPress: () => console.log('OK Pressed')},
+//     //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+//     //     {text: 'OK', onPress: () => console.log('OK Pressed')},
+//     //   ],
+//     //   { cancelable: false }
+//     // )
+//     // Toast.show({
+//     //   text: 'Sakta i backarna! Notera att rutten inte går att planera efter dina önskemål',
+//     //   style: { backgroundColor: 'grey', marginBottom: 20 },
+//     //   buttonText: 'Jag förstår',
+//     //   buttonText: 'Jag förstår',
+//     //   buttonTextStyle: { color: 'white' },
+//     //   buttonStyle: { backgroundColor: 'red' },
+//     //   duration: 300000
+//     // })
 
-  //   }
-  // }
+//   }
+// }
 
-  // runningRouteCallback = (colorRun) => {
-  //   if (colorRun === 1 || colorRun === 2) {
-  //     this.setState({ runningRoad: true })
-  //   }
-  //   else if (colorRun === 3) {
-  //     this.setState({ runningRoad: false })
-  //   }
-  //   else {
-  //     this.setState({ runningRoad: null })
-  //   }
-  // }
+// runningRouteCallback = (colorRun) => {
+//   if (colorRun === 1 || colorRun === 2) {
+//     this.setState({ runningRoad: true })
+//   }
+//   else if (colorRun === 3) {
+//     this.setState({ runningRoad: false })
+//   }
+//   else {
+//     this.setState({ runningRoad: null })
+//   }
+// }
 
-    // I RENDER
-  //const { selected2, selectedColor } = this.state
-    // const selectedText = options[selected2].component || options[selected2]
+// I RENDER
+//const { selected2, selectedColor } = this.state
+// const selectedText = options[selected2].component || options[selected2]
 
-    // SLUT RENDER
+// SLUT RENDER
 
-    // I RETURN
-  {/* {this.renderRunningRoute()};
+// I RETURN
+{/* {this.renderRunningRoute()};
                 {this.runningRoute()};
                 {this.runningExitButton()}; */}
 
-                 {/* <ActionSheet
+{/* <ActionSheet
                 ref={this.getActionSheetRef}
                 title={title}
                 message="Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du t.ex. som mest tänka dig röda vägar men inte svarta, välj röd "
@@ -696,16 +697,16 @@ const styles = StyleSheet.create({
                 onPress={this.handlePress}
               /> */}
 
-              // SLUT RETURN
+// SLUT RETURN
 
 // SLUT PÅ DET SOM BEHÖVS TILL SPRINGRUTTERNA
 
 
-   // axios.get('https://api.myjson.com/bins/1gjnje')
-    //   .then(response => this.setState({ tiles: response.data, visible: false }))
-    //   .catch((error) => {
-    //     alert(error.message)
-    //   });
+// axios.get('https://api.myjson.com/bins/1gjnje')
+//   .then(response => this.setState({ tiles: response.data, visible: false }))
+//   .catch((error) => {
+//     alert(error.message)
+//   });
 
 {/* <LoadingView loading={this.state.loading}> */ }
 
