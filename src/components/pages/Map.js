@@ -138,7 +138,8 @@ export default class Map extends Component {
       searchAlternativesOrigin: false,
       searchAlternativesDestination: false,
       errorToastNumber: 0,
-      alertToastNumber: 0
+      alertToastNumber: 0,
+      zoomNumber: 0
     }
   }
 
@@ -202,13 +203,7 @@ export default class Map extends Component {
           }
           console.log("här är waypoints", customWaypointArray)
         }
-        // this.mapRef.fitToCoordinates(
-        //   coordinates = [this.state.originDetails, this.state.destinationDetails],
-        //   {
-        //     edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
-        //     animated: true
-        //   }
-        // );
+        this.zoomOnCoords();
         if (customWaypointArray.length <= 23) {
           return (
             <MapViewDirections
@@ -239,6 +234,19 @@ export default class Map extends Component {
           this.renderError();
         }
       }
+    }
+  }
+
+  zoomOnCoords() {
+    if (this.state.zoomNumber === 0) {
+      this.mapRef.fitToCoordinates(
+        coordinates = [this.state.originDetails, this.state.destinationDetails],
+        {
+          edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+          animated: true
+        }
+      );
+      this.setState({ zoomNumber: 1 });
     }
   }
 
@@ -526,7 +534,7 @@ export default class Map extends Component {
 
   routeAlternativeCallback = (chosenIndex) => {
     if (chosenIndex != 0) {
-      this.setState({ roadIndex: chosenIndex, alertToastNumber: 0 })
+      this.setState({ roadIndex: chosenIndex, alertToastNumber: 0, zoomNumber: 0 })
       console.log('Nuvarande index (får inte vara 0)', chosenIndex)
     }
   }
@@ -554,6 +562,9 @@ export default class Map extends Component {
     if (this.state.alertToastNumber === 1) {
       this.setState({ alertToastNumber: 0 })
     }
+    if (this.state.zoomNumber === 1) {
+      this.setState({ zoomNumber: 0 })
+    }
   }
 
   destinationCallback = (detailsFromSearch) => {
@@ -566,6 +577,9 @@ export default class Map extends Component {
     this.setState({ destinationDetails: detailsFromSearch, destinationDefined: true, searchAlternativesDestination: false })
     if (this.state.alertToastNumber === 1) {
       this.setState({ alertToastNumber: 0 })
+    }
+    if (this.state.zoomNumber === 1) {
+      this.setState({ zoomNumber: 0 })
     }
   }
 
