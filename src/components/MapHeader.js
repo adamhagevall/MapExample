@@ -19,6 +19,22 @@ export default class MapHeader extends Component {
         console.log('width', width);
         const ratio = width/height;
     }
+
+    informationFunction() {
+        Actions.information();
+        this.props.callbackFromParent(false);
+    }
+
+    feedbackFunction() {
+        Actions.feedback();
+        this.props.callbackFromParent(false);
+    }
+
+    calendarFunction() {
+        Actions.calendar();
+        this.props.callbackFromParent(false);
+    }
+
     render() {
         const { runRoute } = this.state
         
@@ -26,7 +42,7 @@ export default class MapHeader extends Component {
             <BackgroundImage>
                 <Header span style={{ backgroundColor: 'transparent', height: 150}}>
                     <Left>
-                        <Button transparent onPress={Actions.information}>
+                        <Button transparent onPress={this.informationFunction.bind(this)}>
                             <Icon name='information-circle' style={{ color: "white" }} />
                         </Button>
                         {/* <Image source={require('./Assets/nyrullstol.png')} style={{ width: 55, height: 55, marginLeft: 85, marginTop: -4 }} /> ÄLDST */}
@@ -43,10 +59,10 @@ export default class MapHeader extends Component {
 
                     </Body>
                     <Right>
-                        <Button transparent onPress={Actions.feedback}>
+                        <Button transparent onPress={this.feedbackFunction.bind(this)}>
                             <Icon name='text' style={{ color: "white" }} />
                         </Button>
-                        <Button transparent onPress={Actions.calendar} >
+                        <Button transparent onPress={this.calendarFunction.bind(this)} >
                             <Icon name='calendar' style={{ color: "white" }} />
                         </Button>
                         {/* <Image source={require('./Assets/rauka.png')} style={{width:50, height:50}} />

@@ -595,6 +595,10 @@ export default class Map extends Component {
     }
   }
 
+  moveToPage = (receivedBoolean) => {
+    this.setState({ searchAlternativesOrigin: receivedBoolean, searchAlternativesDestination: receivedBoolean })
+  }
+
   renderTiles() {
     return tiles.map(tile =>
       <MapTiles key={tile.origin} tile={tile} />
@@ -605,6 +609,7 @@ export default class Map extends Component {
     Keyboard.dismiss();
     this.setState({ searchAlternativesOrigin: false, searchAlternativesDestination: false });
   }
+
 
   render() {
     const { width, height } = Dimensions.get('window');
@@ -617,7 +622,7 @@ export default class Map extends Component {
       <Container>
         <TouchableWithoutFeedback onPress={this.removeList.bind(this)}>
           <View style={{ height: 150 }} >
-            <NewHeader />
+            <NewHeader callbackFromParent={this.moveToPage} />
           </View>
         </TouchableWithoutFeedback>
         <Content scrollEnabled={false}>
