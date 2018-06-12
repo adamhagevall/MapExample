@@ -121,10 +121,11 @@ export default class SearchBar extends Component {
                         borderWidth: 1
                     },
                     listView: {
+                        height: 190,
                         width: '93.2%',
                         marginLeft: '3.3%',
                         marginTop: '10%',
-                        borderColor: 'lightgray'
+                        borderColor: 'lightgray',
                     },
                     description: {
                         fontWeight: 'bold',
@@ -135,7 +136,7 @@ export default class SearchBar extends Component {
                         color: 'black'
                         //position: 'absolute'
                         //backgroundColor: 'blue'
-                    }
+                    },
                 }}
 
                 //currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
