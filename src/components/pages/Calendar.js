@@ -117,7 +117,7 @@ export default class DeckSwiperExample extends Component {
           ref={(c) => this._deckSwiper = c}
           dataSource={cards}
           renderItem={item =>
-          
+
             <Card style={styles.containerStyle}>
               <CardItem style={{}} >
                 <Left>
@@ -125,10 +125,10 @@ export default class DeckSwiperExample extends Component {
                     <Text style={styles.clockStyle}>{item.time}</Text>
                     <Text style={styles.infoStyle}>{item.text}</Text>
                     <Text note style={styles.infoStyle} >{item.info}
-                    <Text> </Text>
-                    <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
+                      <Text> </Text>
+                      <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
                     </Text>
-                   
+
                     <Text style={styles.locationStyle}>{item.location}</Text>
                   </Body>
                 </Left>
@@ -144,7 +144,7 @@ export default class DeckSwiperExample extends Component {
                 <Text style={{ marginLeft: 73 }} onPress={() => Linking.openURL(item.url)} >Gilla </Text>
                 <Icon onPress={() => Linking.openURL(item.url)} name="logo-facebook" style={{ color: '#4266b2', marginLeft: 5 }} />
               </CardItem>
-              
+
             </Card>
           }
         />
@@ -157,20 +157,24 @@ export default class DeckSwiperExample extends Component {
     AddCalendarEvent.presentEventDialog(calendarEvent);
   }
 
+  unusedFunction = (dummyString) => {
+    console.log(dummyString);
+  }
+
   render() {
     return (
       <Container >
         {this.createInformationList()}
         <View style={{ height: 150 }}>
-          <CalendarHeader />
+          <CalendarHeader callbackFromHeader={this.unusedFunction} />
         </View>
         <BackgroundImage>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -30 }}>
-            <View styles={{ position: 'absolute', flexDirection: 'column', width: 500 }}>
-              {this.createContent()};
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -30 }}>
+              <View styles={{ position: 'absolute', flexDirection: 'column', width: 500 }}>
+                {this.createContent()};
             </View>
-          </View>
+            </View>
           </View>
           <View style={styles.buttonViewStyle}>
             <TouchableOpacity iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>

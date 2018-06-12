@@ -21,7 +21,7 @@ import { redRoute } from '../NodesRed';
 let { width, height } = Dimensions.get('window');
 const bild = require('../Assets/fadedmap.jpg');
 const tiles = require('../RoadColors');
-const mapStyling = require('../mapStyle.json')
+const mapStyling = require('../mapStyle.json');
 const nodeCoordinates = require('../NodeCoordinates');
 const nodeArray = require('../NodeArray');
 const dijkstraArray = [];
@@ -43,7 +43,7 @@ const coordinatesToChange = [
   { latitude: 57.637457, longitude: 18.2880791 },
   { latitude: 57.640335, longitude: 18.2978775 },
   { latitude: 57.6390044, longitude: 18.2953983 }
-]
+];
 const newCoordinates = [
   { latitude: 57.639463, longitude: 18.297678 },
   { latitude: 57.639001, longitude: 18.288192 },
@@ -54,7 +54,7 @@ const newCoordinates = [
   { latitude: 57.637438, longitude: 18.288060 },
   { latitude: 57.640295, longitude: 18.297808 },
   { latitude: 57.639070, longitude: 18.295489 }
-]
+];
 
 export default class Map extends Component {
   constructor() {

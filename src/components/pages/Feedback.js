@@ -8,7 +8,8 @@ import FeedbackHeader from '../FeedbackHeader';
 import CalendarHeader from '../CalendarHeader';
 import { Tile } from 'react-native-elements';
 import BackgroundImage from './bg';
-import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
+import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const bild = require('../Assets/fadedmap.jpg');
 const CANCEL_INDEX = 0
@@ -55,27 +56,31 @@ export default class Feedback extends Component {
         if (this.state.selected === 2) {
             this.setState({ checked: true, ButtonStateHolder: false })
         }
+    }
 
+    removeKeyboardWhileLeaving = (dummyString) => {
+        Keyboard.dismiss();
+        console.log(dummyString);
     }
 
     render() {
         const { runRoute, selected } = this.state
         const selectedText = options[selected].component || options[selected]
-
         return (
-
             <Container>
-                <View style={{ height: 150 }}>
-                    <CalendarHeader />
-                </View>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={{ height: 150 }}>
+                        <CalendarHeader callbackFromHeader={this.removeKeyboardWhileLeaving} />
+                    </View>
+                </TouchableWithoutFeedback>
                 <BackgroundImage>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
-                            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
                                 <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
                                     <Card style={styles.containerStyle}>
                                         <CardItem>
-                                            <View style={styles.view}>
+                                            <KeyboardAwareScrollView style={styles.view}>
                                                 <Text style={styles.text}>Ditt namn</Text>
                                                 <TextInput
                                                     style={styles.textInput}
@@ -104,16 +109,14 @@ export default class Feedback extends Component {
                                                     disabled={this.state.ButtonStateHolder}>
                                                     <Text style={styles.buttonText}>Skicka Återkoppling </Text>
                                                 </TouchableOpacity>
-                                            </View>
+                                            </KeyboardAwareScrollView>
                                         </CardItem>
                                     </Card>
-
                                 </View>
-                            </ TouchableWithoutFeedback>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableWithoutFeedback>
                 </BackgroundImage>
-
                 <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
@@ -123,13 +126,9 @@ export default class Feedback extends Component {
                     destructiveButtonIndex={DESTRUCTIVE_INDEX}
                     onPress={this.handlePress}
                 />
-
             </Container>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -174,9 +173,7 @@ const styles = StyleSheet.create({
         elevation: 1,
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 10,
-
-
+        marginTop: 10
     },
     overlay: {
         position: 'absolute',
