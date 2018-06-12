@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -19,17 +18,12 @@ import { greenRoute } from '../NodesGreen';
 import { blueRoute } from '../NodesBlue';
 import { redRoute } from '../NodesRed';
 
-var bild = require('../Assets/fadedmap.jpg');
-
-//  spring action sheet 
-
-import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
-
-//Spring actionsheet slut
-
 let { width, height } = Dimensions.get('window');
+const bild = require('../Assets/fadedmap.jpg');
 const tiles = require('../RoadColors');
 const mapStyling = require('../mapStyle.json')
+const nodeCoordinates = require('../NodeCoordinates');
+const nodeArray = require('../NodeArray');
 const dijkstraArray = [];
 const pathArray = [];
 const customWaypointArray = [];
@@ -39,8 +33,6 @@ const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const searchDetails = {};
-const nodeCoordinates = require('../NodeCoordinates');
-const nodeArray = require('../NodeArray');
 const coordinatesToChange = [
   { latitude: 57.6394025, longitude: 18.2978174 },
   { latitude: 57.6388676, longitude: 18.2884245 },
@@ -65,7 +57,6 @@ const newCoordinates = [
 ]
 
 export default class Map extends Component {
-
   constructor() {
     super();
     this.mapRef = null;
@@ -265,10 +256,12 @@ export default class Map extends Component {
     }
     console.log('Kostnad', dijkstraArray.cost)
     pathArray = dijkstraArray.path;
-    for (i = 0; i < pathArray.length; i++) {
-      for (j = 0; j < nodeArray.length; j++) {
-        if (pathArray[i] === nodeArray[j].id) {
-          arrayToSend.push(nodeArray[j])
+    if (pathArray.length > 0) {
+      for (i = 0; i < pathArray.length; i++) {
+        for (j = 0; j < nodeArray.length; j++) {
+          if (pathArray[i] === nodeArray[j].id) {
+            arrayToSend.push(nodeArray[j])
+          }
         }
       }
     }
@@ -316,11 +309,6 @@ export default class Map extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
-    // axios.get('https://api.myjson.com/bins/1gjnje')
-    //   .then(response => this.setState({ tiles: response.data, visible: false }))
-    //   .catch((error) => {
-    //     alert(error.message)
-    //   });
   };
 
   componentDidMount() {
@@ -409,7 +397,6 @@ export default class Map extends Component {
     this.setState({ searchAlternativesOrigin: false, searchAlternativesDestination: false });
   }
 
-
   render() {
     const { width, height } = Dimensions.get('window');
     const ratio = width / height;
@@ -488,6 +475,8 @@ const styles = StyleSheet.create({
 
 // ALLT SOM BEHÖVS TILL SPRINGRUTTERNA
 
+
+//import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
 // const CANCEL_INDEX = 0
 // const DESTRUCTIVE_INDEX = 4
 // const options = [
@@ -711,6 +700,12 @@ const styles = StyleSheet.create({
 
 // SLUT PÅ DET SOM BEHÖVS TILL SPRINGRUTTERNA
 
+
+   // axios.get('https://api.myjson.com/bins/1gjnje')
+    //   .then(response => this.setState({ tiles: response.data, visible: false }))
+    //   .catch((error) => {
+    //     alert(error.message)
+    //   });
 
 {/* <LoadingView loading={this.state.loading}> */ }
 
