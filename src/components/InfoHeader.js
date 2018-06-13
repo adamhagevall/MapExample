@@ -5,6 +5,7 @@ import { Image, View, ImageBackground } from 'react-native';
 import BackgroundImage from './pages/arenalogo';
 
 export default class InfoHeader extends Component {
+
     render() {
         return (
             <BackgroundImage>

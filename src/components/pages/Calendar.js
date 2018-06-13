@@ -128,7 +128,6 @@ export default class DeckSwiperExample extends Component {
                       <Text> </Text>
                       <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
                     </Text>
-
                     <Text style={styles.locationStyle}>{item.location}</Text>
                   </Body>
                 </Left>

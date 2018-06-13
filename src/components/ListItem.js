@@ -54,7 +54,6 @@ class ListItem extends Component {
     buttonFunction(selectedID) {
         this.renderState();
         this.renderInformation(selectedID)
-
     }
 
     render() {
@@ -109,6 +108,6 @@ const mapStateToProps = (state, ownProps) => {
     return { expanded };
 };
 
-export default connect(mapStateToProps, actions)(ListItem); 
+export default connect(mapStateToProps, actions)(ListItem);
 
 
