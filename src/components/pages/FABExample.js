@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   backdrop: {
     flex: 1,
