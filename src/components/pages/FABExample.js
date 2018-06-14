@@ -1,12 +1,28 @@
 import React, { Component } from "react";
 import { Container, Header, Button, Content, Text, View, Icon, Fab } from "native-base";
-
-import { StyleSheet, Image, Dimensions } from 'react-native'
+import { StyleSheet, Image, Dimensions, Platform } from 'react-native'
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet'
+
+const sheetFontSize = 0;
+const titleFontSize = 0;
+const acceptFontSize = 0;
+const fabPositionFactor = 0;
+
+if (Platform.isPad) {
+  sheetFontSize = 16;
+  titleFontSize = 24;
+  fabPositionFactor = 0.2;
+} else {
+  sheetFontSize = 12;
+  titleFontSize = 20;
+  fabPositionFactor = 0.3;
+}
 
 const { width, height } = Dimensions.get('window');
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
+const title = <Text style={{ color: 'crimson', fontSize: titleFontSize }}>Hur vill du anpassa din rutt?</Text>
+const message = <Text style={{ color: 'grey', textAlign: 'justify', fontSize: sheetFontSize, marginRight: '4%', marginLeft: '4%', marginBottom: '1%', marginTop: '-1%' }}>Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du till exempel som mest tänka dig röda vägar men inte svarta, välj då röd inställning.</Text>
 const options = [
   'Cancel',
   {
@@ -30,8 +46,6 @@ const options = [
   //   height: 40,
   // }
 ]
-const title = <Text style={{ color: 'crimson', fontSize: 18 }}>Hur vill du anpassa din rutt?</Text>
-const message = <Text style={{ color: 'grey', textAlign: 'justify', fontSize: 12, marginRight: '4%', marginLeft: '4%', marginBottom: '1%', marginTop: '-1%'}}>Här väljer du vilken färg på vägarna som ruttplaneraren ska anpassa sig till. Kan du till exempel som mest tänka dig röda vägar men inte svarta, välj då röd inställning.</Text>
 
 export default class FABExample extends Component {
   constructor(props) {
@@ -87,7 +101,7 @@ export default class FABExample extends Component {
             direction="up"
             containerStyle={{}}
             // style={{ backgroundColor: selectedColor, marginBottom: 200 }}
-            style={{ backgroundColor: selectedColor, marginBottom: height*0.3}}
+            style={{ backgroundColor: selectedColor, marginBottom: height*fabPositionFactor}}
             // position="bottomRight"
             onPress={() => { this.showActionSheet() }}>
             <Image source={require('../Assets/directions2.png')} style={{ width: 25, height: 25 }} />

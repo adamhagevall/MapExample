@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import React, { Component } from 'react';
-import { Image, Linking, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { Container, Content, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon, Button, Right } from 'native-base';
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import CalendarHeader from '../CalendarHeader';
@@ -9,6 +9,40 @@ import BackgroundImage from './bg';
 const swipeForward = require('../Assets/forwardArrow.png');
 const url = 'https://www.facebook.com/events/428188540972908/';
 const cards = [];
+const cardWidth = 0;
+const likeMargin = 0;
+const imageHeight = 0;
+const dateFontSize= 0;
+const noteFontSize = 0;
+const titleFontSize = 0;
+const locationFontSize = 0;
+const lastRowMarginTop = 0;
+const lastRowMarginBottom = 0;
+const lastRowFontSize = 0;
+
+if (Platform.isPad) {
+  cardWidth = '85%';
+  likeMargin = '54%'
+  imageHeight = 370;
+  noteFontSize = 16;
+  dateFontSize= 26;
+  titleFontSize = 20;
+  locationFontSize = 18;
+  lastRowMarginTop = '3%';
+  lastRowMarginBottom = '5%';
+  lastRowFontSize = 20;
+} else {
+  cardWidth = '100%';
+  likeMargin = '30%';
+  imageHeight = 180;
+  noteFontSize = 12;
+  dateFontSize= 22;
+  titleFontSize = 16;
+  locationFontSize = 14;
+  lastRowMarginTop = 0;
+  lastRowMarginBottom = 0;
+  lastRowFontSize = 14;
+}
 
 export default class DeckSwiperExample extends Component {
 
@@ -122,9 +156,9 @@ export default class DeckSwiperExample extends Component {
               <CardItem style={{}} >
                 <Left>
                   <Body>
-                    <Text style={styles.clockStyle}>{item.time}</Text>
-                    <Text style={styles.infoStyle}>{item.text}</Text>
-                    <Text note style={styles.infoStyle} >{item.info}
+                    <Text style={styles.dateStyle}>{item.time}</Text>
+                    <Text style={styles.titleStyle}>{item.text}</Text>
+                    <Text note style={styles.infoStyle}>{item.info}
                       <Text> </Text>
                       <Text style={styles.linkStyle} onPress={() => Linking.openURL(item.url)}>{item.more}</Text>
                     </Text>
@@ -133,14 +167,14 @@ export default class DeckSwiperExample extends Component {
                 </Left>
               </CardItem>
               <CardItem cardBody>
-                <Image style={{ height: 200, flex: 1 }} source={item.image} />
+                <Image style={{ height: imageHeight, flex: 1 }} source={item.image} />
               </CardItem>
-              <CardItem>
+              <CardItem style={{ marginTop: lastRowMarginTop, marginBottom: lastRowMarginBottom}}>
                 <Icon name="add-circle" style={{ color: '#008ccf' }}
                   onPress={() => this.addToCalendar(item.calendarInfo)} />
-                <Text onPress={() => this.addToCalendar(item.calendarInfo)}>Lägg till i kalender
+                <Text style={{ fontSize: lastRowFontSize }} onPress={() => this.addToCalendar(item.calendarInfo)}>Lägg till i kalender
                 </Text>
-                <Text style={{ marginLeft: 73 }} onPress={() => Linking.openURL(item.url)} >Gilla </Text>
+                <Text style={{ marginLeft: likeMargin, fontSize: lastRowFontSize  }} onPress={() => Linking.openURL(item.url)} >Gilla </Text>
                 <Icon onPress={() => Linking.openURL(item.url)} name="logo-facebook" style={{ color: '#4266b2', marginLeft: 5 }} />
               </CardItem>
 
@@ -169,7 +203,7 @@ export default class DeckSwiperExample extends Component {
         </View>
         <BackgroundImage>
           <View style={{ flex: 1, alignItems: 'center' }}>
-            <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -30 }}>
+            <View style={{ position: 'absolute', flexDirection: 'column', width: cardWidth, marginTop: -30 }}>
               <View styles={{ position: 'absolute', flexDirection: 'column', width: 500 }}>
                 {this.createContent()};
             </View>
@@ -189,7 +223,7 @@ export default class DeckSwiperExample extends Component {
 const styles = {
   containerStyle: {
     borderWidth: 1,
-    borderRadius: 50,
+    // borderRadius: 50,
     borderColor: '#ddd',
     borderBottomWidth: 0,
     shadowColor: '#000',
@@ -216,19 +250,27 @@ const styles = {
     height: 110,
     width: 70
   },
-  clockStyle: {
-    fontSize: 22,
+  dateStyle: {
+    fontSize: dateFontSize,
     fontWeight: 'bold'
   },
-  infoStyle: {
+  titleStyle: {
+    fontSize: titleFontSize,
+    marginTop: '1%'
+  },
+  infoStyle: { 
+    fontSize: noteFontSize, 
+    marginTop: '1%', 
+    marginBottom: '1%' 
   },
   locationStyle: {
-    fontSize: 14
+    fontSize: locationFontSize,
+    marginBottom: '1%'
   },
   linkStyle: {
     textDecorationLine: 'underline',
     color: '#008ccf',
-    fontSize: 14,
+    fontSize: noteFontSize,
   }
 };
 

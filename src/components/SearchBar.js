@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Platform } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Geolocation from 'react-native-geolocation-service';
 
+const listViewHeight = 0;
+const listViewMargin = 0;
+const textInputMargin = 0;
+
+if (Platform.isPad) {
+    listViewHeight = 320;
+    listViewMargin = '7%';
+    textInputMargin = '-2%';
+} else {
+    listViewHeight = 190;
+    listViewMargin = '10%';
+    textInputMargin = '-3.5%';
+}
 // 57.640661, 18.288623 ny arena koord
 const availabilityArena = {
     description: 'Tillgänglighetsarenan',
@@ -102,7 +115,7 @@ export default class SearchBar extends Component {
                     textInputContainer: {
                         flex: 1,
                         width: '100%',
-                        height: '100%',
+                        height: '94%',
                         position: 'absolute',
                         backgroundColor: 'white',
                         marginLeft: '3%',
@@ -116,15 +129,15 @@ export default class SearchBar extends Component {
                     textInput: {
                         marginLeft: '-0.2%',
                         marginRight: '-0.3%',
-                        marginTop: '-3.5%',
+                        marginTop: textInputMargin,
                         borderColor: 'lightgrey',
                         borderWidth: 1
                     },
                     listView: {
-                        height: 190,
+                        height: listViewHeight,
                         width: '93.2%',
                         marginLeft: '3.3%',
-                        marginTop: '10%',
+                        marginTop: listViewMargin,
                         borderColor: 'lightgray',
                     },
                     description: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { Container, Header, Left, Body, Title, Right, Textarea, Form, ListItem, CheckBox, Card, CardItem } from "native-base";
 import { Content } from 'native-base';
 import { ScrollView } from 'react-native';
@@ -11,13 +11,44 @@ import BackgroundImage from './bg';
 import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+const cardWidth = 0;
+const sheetFontSize = 0;
+const titleFontSize = 0;
+const acceptFontSize = 0;
+const formHeight = 0;
+const buttonMarginBottom = 0;
+const descriptionFontSize = 0;
+const buttonFontSize = 0;
+
+if (Platform.isPad) {
+    cardWidth = '85%';
+    sheetFontSize = 16;
+    titleFontSize = 24;
+    acceptFontSize = 22;
+    formHeight = 220;
+    buttonMarginBottom = '6%';
+    descriptionFontSize = 18;
+    buttonFontSize = 22;
+} else {
+    cardWidth = '100%';
+    sheetFontSize = 12;
+    titleFontSize = 20;
+    acceptFontSize = 18;
+    formHeight = 120;
+    buttonMarginBottom = 0;
+    descriptionFontSize = 14;
+    buttonFontSize = 18;
+}
+
 const bild = require('../Assets/fadedmap.jpg');
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 1
+const title = <Text style={{ color: 'blue', fontSize: titleFontSize }}>Villkor gällande personuppgifter</Text>
+const message = <Text style={{ fontSize: sheetFontSize, marginLeft: 8, marginRight: 8, textAlign: 'center' }}>För att skicka återkoppling måste följande villkor godkännas:</Text>
 const options = [
     'Cancel',
     {
-        component: <Text style={{ color: 'grey', fontSize: 12, marginLeft: 12, marginRight: 12, marginBottom: 12 }}>
+        component: <Text style={{ color: 'grey', fontSize: sheetFontSize, marginLeft: 12, marginRight: 12, marginBottom: 12 }}>
 
             * Tillgänglighetsarenan kan samla in följande personuppgifter: för- och efternamn, e-post, organisation och telefonnummer.
 {'\n'}
@@ -33,11 +64,10 @@ const options = [
         height: 210,
     },
     {
-        component: <Text style={{ color: 'blue', fontSize: 18 }}>Godkänn</Text>,
+        component: <Text style={{ color: 'blue', fontSize: acceptFontSize }}>Godkänn</Text>,
         height: 50,
     },
 ]
-const title = <Text style={{ color: 'blue', fontSize: 20 }}>Villkor gällande personuppgifter</Text>
 
 export default class Feedback extends Component {
     state = { mailSender: '', mailSubject: '', mailContent: '', checked: false, ButtonStateHolder: true, selected: 1 };
@@ -76,7 +106,7 @@ export default class Feedback extends Component {
                 <BackgroundImage>
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <View style={{ position: 'absolute', flexDirection: 'column', width: 375, marginTop: -40 }}>
+                            <View style={{ position: 'absolute', flexDirection: 'column', width: cardWidth, marginTop: -40 }}>
                                 <View styles={{ position: 'absolute', flexDirection: 'column', width: 300, marginTop: 150 }}>
                                     <Card style={styles.containerStyle}>
                                         <CardItem>
@@ -93,7 +123,7 @@ export default class Feedback extends Component {
                                                     onChangeText={(mailSubject) => this.setState({ mailSubject })}
                                                 ></TextInput>
                                                 <Text style={styles.text}>Återkoppling</Text>
-                                                <Form style={{ backgroundColor: 'white' }}>
+                                                <Form style={{ backgroundColor: 'white', height: formHeight }}>
                                                     <Textarea rowSpan={5} bordered
                                                         onChangeText={(mailContent) => this.setState({ mailContent })} />
                                                 </Form>
@@ -101,7 +131,7 @@ export default class Feedback extends Component {
                                                 <ListItem>
                                                     <CheckBox checked={this.state.checked} color='#4A90E2' onPress={() => this.setState({ checked: !this.state.checked, ButtonStateHolder: !this.state.ButtonStateHolder })} />
                                                     <Body>
-                                                        <Text> Godkänn <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>återkopplingsvillkor</Text>
+                                                        <Text style={{ fontSize: descriptionFontSize }}> Godkänn <Text style={{ textDecorationLine: 'underline', color: '#008ccf' }} onPress={() => { this.showActionSheet() }}>återkopplingsvillkor</Text>
                                                         </Text>
                                                     </Body>
                                                 </ListItem>
@@ -120,7 +150,7 @@ export default class Feedback extends Component {
                 <ActionSheet
                     ref={this.getActionSheetRef}
                     title={title}
-                    message="För att skicka återkoppling måste följande villkor godkännas:"
+                    message={message}
                     options={options}
                     cancelButtonIndex={CANCEL_INDEX}
                     destructiveButtonIndex={DESTRUCTIVE_INDEX}
@@ -140,7 +170,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#333333',
-        marginBottom: 5
+        marginBottom: 5,
+        marginTop: 1,
+        fontSize: descriptionFontSize
     },
     textInput: {
         height: 40,
@@ -153,11 +185,12 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#4A90E2',
         padding: 12,
-        borderRadius: 6
+        borderRadius: 6,
+        marginBottom: buttonMarginBottom
     },
     buttonText: {
         color: '#fff',
-        fontSize: 18,
+        fontSize: buttonFontSize,
         fontWeight: 'bold',
         textAlign: 'center'
     },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ActivityIndicator, Image, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Container, Content, Body, Card, Toast, Fab, Icon } from 'native-base';
@@ -17,6 +17,17 @@ import geolib from 'geolib';
 import { greenRoute } from '../NodesGreen';
 import { blueRoute } from '../NodesBlue';
 import { redRoute } from '../NodesRed';
+
+const initialLatitude = 0;
+const initialLongitude = 0;
+
+if (Platform.isPad) {
+  initialLatitude = 57.638584;
+  initialLongitude = 18.293009;
+} else {
+  initialLatitude = 57.637685;
+  initialLongitude = 18.292500;
+}
 
 let { width, height } = Dimensions.get('window');
 const bild = require('../Assets/fadedmap.jpg');
@@ -353,6 +364,7 @@ export default class Map extends Component {
     if (this.state.zoomNumber === 1) {
       this.setState({ zoomNumber: 0 })
     }
+    console.log(this.state.region.latitudeDelta, this.state.region.longitudeDelta)
   }
 
   destinationCallback = (detailsFromSearch) => {
@@ -418,8 +430,8 @@ export default class Map extends Component {
                 style={styles.container}
                 customMapStyle={mapStyling}
                 initialRegion={{
-                  latitude: 57.637685,
-                  longitude: 18.292500,
+                  latitude: initialLatitude,
+                  longitude: initialLongitude,
                   latitudeDelta: 0.002,
                   longitudeDelta: 0.015
                 }}

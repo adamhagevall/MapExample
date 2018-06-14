@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View, Image, ScrollView } from 'react-native';
+import { ListView, View, Image, ScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Content, Container, Separator, Text, Card, CardItem, Left, Right, Body, Icon, Thumbnail } from 'native-base';
 import { ButtonGroup } from 'react-native-elements';
@@ -13,6 +13,23 @@ import { Actions } from 'react-native-router-flux';
 import InfoHeader from '../InfoHeader';
 import CalendarHeader from '../CalendarHeader';
 import BackgroundImage from './bg';
+
+const cardWidth = 0;
+const headerHeight = 0;
+const scrollViewHeight = 0;
+const contentMargin = 0;
+
+if (Platform.isPad) {
+    cardWidth = '85%';
+    headerHeight = 240;
+    scrollViewHeight = 650;
+    contentMargin = '4%';
+} else {
+    cardWidth = '100%';
+    headerHeight = 150;
+    scrollViewHeight = 465;
+    contentMargin = 0;
+}
 
 const bild1 = require('../Assets/parasportalmedalen.jpg');
 const bild2 = require('../Assets/Bildhyreshus.jpg');
@@ -56,25 +73,24 @@ class Information extends Component {
     render() {
         const buttons = ['Information', 'Schema']
         const { selectedIndex } = this.state
-
         return (
             <Container>
-                <View style={{ height: 150 }}>
+                <View style={{ height: headerHeight }}>
                     <InfoHeader />
                 </View>
                 <BackgroundImage>
                     <View style={{ flex: 1, alignItems: 'center' }}>
-                        <View style={{ position: 'absolute', width: 375, marginTop: -30 }}>
+                        <View style={{ position: 'absolute', width: cardWidth, marginTop: -30 }}>
                             <Card style={styles.containerStyle}>
                                 <CardItem>
-                                    <ScrollView style={{ width: 300, height: 465 }}>
+                                    <ScrollView style={{ width: 300, height: scrollViewHeight }}>
                                         {this.renderList()}
                                         <View style={{ marginTop: 10 }}>
                                             <Separator bordered>
                                                 <Text>TISDAG 3 JULI 2018</Text>
                                             </Separator>
                                         </View>
-                                        <CardItem>
+                                        <CardItem style={{ marginTop: contentMargin }}>
 
                                             <Text style={{ flex: 15 }}><Text style={{ fontWeight: 'bold' }}> 14.00-14.45</Text>{'\n'} Bygg tillgängligt tjäna mer!</Text>
                                             <Right>
@@ -83,20 +99,20 @@ class Information extends Component {
 
                                         </CardItem>
 
-                                        <CardItem>
+                                        <CardItem style={{ marginTop: contentMargin }}>
                                             <Text style={{ flex: 15 }}><Text style={{ fontWeight: 'bold' }}> 15.00-15.45</Text>{'\n'} Kan miljonprogrammet lösa{'\n'} de bostadspolitiska{'\n'} utmaningarna?</Text>
                                             <Right>
                                                 <Thumbnail source={bild2} />
                                             </Right>
                                         </CardItem>
-                                        <CardItem>
+                                        <CardItem style={{ marginTop: contentMargin }}>
                                             <Text style={{ flex: 15 }}><Text style={{ fontWeight: 'bold' }}> 16.00-16.45</Text>{'\n'} Sverige - tillgängligt{'\n'} för alla?!</Text>
                                             <Right>
                                                 <Thumbnail source={bild3} />
                                             </Right>
 
                                         </CardItem>
-                                        <CardItem>
+                                        <CardItem style={{ marginTop: contentMargin }}>
                                             <Text style={{ flex: 15 }}><Text style={{ fontWeight: 'bold' }}> 17.00-18.00</Text>{'\n'} Eftersnack</Text>
                                             <Right>
                                                 <Thumbnail source={bild4} />
